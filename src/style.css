@@ -1,0 +1,202 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#content {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+    border: solid red;
+}
+
+#contentContainer {
+    /* Credits to https://uigradients.com/ */
+    background: #314755;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #26a0da, #314755);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #26a0da, #314755); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* Credits to https://uigradients.com/ */
+
+    /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
+    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+    0 2px 2px rgba(0,0,0,0.11), 
+    0 4px 4px rgba(0,0,0,0.11), 
+    0 8px 8px rgba(0,0,0,0.11), 
+    0 16px 16px rgba(0,0,0,0.11), 
+    0 32px 32px rgba(0,0,0,0.11);
+    /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
+
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    width: 100%;
+    margin: 25px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    height: 6%;
+    width: 100%;
+    border: solid black;
+    border-radius: 20px;
+    color: white;
+}
+
+#headerChildrenContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    border: solid purple;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#headerChildrenContainer > i {
+    margin: 5px;
+}
+
+#headerChildrenContainer > h3 {
+    margin: 5px;
+}
+
+#headerIcon {
+    height: fit-content;
+    width: fit-content;
+    border: solid green;
+}
+
+#headerTitle {
+    height: fit-content;
+    width: fit-content;
+    border: solid yellow;
+}
+
+#sideAndMainContainer {
+    display: flex;
+    border: solid yellow;
+    height: 100%;
+    width: 100%;
+}
+
+#sideAndMainContainer > div {
+    display: flex;
+    flex-wrap: wrap;
+    height: 90%;
+    margin: 10px;
+}
+
+#sideColumn {
+    /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
+    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+    0 2px 2px rgba(0,0,0,0.11), 
+    0 4px 4px rgba(0,0,0,0.11), 
+    0 8px 8px rgba(0,0,0,0.11), 
+    0 16px 16px rgba(0,0,0,0.11), 
+    0 32px 32px rgba(0,0,0,0.11);
+    /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
+
+    width: clamp(250px, 17%, 17%);
+    color: white;
+    background-color: rgb(255, 255, 255, 0.2);
+    border-radius: 23px;
+    overflow: hidden;
+}
+
+#sideColumn > div{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+#sideColumnFirstChild {
+    border: solid blue;
+    height: fit-content;
+    margin: 10px;
+    margin-top: 20px;
+}
+
+#sideColumnFirstChild > div {
+    display: flex;
+    align-items: center;
+    border: solid red;
+    height: fit-content;
+    width: 100%;
+    margin: 5px;
+    text-align: center;
+}
+
+#sideColumnFirstChild > div > i, p{
+    border: solid rgb(0, 0, 0);
+    height: fit-content;
+    margin: 5px;
+}
+
+#sideColumnSecondChild {
+    height: 80%;
+    border: solid green;
+    margin: 10px;
+}
+
+#sideColumnAddProjectContainer {
+    display: flex;
+    border: solid red;
+    height: fit-content;
+    width: 100%;
+    margin: 5px;
+}
+
+#sideColumnAddProjectContainer > i, h4 {
+    display: flex;
+    border: solid rgb(0, 0, 0);
+    height: fit-content;
+    margin: 5px;
+}
+
+#mainSquare {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    width: 100%;
+}
+
+#mainSquareChildrenContainer {
+    border: solid peru;
+    height: 90%;
+    width: 90%;
+}
+
+#mainSquareTitleChild {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    height: fit-content;
+    width: 100%;
+    text-align: center;
+}
+
+#mainSquareTitleChild > h4, i{
+    display: flex;
+    text-align: center;
+    border: solid navajowhite;
+}
+
+#mainSquareTitleChild > h4 {
+    width: 90%;
+    text-align: center;
+}
+
+
+
