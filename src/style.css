@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap&display=swap');
+
 * {
     margin: 0px;
     padding: 0px;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 ::-webkit-scrollbar {
@@ -32,9 +35,9 @@
 
     display: flex;
     flex-wrap: wrap;
-    height: 100vh;
+    height: 95vh;
     width: 100%;
-    margin: 15px;
+    margin: 20px;
     border-radius: 25px;
     overflow: hidden;
 }
@@ -42,9 +45,8 @@
 #header {
     display: flex;
     align-items: center;
-    height: 6%;
+    height: fit-content;
     width: 100%;
-    border: solid black;
     border-radius: 20px;
     color: white;
 }
@@ -56,29 +58,28 @@
     align-items: center;
     height: fit-content;
     width: fit-content;
-    border: solid purple;
-    font-size: 2rem;
+    font-size: 2.3rem;
     text-align: center;
 }
 
 #headerChildrenContainer > i {
     margin: 5px;
+    margin-left: 30px;
 }
 
 #headerChildrenContainer > h3 {
     margin: 5px;
+    font-weight: 200;
 }
 
 #headerIcon {
     height: fit-content;
     width: fit-content;
-    border: solid green;
 }
 
 #headerTitle {
     height: fit-content;
     width: fit-content;
-    border: solid yellow;
 }
 
 #sideAndMainContainer {
@@ -105,54 +106,85 @@
     0 32px 32px rgba(0,0,0,0.11);
     /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
 
-    width: clamp(250px, 17%, 17%);
+    width: clamp(250px, 23%, 23%);
     color: white;
     background-color: rgb(255, 255, 255, 0.2);
     border-radius: 23px;
     overflow: hidden;
 }
 
-#sideColumn > div{
+#sideColumn > div {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    font-size: 1.1rem;
+    font-weight: 200;
 }
 
 #sideColumnFirstChild {
-    border: solid blue;
+    align-items: center;
     height: fit-content;
-    margin: 10px;
-    margin-top: 20px;
+    width: 100%;
+    margin: 5px;
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 #sideColumnFirstChild > div {
     display: flex;
     align-items: center;
-    border: solid red;
     height: fit-content;
     width: 100%;
     margin: 5px;
+    padding: 3px;
     text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#sideColumnFirstChild > div:hover {
+    background-color: rgba(79, 78, 78, 0.31);
 }
 
 #sideColumnFirstChild > div > i, p{
-    border: solid rgb(0, 0, 0);
     height: fit-content;
     margin: 5px;
 }
 
 #sideColumnSecondChild {
     height: 80%;
+    width: 100%;
     border: solid green;
+    margin: 5px;
+    margin-top: 0;
+}
+
+#sideColumnSecondChild > div {
+    display: flex;
+    align-items: center;
+    border: solid red;
+    height: fit-content;
+    width: 100%;
     margin: 10px;
+    padding: 3px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
 #sideColumnAddProjectContainer {
     display: flex;
+    align-items: center;
     border: solid red;
     height: fit-content;
     width: 100%;
     margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#sideColumnAddProjectContainer:hover {
+    background-color: rgba(79, 78, 78, 0.31);
 }
 
 #sideColumnAddProjectContainer > i, h4 {
@@ -160,6 +192,7 @@
     border: solid rgb(0, 0, 0);
     height: fit-content;
     margin: 5px;
+    font-weight: 300; 
 }
 
 #mainSquare {
@@ -173,7 +206,7 @@
 
 #mainSquareChildrenContainer {
     border: solid peru;
-    height: 90%;
+    height: fit-content;
     width: 90%;
 }
 
@@ -185,17 +218,31 @@
     height: fit-content;
     width: 100%;
     text-align: center;
+    font-size: 2rem;
+    font-weight: 200;
 }
 
-#mainSquareTitleChild > h4, i{
+#mainSquareTitleIconChild {
+    cursor: pointer;
+}
+
+#mainSquareTitleChild > h4, i {
     display: flex;
     text-align: center;
-    border: solid navajowhite;
 }
 
 #mainSquareTitleChild > h4 {
-    width: 90%;
-    text-align: center;
+    justify-content: center;
+    flex-grow: 2;
+}
+
+/*Add fit content on the external containers to give the possibility to add a lot of tasks*/
+#mainSquareTasksChild {
+    display: flex;
+    flex-wrap: wrap;
+    height: 80vh;
+    width: 100%;
+    border: solid purple;
 }
 
 

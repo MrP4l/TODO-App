@@ -1,4 +1,5 @@
-import userInterface from "./userInterface";
+import staticUserInterface from "./staticUserInterface";
 import './style.css';
 
-userInterface();
+console.log("we")
+staticUserInterface();
