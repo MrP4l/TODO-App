@@ -97,6 +97,7 @@
 }
 
 #sideColumn {
+    display: flex;
     /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
     box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
     0 2px 2px rgba(0,0,0,0.11), 
@@ -110,24 +111,20 @@
     color: white;
     background-color: rgb(255, 255, 255, 0.2);
     border-radius: 23px;
-    overflow: hidden;
-}
-
-#sideColumn > div {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    font-size: 1.1rem;
-    font-weight: 200;
 }
 
 #sideColumnFirstChild {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     height: fit-content;
     width: 100%;
     margin: 5px;
     margin-top: 10px;
     margin-bottom: 0;
+    font-size: 1.1rem;
+    font-weight: 200;
+    border: solid;
 }
 
 #sideColumnFirstChild > div {
@@ -152,24 +149,16 @@
 }
 
 #sideColumnSecondChild {
+    display: flex;
+    flex-direction: column;
     height: 80%;
     width: 100%;
     border: solid green;
     margin: 5px;
     margin-top: 0;
-}
-
-#sideColumnSecondChild > div {
-    display: flex;
-    align-items: center;
-    border: solid red;
-    height: fit-content;
-    width: 100%;
-    margin: 10px;
-    padding: 3px;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 200;
+    overflow: scroll;
 }
 
 #sideColumnAddProjectContainer {
@@ -177,9 +166,11 @@
     align-items: center;
     border: solid red;
     height: fit-content;
-    width: 100%;
+    width: 90%;
     margin: 5px;
-    border-radius: 10px;
+    padding: 3px;
+    border-radius: 5px;
+    font-size: 1.2rem;
     cursor: pointer;
 }
 
@@ -193,6 +184,60 @@
     height: fit-content;
     margin: 5px;
     font-weight: 300; 
+}
+
+#sideColumnSecondChild > :nth-child(n+2) {
+    display: flex;
+    align-items: center;
+    border: solid rgb(0, 0, 0);
+    height: fit-content;
+    width: 90%;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+#sideColumnSecondChild > #newNameContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+}
+
+#newNameContainer > #newNameAddButton {
+    height: 2vh;
+    width: 3vw;
+    border: solid;
+    margin: 5px;
+    border-radius: 3px;
+    background-color: greenyellow;
+}
+
+#newNameContainer > #newNameCancelButton {
+    height: 2vh;
+    width: 3vw;
+    border: solid;
+    margin: 5px;
+    border-radius: 3px;
+    background-color: orange;
+}
+
+input {
+    width: 100%;
+    height: 2.5vh;
+    border: 1px solid;
+    border-radius: 7px;
+    margin: 5px;
+    padding: 2px 10px;
+    font-size: 1rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#sideColumnSecondChild > #newProjectContainer {
+    width: 85%;
 }
 
 #mainSquare {
