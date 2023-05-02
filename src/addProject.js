@@ -31,24 +31,40 @@ function addProject() {
                     const newProjectDeleteButton = document.createElement("div");
 
                     newProjectName.textContent = newNameTextfield.value;
+                    newProjectDeleteButton.classList.add("fa-solid");
+                    newProjectDeleteButton.classList.add("fa-trash");
                     
                     newProjectContainer.setAttribute("id", "newProjectContainer");
                     newProjectName.setAttribute("id", "newProjectName");
                     newProjectDeleteButton.setAttribute("id", "newProjectDeleteButton");
 
                     sideColumnSecondChild.appendChild(newProjectContainer);
-                    newProjectContainer.appendChild(newProjectDeleteButton);
                     newProjectContainer.appendChild(newProjectName);
+                    newProjectContainer.appendChild(newProjectDeleteButton);
+
+                    newProjectContainer.addEventListener("click", () => {
+                        // Add here the creation of object ex. 'when clicked -> *** = New taskWindow'
+                        // or 'when clicked -> *** = taskWindow(name)'
+                    })
+
+                    newProjectDeleteButton.addEventListener("click", () => {
+                        const parent = newProjectDeleteButton.parentNode;
+                        parent.remove();
+                        // Add here the logic to remove the tasks window
+                    })
                 }
                 sideColumnSecondChild.removeChild(newNameContainer);
                 open = false;
-            })
+            });
 
             newNameCancelButton.addEventListener("click", () => {
                 sideColumnSecondChild.removeChild(newNameContainer);
                 open = false;
 
             });
+
+
+            
         })
 }
 
