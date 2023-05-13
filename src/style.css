@@ -24,14 +24,8 @@
     background: linear-gradient(to bottom, #26a0da, #314755); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     /* Credits to https://uigradients.com/ */
 
-    /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
-    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
-    0 2px 2px rgba(0,0,0,0.11), 
-    0 4px 4px rgba(0,0,0,0.11), 
-    0 8px 8px rgba(0,0,0,0.11), 
-    0 16px 16px rgba(0,0,0,0.11), 
-    0 32px 32px rgba(0,0,0,0.11);
-    /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
+    -webkit-box-shadow: 0px 0px 28px 8px #000000; 
+    box-shadow: 0px 0px 28px 8px #000000;
 
     display: flex;
     flex-wrap: wrap;
@@ -100,14 +94,8 @@
     display: flex;
     flex-wrap: wrap;
     border: solid;
-    /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
-    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
-    0 2px 2px rgba(0,0,0,0.11), 
-    0 4px 4px rgba(0,0,0,0.11), 
-    0 8px 8px rgba(0,0,0,0.11), 
-    0 16px 16px rgba(0,0,0,0.11), 
-    0 32px 32px rgba(0,0,0,0.11);
-    /* Credits to https://tobiasahlin.com/blog/layered-smooth-box-shadows/ */
+    -webkit-box-shadow: 0px 0px 28px 8px #000000; 
+    box-shadow: 0px 0px 28px 8px #000000;
     height: fit-content;
     width: clamp(250px, 23%, 23%);
     color: white;

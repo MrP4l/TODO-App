@@ -1,4 +1,6 @@
+import { Project } from './classes.js';
 function addProject() {
+        const projectsList = [];
         const addEvent = document.getElementById("sideColumnAddProjectContainer"); 
         const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
         let open = false;
@@ -42,9 +44,16 @@ function addProject() {
                     newProjectContainer.appendChild(newProjectName);
                     newProjectContainer.appendChild(newProjectDeleteButton);
 
+                    // Maybe separate the UI part with the logic under here
+                    const projectName = newNameTextfield.value
+                    const newProject = new Project(projectName);
+                    projectsList.push(newProject);
+                    console.log(projectsList);
+
                     newProjectContainer.addEventListener("click", () => {
                         // Add here the creation of object ex. 'when clicked -> *** = New taskWindow'
                         // or 'when clicked -> *** = taskWindow(name)'
+
                     })
 
                     newProjectDeleteButton.addEventListener("click", () => {
@@ -63,8 +72,6 @@ function addProject() {
 
             });
 
-
-            
         })
 }
 
