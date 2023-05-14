@@ -99,7 +99,7 @@
     height: fit-content;
     width: clamp(250px, 23%, 23%);
     color: white;
-    background-color: rgb(255, 255, 255, 0.2);
+    background-color: rgb(255, 255, 255, 0.3);
     border-radius: 23px;
     overflow: scroll;
 }
@@ -126,7 +126,7 @@
     margin: 5px;
     padding: 3px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -216,7 +216,7 @@
     background-color: orange;
 }
 
-input {
+#newNameTextfieldInput {
     width: 100%;
     height: 2.5vh;
     border: 1px solid;
@@ -262,7 +262,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: solid;
+    border: solid yellow;
     height: fit-content;
     width: 100%;
     text-align: center;
@@ -277,6 +277,7 @@ input {
 #mainSquareTitleChild > h4, i {
     display: flex;
     text-align: center;
+    border: solid blue;
 }
 
 #mainSquareTitleChild > h4 {
@@ -288,10 +289,55 @@ input {
 #mainSquareTasksChild {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     height: 80vh;
     width: 100%;
     border: solid purple;
 }
 
+#taskNameContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+    background-color: greenyellow;
+}
+
+#taskNameInput {
+    height: 2.5vh;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 7px;
+    margin: 5px;
+    padding: 2px 10px;
+    font-size: 1rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#taskNameAdd {
+    height: 2.5vh;
+    width: 25%;
+    border: 1px solid;
+    border-radius: 7px;
+    margin: 5px;
+    padding: 2px 10px;
+    background-color: green;
+    font-size: 1rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#taskNameCancel {
+    height: 2.5vh;
+    width: 25%;
+    border: 1px solid;
+    border-radius: 7px;
+    margin: 5px;
+    padding: 2px 10px;
+    background-color: tomato;
+    font-size: 1rem;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
 
 

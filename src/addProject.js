@@ -1,6 +1,7 @@
 import { Project } from './classes.js';
 function addProject() {
-        const projectsList = [];
+        let projectsList = [];
+        let id = 0;
         const addEvent = document.getElementById("sideColumnAddProjectContainer"); 
         const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
         let open = false;
@@ -15,6 +16,7 @@ function addProject() {
 
             newNameContainer.setAttribute("id", "newNameContainer");
             newNameTextfield.setAttribute("type", "text");
+            newNameTextfield.setAttribute("id", "newNameTextfieldInput");
             newNameAddButton.setAttribute("id", "newNameAddButton");
             newNameCancelButton.setAttribute("id", "newNameCancelButton");
 
@@ -44,21 +46,18 @@ function addProject() {
                     newProjectContainer.appendChild(newProjectName);
                     newProjectContainer.appendChild(newProjectDeleteButton);
 
-                    // Maybe separate the UI part with the logic under here
                     const projectName = newNameTextfield.value
-                    const newProject = new Project(projectName);
+                    id += 1;
+                    const newProject = new Project(id, projectName, projectsList);
                     projectsList.push(newProject);
                     console.log(projectsList);
 
                     newProjectContainer.addEventListener("click", () => {
-                        // Add here the creation of object ex. 'when clicked -> *** = New taskWindow'
-                        // or 'when clicked -> *** = taskWindow(name)'
-
+                        newProject.showTasks();
                     })
 
                     newProjectDeleteButton.addEventListener("click", () => {
-                        const parent = newProjectDeleteButton.parentNode;
-                        parent.remove();
+                        newProject.deleteProject();
                         // Add here the logic to remove the tasks window
                     })
                 }
@@ -69,10 +68,10 @@ function addProject() {
             newNameCancelButton.addEventListener("click", () => {
                 sideColumnSecondChild.removeChild(newNameContainer);
                 open = false;
-
             });
 
         })
 }
+
 
 export default addProject;
