@@ -1,12 +1,12 @@
 export class Project {
     static id = 0;
-    
+
     constructor(projectName, projectsList) {
-      this.projectName = projectName;
-      this.projectsList = projectsList;
-      this.id = ++Project.id;
+        this.projectName = projectName;
+        this.projectsList = projectsList;
+        this.id = ++Project.id;
     }
-  
+
     deleteProject() {
         const index = this.projectsList.findIndex(project => project.id === this.id);
         if (index !== -1) {
@@ -22,7 +22,7 @@ export class Project {
         const newProjectName = document.createElement("div");
         const newProjectDeleteButton = document.createElement("div");
         const newNameTextfield = document.getElementById("newNameTextfieldInput");
-        
+
         newProjectName.textContent = newNameTextfield.value;
         newProjectDeleteButton.classList.add("fa-solid");
         newProjectDeleteButton.classList.add("fa-trash");
@@ -36,10 +36,7 @@ export class Project {
         newProjectContainer.appendChild(newProjectDeleteButton);
     }
 
-    addTask() {
-    }
-
-    showTasks() {
+    showProject() {
         const index = this.projectsList.findIndex(project => project.id === this.id);
 
         if (index !== -1) {
@@ -48,7 +45,18 @@ export class Project {
             mainSquareTitleTextChild.innerText = project.projectName;
         }
     }
+}
 
-    
+export class Task extends Project {
+    constructor(projectName, projectsList) {
+        super(projectName, projectsList);
+    }
+
+    addTask() {
+    }
+
+    deleteTask() {
+        
+    }
 
 }

@@ -35,7 +35,7 @@ function userDynamicInterface() {
                 //console.log(projectsList);
 
                 newProject.renderProject();
-                newProject.showTasks();
+                newProject.showProject();
                 
                 // fix the title project on the mainSquare, the nth project after the first doesn't change the title
                 // Add the possibility to delete the projects
