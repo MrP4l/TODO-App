@@ -34,15 +34,13 @@ function userDynamicInterface() {
                 projectsList.push(newProject);
                 //console.log(projectsList);
 
-                newProject.renderProject();
+                newProject.createProject();
                 newProject.showProject();
                 
                 // fix the title project on the mainSquare, the nth project after the first doesn't change the title
                 // Add the possibility to delete the projects
-                const projectItem = document.querySelectorAll(".newProjectContainer");
-                projectItem.forEach((e, index) => {
-   
-                });  
+                const projectItems = document.querySelectorAll(".newProjectContainer");
+
             }
             sideColumnSecondChild.removeChild(newNameContainer);
             open = false;

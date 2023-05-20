@@ -17,7 +17,7 @@ export class Project {
         parent.remove();
     }
 
-    renderProject() {
+    createProject() {
         const newProjectContainer = document.createElement("div");
         const newProjectName = document.createElement("div");
         const newProjectDeleteButton = document.createElement("div");
@@ -43,6 +43,7 @@ export class Project {
             const project = this.projectsList[index];
             const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
             mainSquareTitleTextChild.innerText = project.projectName;
+            console.log(this.projectName, project, index)
         }
     }
 }
