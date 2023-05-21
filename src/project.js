@@ -7,45 +7,44 @@ export class Project {
         this.id = ++Project.id;
     }
 
-    deleteProject() {
-        const index = this.projectsList.findIndex(project => project.id === this.id);
-        if (index !== -1) {
-            this.projectsList.splice(index, 1);
-        }
-        const newProjectDeleteButton = document.getElementById("newProjectDeleteButton");
-        const parent = newProjectDeleteButton.parentNode;
-        parent.remove();
-    }
-
     createProject() {
         const newProjectContainer = document.createElement("div");
         const newProjectName = document.createElement("div");
         const newProjectDeleteButton = document.createElement("div");
-        const newNameTextfield = document.getElementById("newNameTextfieldInput");
 
-        newProjectName.textContent = newNameTextfield.value;
+        newProjectName.textContent = this.projectName;
         newProjectDeleteButton.classList.add("fa-solid");
         newProjectDeleteButton.classList.add("fa-trash");
 
-        newProjectContainer.setAttribute("class", "newProjectContainer");
-        newProjectName.setAttribute("class", "newProjectName");
-        newProjectDeleteButton.setAttribute("id", "newProjectDeleteButton");
+        newProjectContainer.id = "newProjectContainer";
+        newProjectName.classList.add("newProjectName");
+        newProjectDeleteButton.classList.add("newProjectDeleteButton");
 
         sideColumnSecondChild.appendChild(newProjectContainer);
         newProjectContainer.appendChild(newProjectName);
         newProjectContainer.appendChild(newProjectDeleteButton);
+
+        newProjectDeleteButton.addEventListener("click", () => {
+            this.deleteProject(newProjectContainer);
+          });
+      
+        return newProjectContainer;
     }
 
     showProject() {
-        const index = this.projectsList.findIndex(project => project.id === this.id);
-
-        if (index !== -1) {
-            const project = this.projectsList[index];
-            const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
-            mainSquareTitleTextChild.innerText = project.projectName;
-            console.log(this.projectName, project, index)
-        }
+        const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
+        mainSquareTitleTextChild.innerText = this.projectName;
     }
+
+    deleteProject(newProjectContainer) {
+        const index = this.projectsList.findIndex((project) => project.id === this.id);
+        if (index !== -1) {
+          this.projectsList.splice(index, 1);
+        }
+        newProjectContainer.remove();
+        // Add at the end the deletion (and the creation) of the project's content (mainSquareChildrenContainer)
+        //mainSquareChildrenContainer.remove();
+      }
 }
 
 export class Task extends Project {
@@ -53,7 +52,12 @@ export class Task extends Project {
         super(projectName, projectsList);
     }
 
-    addTask() {
+    createTask() {
+        
+    }
+
+    showTask() {
+
     }
 
     deleteTask() {

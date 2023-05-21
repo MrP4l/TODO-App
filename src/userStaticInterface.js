@@ -8,10 +8,10 @@ function createHeader() {
     headerChildrenContainer.appendChild(headerIcon);
     headerChildrenContainer.appendChild(headerTitle);
 
-    header.setAttribute("id", "header");
-    headerChildrenContainer.setAttribute("id", "headerChildrenContainer");
-    headerIcon.setAttribute("id", "headerIcon"); 
-    headerTitle.setAttribute("id", "headerTitle");
+    header.id = "header";
+    headerChildrenContainer.id = "headerChildrenContainer";
+    headerIcon.id = "headerIcon"; 
+    headerTitle.id = "headerTitle";
 
     headerIcon.classList.add("fa-solid");
     headerIcon.classList.add("fa-fish");
@@ -52,21 +52,21 @@ function createSideColumn() {
     sideColumnAddProjectContainer.appendChild(sideColumnAddProjectIcon);
     sideColumnAddProjectContainer.appendChild(sideColumnAddProjectText);
 
-    sideColumn.setAttribute("id", "sideColumn");
-    sideColumnFirstChild.setAttribute("id", "sideColumnFirstChild");
-    sideColumnAllContainer.setAttribute("id", "sideColumnAllContainer");
-    sideColumnAllIcon.setAttribute("id", "sideColumnAllIcon");
-    sideColumnAllText.setAttribute("id", "sideColumnAllText");
-    sideColumnTodayContainer.setAttribute("id", "sideColumnTodayContainer");
-    sideColumnTodayIcon.setAttribute("id", "sideColumnTodayIcon");
-    sideColumnTodayText.setAttribute("id", "sideColumnTodayText");
-    sideColumnWeekContainer.setAttribute("id", "sideColumnWeekContainer");
-    sideColumnWeekIcon.setAttribute("id", "sideColumnWeekIcon");
-    sideColumnWeekText.setAttribute("id", "sideColumnWeekText");
-    sideColumnSecondChild.setAttribute("id", "sideColumnSecondChild");
-    sideColumnAddProjectContainer.setAttribute("id", "sideColumnAddProjectContainer");
-    sideColumnAddProjectIcon.setAttribute("id", "sideColumnAddProjectIcon");
-    sideColumnAddProjectText.setAttribute("id", "sideColumnAddProjectText");
+    sideColumn.id = "sideColumn";
+    sideColumnFirstChild.id = "sideColumnFirstChild";
+    sideColumnAllContainer.id = "sideColumnAllContainer";
+    sideColumnAllIcon.id = "sideColumnAllIcon";
+    sideColumnAllText.id = "sideColumnAllText";
+    sideColumnTodayContainer.id = "sideColumnTodayContainer";
+    sideColumnTodayIcon.id = "sideColumnTodayIcon";
+    sideColumnTodayText.id = "sideColumnTodayText";
+    sideColumnWeekContainer.id = "sideColumnWeekContainer";
+    sideColumnWeekIcon.id = "sideColumnWeekIcon";
+    sideColumnWeekText.id = "sideColumnWeekText";
+    sideColumnSecondChild.id = "sideColumnSecondChild";
+    sideColumnAddProjectContainer.id = "sideColumnAddProjectContainer";
+    sideColumnAddProjectIcon.id = "sideColumnAddProjectIcon";
+    sideColumnAddProjectText.id = "sideColumnAddProjectText";
 
     sideColumnAllText.textContent = "All";
     sideColumnTodayText.textContent = "Today";
@@ -99,12 +99,12 @@ function createMainSquare() {
     mainSquareTitleChild.appendChild(mainSquareTitleTextChild);
     mainSquareTitleChild.appendChild(mainSquareTitleIconChild);
 
-    mainSquare.setAttribute("id", "mainSquare");
-    mainSquareChildrenContainer.setAttribute("id", "mainSquareChildrenContainer");
-    mainSquareTitleChild.setAttribute("id", "mainSquareTitleChild");
-    mainSquareTasksChild.setAttribute("id", "mainSquareTasksChild");
-    mainSquareTitleTextChild.setAttribute("id", "mainSquareTitleTextChild");
-    mainSquareTitleIconChild.setAttribute("id", "mainSquareTitleIconChild");
+    mainSquare.id = "mainSquare";
+    mainSquareChildrenContainer.id = "mainSquareChildrenContainer";
+    mainSquareTitleChild.id = "mainSquareTitleChild";
+    mainSquareTasksChild.id = "mainSquareTasksChild";
+    mainSquareTitleTextChild.id = "mainSquareTitleTextChild";
+    mainSquareTitleIconChild.id = "mainSquareTitleIconChild";
 
     mainSquareTitleTextChild.textContent = "Variable Text";
 
@@ -117,7 +117,7 @@ function createMainSquare() {
 function createBody() {
     const sideAndMainContainer = document.createElement("div");
 
-    sideAndMainContainer.setAttribute("id", "sideAndMainContainer");
+    sideAndMainContainer.id = "sideAndMainContainer";
 
     sideAndMainContainer.appendChild(createSideColumn())
     sideAndMainContainer.appendChild(createMainSquare())
@@ -129,7 +129,7 @@ function userStaticInterface() {
     const content = document.getElementById("content");
     const contentContainer = document.createElement("div");
 
-    contentContainer.setAttribute("id", "contentContainer");
+    contentContainer.id = "contentContainer";
 
     contentContainer.appendChild(createHeader());
     contentContainer.appendChild(createBody());

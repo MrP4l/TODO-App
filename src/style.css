@@ -227,12 +227,12 @@
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
-#newProjectDeleteButton:hover {
+.newProjectDeleteButton:hover {
     border: black;
     color: rgb(67, 131, 67);
 }
 
-#sideColumnSecondChild > .newProjectContainer {
+#sideColumnSecondChild > #newProjectContainer {
     width: 85%;
     border: solid slateblue;
     display: flex;
@@ -292,7 +292,7 @@
     border: solid purple;
 }
 
-#taskNameContainer {
+.taskNameContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
