@@ -1,4 +1,5 @@
-function addProject() {
+import { Project, Task } from "./project";
+function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
     const projectsList = [];
@@ -45,9 +46,7 @@ function addProject() {
             sideColumnSecondChild.removeChild(newNameContainer);
         });
     })
-}
 
-function addTask() {
     const addTask = document.getElementById("mainSquareTitleIconChild");
     const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
     addTask.addEventListener("click", () => {
@@ -75,16 +74,10 @@ function addTask() {
         // TODO
         taskNameAdd.addEventListener("click", () => {
             const taskName = taskNameInput.value.trim();
-            if (taskName !== "") {
-                
-                const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
+            if (taskName !== "" && projectsList.length !== 0) {
 
-                // maybe with Project class
-                // if the input field is not empty -> create the task div with his children
-                // task div children:
-                // check/an icon, the task name, tasks creation date, the icon to delete the task
-                // task div funct:
-                // click on the task div --> delete this.task
+                
+
                 const newTaskContainer = document.createElement("div");
                 const newTaskIcon = document.createElement("div");
                 const newTaskName = document.createElement("div");
@@ -120,9 +113,92 @@ function addTask() {
     });
 }
 
-function userDynamicInterface() {
-    addProject();
-    addTask();
-}
+//function addTask() {
+//    const addTask = document.getElementById("mainSquareTitleIconChild");
+//    const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
+//    addTask.addEventListener("click", () => {
+//        if (mainSquareTasksChild.querySelector(".taskNameContainer")) {
+//            return;
+//        }
+//        const taskNameContainer = document.createElement("div");
+//        const taskNameInput = document.createElement("input");
+//        const taskNameAdd = document.createElement("button");
+//        const taskNameCancel = document.createElement("button");
+//
+//        taskNameContainer.setAttribute("class", "taskNameContainer");
+//        taskNameInput.setAttribute("type", "text");
+//        taskNameInput.id = "taskNameInput";
+//        taskNameAdd.id = "taskNameAdd";
+//        taskNameCancel.id = "taskNameCancel";
+//
+//        taskNameContainer.appendChild(taskNameInput);
+//        taskNameContainer.appendChild(taskNameAdd);
+//        taskNameContainer.appendChild(taskNameCancel);
+//        mainSquareTasksChild.appendChild(taskNameContainer);
+//
+//        mainSquareTasksChild.insertBefore(taskNameContainer, mainSquareTasksChild.children[1]);
+//
+//        // TODO
+//        taskNameAdd.addEventListener("click", () => {
+//            const taskName = taskNameInput.value.trim();
+//            if (taskName !== "" && projectsList.length !== 0) {
+//
+//                //const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
+//
+//                // maybe with Project class
+//                // if the input field is not empty -> create the task div with his children
+//                // task div children:
+//                // check/an icon, the task name, tasks creation date, the icon to delete the task
+//                // task div funct:
+//                // click on the task div --> delete this.task
+//                //const newProject = new Project(projectName, projectsList);
+//                //projectsList.push(newProject);
+//                //
+//                //const newProjectContainer = newProject.createProject();
+//                //newProject.showProject();
+//                //
+//                //newProjectContainer.addEventListener("click", () => {
+//                //    newProject.showProject();
+//                //
+//
+//                const newTaskContainer = document.createElement("div");
+//                const newTaskIcon = document.createElement("div");
+//                const newTaskName = document.createElement("div");
+//                const newTaskColorContainer = document.createElement("div");
+//                const newTaskColorRed = document.createElement("div");
+//                const newTaskColorYellow = document.createElement("div");
+//                const newTaskColorGreen = document.createElement("div");
+//                const newTaskDate = document.createElement("div");
+//
+//                newTaskContainer.setAttribute("id", "newTaskContainer");
+//                newTaskIcon.setAttribute("id", "newTaskIcon");
+//                newTaskName.setAttribute("id", "newTaskName");
+//                newTaskColorContainer.setAttribute("id", "newTaskColorContainer");
+//                newTaskColorRed.setAttribute("id", "newTaskColorRed");
+//                newTaskColorYellow.setAttribute("id", "newTaskColorYellow");
+//                newTaskColorGreen.setAttribute("id", "newTaskColorGreen");
+//                newTaskDate.setAttribute("id", "newTaskDate");
+//
+//                mainSquareTasksChild.appendChild(newTaskContainer);
+//                newTaskContainer.appendChild(newTaskIcon);
+//                newTaskContainer.appendChild(newTaskName);
+//                newTaskContainer.appendChild(newTaskColorContainer);
+//                newTaskColorContainer.appendChild(newTaskColorRed);
+//                newTaskColorContainer.appendChild(newTaskColorYellow);
+//                newTaskColorContainer.appendChild(newTaskColorGreen);
+//                newTaskContainer.appendChild(newTaskDate);
+//            }
+//            mainSquareTasksChild.removeChild(taskNameContainer);
+//        })
+//
+//        taskNameCancel.addEventListener("click", () => {
+//        })
+//    });
+//}
+//
+//function userDynamicInterface() {
+//    addProject();
+//    addTask();
+//}
 
 export default userDynamicInterface;
