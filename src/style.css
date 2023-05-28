@@ -337,10 +337,56 @@
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
+/*Cambiare height in fit content*/
 #newTaskContainer {
     display: flex;
-    flex-wrap: wrap;
-    border: solid;
+    height: 5%;
+    width: 100%;
+    border: solid chartreuse;
 }
 
+#newTaskContainer > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 100%;
+    border: solid tomato;
+}
+
+#newTaskIcon {
+    width: 3%;
+}
+
+#newTaskName {
+    width: 70%;
+}
+
+#newTaskColorContainer {
+    display: flex;
+    width: 17%;
+}
+
+#newTaskDate {
+    width: 10%;
+}
+
+#newTaskColorContainer > div {
+    flex: 1;
+    height: 100%;
+    border: solid mediumpurple;
+    border-radius: 10px;
+}
+
+/*Maybe add opacity*/
+#newTaskColorGreen {
+    background-color: greenyellow;
+}
+
+#newTaskColorYellow {
+    background-color: yellow;
+}
+
+#newTaskColorRed {
+    background-color: tomato;
+}
 

@@ -3,6 +3,7 @@ function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
     const projectsList = [];
+    let projectId = 0;
 
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
@@ -34,9 +35,11 @@ function userDynamicInterface() {
 
                 const newProjectContainer = newProject.createProject();
                 newProject.showProject();
-
+                projectId = newProject.projectId;
+                
                 newProjectContainer.addEventListener("click", () => {
                     newProject.showProject();
+                    projectId = newProject.projectId;
                 });
             }
             sideColumnSecondChild.removeChild(newNameContainer);
@@ -53,6 +56,11 @@ function userDynamicInterface() {
         if (mainSquareTasksChild.querySelector(".taskNameContainer")) {
             return;
         }
+
+        if (projectsList.length === 0) {
+            return;
+        }
+
         const taskNameContainer = document.createElement("div");
         const taskNameInput = document.createElement("input");
         const taskNameAdd = document.createElement("button");
@@ -69,46 +77,21 @@ function userDynamicInterface() {
         taskNameContainer.appendChild(taskNameCancel);
         mainSquareTasksChild.appendChild(taskNameContainer);
 
-        mainSquareTasksChild.insertBefore(taskNameContainer, mainSquareTasksChild.children[1]);
+        mainSquareTasksChild.insertBefore(taskNameContainer, mainSquareTasksChild.children[0]);
 
         // TODO
+        // click to delete
         taskNameAdd.addEventListener("click", () => {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
-
-
-
-                const newTaskContainer = document.createElement("div");
-                const newTaskIcon = document.createElement("div");
-                const newTaskName = document.createElement("div");
-                const newTaskColorContainer = document.createElement("div");
-                const newTaskColorRed = document.createElement("div");
-                const newTaskColorYellow = document.createElement("div");
-                const newTaskColorGreen = document.createElement("div");
-                const newTaskDate = document.createElement("div");
-
-                newTaskContainer.setAttribute("id", "newTaskContainer");
-                newTaskIcon.setAttribute("id", "newTaskIcon");
-                newTaskName.setAttribute("id", "newTaskName");
-                newTaskColorContainer.setAttribute("id", "newTaskColorContainer");
-                newTaskColorRed.setAttribute("id", "newTaskColorRed");
-                newTaskColorYellow.setAttribute("id", "newTaskColorYellow");
-                newTaskColorGreen.setAttribute("id", "newTaskColorGreen");
-                newTaskDate.setAttribute("id", "newTaskDate");
-
-                mainSquareTasksChild.appendChild(newTaskContainer);
-                newTaskContainer.appendChild(newTaskIcon);
-                newTaskContainer.appendChild(newTaskName);
-                newTaskContainer.appendChild(newTaskColorContainer);
-                newTaskColorContainer.appendChild(newTaskColorRed);
-                newTaskColorContainer.appendChild(newTaskColorYellow);
-                newTaskColorContainer.appendChild(newTaskColorGreen);
-                newTaskContainer.appendChild(newTaskDate);
+                console.log(projectsList,projectId)
+                const newTask = new Task(projectsList, projectId, taskName);
+                newTask.createTask();
             }
             mainSquareTasksChild.removeChild(taskNameContainer);
         })
-
         taskNameCancel.addEventListener("click", () => {
+            mainSquareTasksChild.removeChild(taskNameContainer);
         })
     });
 }

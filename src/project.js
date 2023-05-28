@@ -7,6 +7,10 @@ export class Project {
         this.id = ++Project.id;
     }
 
+    get projectId() {
+        return this.id 
+    }
+
     createProject() {
         const newProjectContainer = document.createElement("div");
         const newProjectName = document.createElement("div");
@@ -47,13 +51,53 @@ export class Project {
       }
 }
 
+// add the tasks to the corrispective object project
 export class Task extends Project {
-    constructor(projectName, projectsList) {
-        super(projectName, projectsList);
+    constructor(projectsList, projectId, taskName) {
+        super(projectsList);
+        this.taskId = projectId;
+        this.taskName = taskName;
     }
 
     createTask() {
+        const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
         
+        const newTaskContainer = document.createElement("div");
+        const newTaskIcon = document.createElement("div");
+        const newTaskName = document.createElement("div");
+        const newTaskColorContainer = document.createElement("div");
+        const newTaskColorRed = document.createElement("div");
+        const newTaskColorYellow = document.createElement("div");
+        const newTaskColorGreen = document.createElement("div");
+        const newTaskDate = document.createElement("div");
+
+        newTaskContainer.id = "newTaskContainer";
+        newTaskIcon.id = "newTaskIcon";
+        newTaskName.id = "newTaskName";
+        newTaskColorContainer.id = "newTaskColorContainer";
+        newTaskColorRed.id = "newTaskColorRed";
+        newTaskColorYellow.id = "newTaskColorYellow";
+        newTaskColorGreen.id = "newTaskColorGreen";
+        newTaskDate.id = "newTaskDate";
+
+        newTaskName.textContent = this.taskName;
+        const [day, month, year]= [
+            new Date().getDate(),
+            new Date().getMonth() + 1,
+            new Date().getFullYear()
+        ]
+        newTaskDate.textContent = `${day}/${month}/${year}`;
+
+        mainSquareTasksChild.appendChild(newTaskContainer);
+        newTaskContainer.appendChild(newTaskIcon);
+        newTaskContainer.appendChild(newTaskName);
+        newTaskContainer.appendChild(newTaskColorContainer);
+        newTaskColorContainer.appendChild(newTaskColorGreen);
+        newTaskColorContainer.appendChild(newTaskColorYellow);
+        newTaskColorContainer.appendChild(newTaskColorRed);
+        newTaskContainer.appendChild(newTaskDate);
+
+        return mainSquareTasksChild;
     }
 
     showTask() {
