@@ -363,30 +363,30 @@
 
 #newTaskColorContainer {
     display: flex;
-    width: 17%;
+    width: 10%;
 }
 
 #newTaskDate {
+    justify-content: center;
     width: 10%;
+    text-align: center;
 }
 
 #newTaskColorContainer > div {
     flex: 1;
     height: 100%;
-    border: solid mediumpurple;
-    border-radius: 10px;
+    border: solid rgb(255, 255, 255) 1px;
 }
 
-/*Maybe add opacity*/
 #newTaskColorGreen {
-    background-color: greenyellow;
+    background-color: rgb(173, 255, 47, 0.6);
 }
 
 #newTaskColorYellow {
-    background-color: yellow;
+    background-color: rgb(255, 255, 0, 0.6);
 }
 
 #newTaskColorRed {
-    background-color: tomato;
+    background-color: rgb(255, 99, 71, 0.6);
 }
 

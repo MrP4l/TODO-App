@@ -105,7 +105,7 @@ export class Task extends Project {
     }
 
     deleteTask() {
-        
+
     }
 
 }
