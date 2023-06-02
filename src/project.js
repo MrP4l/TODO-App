@@ -1,6 +1,5 @@
 export class Project {
     static id = 0;
-
     constructor(projectName, projectsList) {
         this.projectName = projectName;
         this.projectsList = projectsList;
@@ -52,16 +51,20 @@ export class Project {
 }
 
 // add the tasks to the corrispective object project
-export class Task extends Project {
-    constructor(projectsList, projectId, taskName) {
-        super(projectsList);
-        this.taskId = projectId;
+export class Task {
+    static id = 0;
+    constructor(taskName, projectId) {
         this.taskName = taskName;
+        this.id = ++Task.id;
+        this.projectId = projectId
+    }
+
+    get taskId() {
+        return this.id 
     }
 
     createTask() {
         const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
-        
         const newTaskContainer = document.createElement("div");
         const newTaskIcon = document.createElement("div");
         const newTaskName = document.createElement("div");
@@ -81,13 +84,15 @@ export class Task extends Project {
         newTaskDate.id = "newTaskDate";
 
         newTaskName.textContent = this.taskName;
+        newTaskIcon.textContent = "icon";
+
         const [day, month, year]= [
             new Date().getDate(),
             new Date().getMonth() + 1,
             new Date().getFullYear()
-        ]
+        ];
         newTaskDate.textContent = `${day}/${month}/${year}`;
-
+        
         mainSquareTasksChild.appendChild(newTaskContainer);
         newTaskContainer.appendChild(newTaskIcon);
         newTaskContainer.appendChild(newTaskName);

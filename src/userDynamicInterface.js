@@ -2,8 +2,11 @@ import { Project, Task } from "./project";
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
-    const projectsList = [];
+    let projectsList = [];
+    let tasksList = [];
+    let taskTemp = [];
     let projectId = 0;
+    let taskId = 0;
 
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
@@ -36,10 +39,13 @@ function userDynamicInterface() {
                 const newProjectContainer = newProject.createProject();
                 newProject.showProject();
                 projectId = newProject.projectId;
-                
+
+                console.log("last proj creat:", projectsList, projectId);
+
                 newProjectContainer.addEventListener("click", () => {
                     newProject.showProject();
                     projectId = newProject.projectId;
+                    console.log("click proj:", projectsList, projectId);
                 });
             }
             sideColumnSecondChild.removeChild(newNameContainer);
@@ -56,11 +62,9 @@ function userDynamicInterface() {
         if (mainSquareTasksChild.querySelector(".taskNameContainer")) {
             return;
         }
-
         if (projectsList.length === 0) {
             return;
         }
-
         const taskNameContainer = document.createElement("div");
         const taskNameInput = document.createElement("input");
         const taskNameAdd = document.createElement("button");
@@ -81,12 +85,33 @@ function userDynamicInterface() {
 
         // TODO
         // click to delete
+        // Add a centralized module with arrays and functs like date
         taskNameAdd.addEventListener("click", () => {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
-                console.log(projectsList,projectId)
-                const newTask = new Task(projectsList, projectId, taskName);
-                newTask.createTask();
+                const newTask = new Task(taskName, projectId);
+                tasksList.push(newTask);
+
+                const newTaskContainer = newTask.createTask();
+                taskId = newTask.taskId;
+
+                const [day, month, year] = [
+                    new Date().getDate(),
+                    new Date().getMonth() + 1,
+                    new Date().getFullYear()
+                ];
+                const date = `${day}/${month}/${year}`;
+                tasksList[taskId - 1]["date"] = date;
+
+                // TODO
+                // Modify this, it should insert to the Proj Obj only if the Id are the same (proj id inside and outside task)
+                // Pushing the tasks Obj inside the project Obj
+                projectsList[projectId - 1]["tasks"] = tasksList;
+
+                console.log(tasksList);
+
+                console.log("projList after the TL push:", projectsList);
+
             }
             mainSquareTasksChild.removeChild(taskNameContainer);
         })
