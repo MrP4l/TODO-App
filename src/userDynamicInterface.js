@@ -4,7 +4,7 @@ function userDynamicInterface() {
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
     let projectsList = [];
     let tasksList = [];
-    let taskTemp = [];
+    let tasks = [];
     let projectId = 0;
     let taskId = 0;
 
@@ -92,7 +92,7 @@ function userDynamicInterface() {
                 const newTask = new Task(taskName, projectId);
                 tasksList.push(newTask);
 
-                const newTaskContainer = newTask.createTask();
+                newTask.createTask();
                 taskId = newTask.taskId;
 
                 const [day, month, year] = [
@@ -103,14 +103,8 @@ function userDynamicInterface() {
                 const date = `${day}/${month}/${year}`;
                 tasksList[taskId - 1]["date"] = date;
 
-                // TODO
-                // Modify this, it should insert to the Proj Obj only if the Id are the same (proj id inside and outside task)
-                // Pushing the tasks Obj inside the project Obj
-                projectsList[projectId - 1]["tasks"] = tasksList;
-
-                console.log(tasksList);
-
-                console.log("projList after the TL push:", projectsList);
+                projectsList[projectId - 1].tasks.push(newTask);
+                console.log("test:", projectsList)
 
             }
             mainSquareTasksChild.removeChild(taskNameContainer);

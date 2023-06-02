@@ -3,6 +3,7 @@ export class Project {
     constructor(projectName, projectsList) {
         this.projectName = projectName;
         this.projectsList = projectsList;
+        this.tasks = [];
         this.id = ++Project.id;
     }
 
@@ -110,6 +111,7 @@ export class Task {
     }
 
     deleteTask() {
+        const task = document.getElementById("newTaskContainer");
 
     }
 
