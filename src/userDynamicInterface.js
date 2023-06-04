@@ -4,7 +4,6 @@ function userDynamicInterface() {
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
     let projectsList = [];
     let tasksList = [];
-    let tasks = [];
     let projectId = 0;
     let taskId = 0;
 
@@ -84,12 +83,11 @@ function userDynamicInterface() {
         mainSquareTasksChild.insertBefore(taskNameContainer, mainSquareTasksChild.children[0]);
 
         // TODO
-        // click to delete
         // Add a centralized module with arrays and functs like date
         taskNameAdd.addEventListener("click", () => {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
-                const newTask = new Task(taskName, projectId);
+                const newTask = new Task(taskName, projectId, projectsList);
                 tasksList.push(newTask);
 
                 newTask.createTask();
@@ -104,7 +102,7 @@ function userDynamicInterface() {
                 tasksList[taskId - 1]["date"] = date;
 
                 projectsList[projectId - 1].tasks.push(newTask);
-                console.log("test:", projectsList)
+                console.log("test:", projectsList)               
 
             }
             mainSquareTasksChild.removeChild(taskNameContainer);

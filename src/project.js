@@ -1,3 +1,4 @@
+import createMainSquare from "./userStaticInterface"; 
 export class Project {
     static id = 0;
     constructor(projectName, projectsList) {
@@ -12,6 +13,7 @@ export class Project {
     }
 
     createProject() {
+        const mainSquare = document.getElementById("mainSquare");
         const newProjectContainer = document.createElement("div");
         const newProjectName = document.createElement("div");
         const newProjectDeleteButton = document.createElement("div");
@@ -54,10 +56,11 @@ export class Project {
 // add the tasks to the corrispective object project
 export class Task {
     static id = 0;
-    constructor(taskName, projectId) {
-        this.taskName = taskName;
+    constructor(taskName, projectId, projectsList) {
         this.id = ++Task.id;
-        this.projectId = projectId
+        this.taskName = taskName;
+        this.projectId = projectId;
+        this.projectsList = projectsList;
     }
 
     get taskId() {
@@ -69,23 +72,16 @@ export class Task {
         const newTaskContainer = document.createElement("div");
         const newTaskIcon = document.createElement("div");
         const newTaskName = document.createElement("div");
-        const newTaskColorContainer = document.createElement("div");
-        const newTaskColorRed = document.createElement("div");
-        const newTaskColorYellow = document.createElement("div");
-        const newTaskColorGreen = document.createElement("div");
         const newTaskDate = document.createElement("div");
 
         newTaskContainer.id = "newTaskContainer";
         newTaskIcon.id = "newTaskIcon";
         newTaskName.id = "newTaskName";
-        newTaskColorContainer.id = "newTaskColorContainer";
-        newTaskColorRed.id = "newTaskColorRed";
-        newTaskColorYellow.id = "newTaskColorYellow";
-        newTaskColorGreen.id = "newTaskColorGreen";
         newTaskDate.id = "newTaskDate";
 
         newTaskName.textContent = this.taskName;
-        newTaskIcon.textContent = "icon";
+        newTaskIcon.classList.add("fa-solid");
+        newTaskIcon.classList.add("fa-check-double");
 
         const [day, month, year]= [
             new Date().getDate(),
@@ -97,22 +93,24 @@ export class Task {
         mainSquareTasksChild.appendChild(newTaskContainer);
         newTaskContainer.appendChild(newTaskIcon);
         newTaskContainer.appendChild(newTaskName);
-        newTaskContainer.appendChild(newTaskColorContainer);
-        newTaskColorContainer.appendChild(newTaskColorGreen);
-        newTaskColorContainer.appendChild(newTaskColorYellow);
-        newTaskColorContainer.appendChild(newTaskColorRed);
         newTaskContainer.appendChild(newTaskDate);
 
-        return mainSquareTasksChild;
-    }
-
-    showTask() {
-
+        newTaskContainer.addEventListener("click", () => {
+            this.deleteTask(newTaskContainer);
+          });
+      
+        return newTaskContainer;
     }
 
     deleteTask() {
-        const task = document.getElementById("newTaskContainer");
-
+        const project = this.projectsList.find(project => project.id === this.projectId);
+        if (project) {
+          const taskIndex = project.tasks.findIndex(task => task.id === this.id);
+          if (taskIndex !== -1) {
+            project.tasks.splice(taskIndex, 1);
+          }
+        }
+        const newTaskContainer = document.getElementById("newTaskContainer");
+        newTaskContainer.remove();
     }
-
 }
