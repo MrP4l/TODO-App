@@ -38,8 +38,27 @@ export class Project {
     }
 
     showProject() {
+        //TODO
+        //Add remove child
+        const removeTasks = document.querySelectorAll("#newTaskContainer");
+        removeTasks.forEach((newTaskContainer) => {
+            newTaskContainer.remove();
+        }) 
+
         const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
         mainSquareTitleTextChild.innerText = this.projectName;
+        const index = this.projectsList.findIndex((project) => project.id === this.id);
+        console.log("showPro:", index);
+        if (index !== -1) {
+            for (const [key, value] of Object.entries(this.projectsList[index])) {
+                if (key === "tasks") {
+                    for (const task of value) {
+                      const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, this.date);
+                      taskInstance.createTask();
+                    }
+                }
+            }
+          }
     }
 
     deleteProject(newProjectContainer) {
@@ -69,6 +88,9 @@ export class Task {
 
     createTask() {
         const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
+        if (!mainSquareTasksChild) {
+            const mainSquareTasksChild = document.createElement("div");
+        }
         const newTaskContainer = document.createElement("div");
         const newTaskIcon = document.createElement("div");
         const newTaskName = document.createElement("div");
@@ -83,12 +105,16 @@ export class Task {
         newTaskIcon.classList.add("fa-solid");
         newTaskIcon.classList.add("fa-check-double");
 
-        const [day, month, year]= [
+        const [day, month, year] = [
             new Date().getDate(),
             new Date().getMonth() + 1,
             new Date().getFullYear()
         ];
-        newTaskDate.textContent = `${day}/${month}/${year}`;
+        const date = `${day}/${month}/${year}`;
+        
+        this.date = date;
+
+        newTaskDate.innerHTML = this.date;
         
         mainSquareTasksChild.appendChild(newTaskContainer);
         newTaskContainer.appendChild(newTaskIcon);
@@ -97,11 +123,13 @@ export class Task {
 
         newTaskContainer.addEventListener("click", () => {
             this.deleteTask(newTaskContainer);
-          });
+        });
       
         return newTaskContainer;
     }
 
+    //TODO
+    //Bugged, after the click on the project it doesnt remove anymore the element from the array 
     deleteTask() {
         const project = this.projectsList.find(project => project.id === this.projectId);
         if (project) {
@@ -112,5 +140,6 @@ export class Task {
         }
         const newTaskContainer = document.getElementById("newTaskContainer");
         newTaskContainer.remove();
+        console.log("project:", project, this.projectsList)
     }
 }

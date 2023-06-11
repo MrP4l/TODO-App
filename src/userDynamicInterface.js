@@ -5,7 +5,6 @@ function userDynamicInterface() {
     let projectsList = [];
     let tasksList = [];
     let projectId = 0;
-    let taskId = 0;
 
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
@@ -45,11 +44,11 @@ function userDynamicInterface() {
                     newProject.showProject();
                     projectId = newProject.projectId;
                     console.log("click proj:", projectsList, projectId);
+                    console.log("click:", newProject);
                 });
             }
             sideColumnSecondChild.removeChild(newNameContainer);
         });
-
         newNameCancelButton.addEventListener("click", () => {
             sideColumnSecondChild.removeChild(newNameContainer);
         });
@@ -91,19 +90,8 @@ function userDynamicInterface() {
                 tasksList.push(newTask);
 
                 newTask.createTask();
-                taskId = newTask.taskId;
-
-                const [day, month, year] = [
-                    new Date().getDate(),
-                    new Date().getMonth() + 1,
-                    new Date().getFullYear()
-                ];
-                const date = `${day}/${month}/${year}`;
-                tasksList[taskId - 1]["date"] = date;
 
                 projectsList[projectId - 1].tasks.push(newTask);
-                console.log("test:", projectsList)               
-
             }
             mainSquareTasksChild.removeChild(taskNameContainer);
         })
