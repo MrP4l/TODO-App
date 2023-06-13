@@ -40,6 +40,7 @@ export class Project {
     showProject() {
         //TODO
         //Add remove child
+        //Probably the bug is at line 57 and 58
         const removeTasks = document.querySelectorAll("#newTaskContainer");
         removeTasks.forEach((newTaskContainer) => {
             newTaskContainer.remove();
@@ -72,7 +73,6 @@ export class Project {
       }
 }
 
-// add the tasks to the corrispective object project
 export class Task {
     static id = 0;
     constructor(taskName, projectId, projectsList) {
@@ -88,9 +88,6 @@ export class Task {
 
     createTask() {
         const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
-        if (!mainSquareTasksChild) {
-            const mainSquareTasksChild = document.createElement("div");
-        }
         const newTaskContainer = document.createElement("div");
         const newTaskIcon = document.createElement("div");
         const newTaskName = document.createElement("div");
@@ -130,7 +127,7 @@ export class Task {
 
     //TODO
     //Bugged, after the click on the project it doesnt remove anymore the element from the array 
-    deleteTask() {
+    deleteTask(newTaskContainer) {
         const project = this.projectsList.find(project => project.id === this.projectId);
         if (project) {
           const taskIndex = project.tasks.findIndex(task => task.id === this.id);
@@ -138,8 +135,7 @@ export class Task {
             project.tasks.splice(taskIndex, 1);
           }
         }
-        const newTaskContainer = document.getElementById("newTaskContainer");
+        //const newTaskContainer = document.getElementById("newTaskContainer");
         newTaskContainer.remove();
-        console.log("project:", project, this.projectsList)
     }
 }
