@@ -100,6 +100,18 @@ function userDynamicInterface() {
             mainSquareTasksChild.removeChild(taskNameContainer);
         })
     });
+
+    const parent = document.getElementById("sideColumnFirstChild");
+    const dateFilters = parent.querySelectorAll("*");
+
+    dateFilters.forEach(child => {
+        child.addEventListener("click", () => {
+
+        })
+    })
+    //const allTasks = document.getElementById("sideColumnAllContainer");
+    //const todayTasks = document.getElementById("sideColumnTodayContainer");
+    //const weekTasks = document.getElementById("sideColumnWeekContainer");
 }
 
 export default userDynamicInterface;

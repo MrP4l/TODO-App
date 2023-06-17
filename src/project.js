@@ -39,7 +39,7 @@ export class Project {
         return newProjectContainer;
     }
 
-    showProject() {
+    showProject(x) {
         //TODO
         //Add remove child
         const removeTasks = document.querySelectorAll("#newTaskContainer");
