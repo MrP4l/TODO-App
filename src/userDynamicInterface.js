@@ -5,6 +5,7 @@ function userDynamicInterface() {
     let projectsList = [];
     let tasksList = [];
     let projectId = 0;
+    let taskId = 0;
 
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
@@ -44,7 +45,6 @@ function userDynamicInterface() {
                     newProject.showProject();
                     projectId = newProject.projectId;
                     console.log("click proj:", projectsList, projectId);
-                    console.log("click:", newProject);
                 });
             }
             sideColumnSecondChild.removeChild(newNameContainer);
@@ -86,7 +86,8 @@ function userDynamicInterface() {
         taskNameAdd.addEventListener("click", () => {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
-                const newTask = new Task(taskName, projectId, projectsList);
+                ++taskId;
+                const newTask = new Task(taskName, projectId, projectsList, taskId);
                 tasksList.push(newTask);
 
                 newTask.createTask();

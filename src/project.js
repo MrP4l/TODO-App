@@ -12,6 +12,8 @@ export class Project {
         return this.id 
     }
 
+    // TODO
+    // Dynamic window usable for All, today, week and compatible with DOM
     createProject() {
         const mainSquare = document.getElementById("mainSquare");
         const newProjectContainer = document.createElement("div");
@@ -40,7 +42,6 @@ export class Project {
     showProject() {
         //TODO
         //Add remove child
-        //Probably the bug is at line 57 and 58
         const removeTasks = document.querySelectorAll("#newTaskContainer");
         removeTasks.forEach((newTaskContainer) => {
             newTaskContainer.remove();
@@ -49,12 +50,11 @@ export class Project {
         const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
         mainSquareTitleTextChild.innerText = this.projectName;
         const index = this.projectsList.findIndex((project) => project.id === this.id);
-        console.log("showPro:", index);
         if (index !== -1) {
             for (const [key, value] of Object.entries(this.projectsList[index])) {
                 if (key === "tasks") {
                     for (const task of value) {
-                      const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, this.date);
+                      const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
                       taskInstance.createTask();
                     }
                 }
@@ -74,16 +74,11 @@ export class Project {
 }
 
 export class Task {
-    static id = 0;
-    constructor(taskName, projectId, projectsList) {
-        this.id = ++Task.id;
+    constructor(taskName, projectId, projectsList, taskId) {
         this.taskName = taskName;
         this.projectId = projectId;
         this.projectsList = projectsList;
-    }
-
-    get taskId() {
-        return this.id 
+        this.taskId = taskId;
     }
 
     createTask() {
@@ -125,17 +120,16 @@ export class Task {
         return newTaskContainer;
     }
 
-    //TODO
-    //Bugged, after the click on the project it doesnt remove anymore the element from the array 
     deleteTask(newTaskContainer) {
         const project = this.projectsList.find(project => project.id === this.projectId);
         if (project) {
-          const taskIndex = project.tasks.findIndex(task => task.id === this.id);
+            const taskIndex = project.tasks.findIndex(task => task.taskId === this.taskId);
+            console.log("taskIndex:", taskIndex)
           if (taskIndex !== -1) {
             project.tasks.splice(taskIndex, 1);
           }
         }
-        //const newTaskContainer = document.getElementById("newTaskContainer");
+        console.log("project:", project, "project list after splice:", this.projectsList)
         newTaskContainer.remove();
     }
 }
