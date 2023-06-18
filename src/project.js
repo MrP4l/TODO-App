@@ -39,9 +39,7 @@ export class Project {
         return newProjectContainer;
     }
 
-    showProject(x) {
-        //TODO
-        //Add remove child
+    showProject() {
         const removeTasks = document.querySelectorAll("#newTaskContainer");
         removeTasks.forEach((newTaskContainer) => {
             newTaskContainer.remove();
@@ -131,5 +129,9 @@ export class Task {
         }
         console.log("project:", project, "project list after splice:", this.projectsList)
         newTaskContainer.remove();
+    }
+
+    showTasks() {
+        
     }
 }
