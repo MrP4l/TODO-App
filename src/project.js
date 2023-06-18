@@ -132,6 +132,23 @@ export class Task {
     }
 
     showTasks() {
+    }
+}
+
+export class Filter {
+    constructor(projectsList) {
+        this.projectsList = projectsList;
+    }
+
+    allFilter() {
+
+    }
+
+    todayFilter() {
+
+    }
+
+    weekFilter() {
         
     }
 }

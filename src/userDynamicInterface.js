@@ -1,4 +1,4 @@
-import { Project, Task } from "./project";
+import { Project, Task, Filter} from "./project";
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
@@ -103,15 +103,28 @@ function userDynamicInterface() {
 
     const parent = document.getElementById("sideColumnFirstChild");
     const dateFilters = parent.querySelectorAll("*");
-
     dateFilters.forEach(child => {
-        child.addEventListener("click", () => {
-
+        child.addEventListener("click", (event) => {
+            event.stopPropagation();
+            console.log(event.target)
+            const filter = new Filter(projectsList);
+            if (child.id === "sideColumnAllContainer") {
+                alert("first");
+                filter.allFilter();
+            } else if (child.id === "sideColumnTodayContainer") {
+                alert("second");
+                filter.todayFilter();
+            } else if (child.id === "sideColumnWeekContainer") {
+                alert("third");
+                filter.weekFilter();
+            }
         })
     })
     //const allTasks = document.getElementById("sideColumnAllContainer");
     //const todayTasks = document.getElementById("sideColumnTodayContainer");
     //const weekTasks = document.getElementById("sideColumnWeekContainer");
 }
+
+
 
 export default userDynamicInterface;
