@@ -141,14 +141,33 @@ export class Filter {
     }
 
     allFilter() {
-
     }
 
     todayFilter() {
+        const date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        let currentDate = `${day}/${month}/${year}`;
 
+        const removeTasks = document.querySelectorAll("#newTaskContainer");
+        removeTasks.forEach(taskContainer => {
+          taskContainer.remove();
+        });
+
+        for (const project of this.projectsList) {
+          for (const task of project.tasks) {
+            if (task.date === currentDate) {
+                const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
+                taskInstance.createTask();
+            }
+          }
+        }
+        const newProjectName = document.getElementById("mainSquareTitleTextChild")
+        newProjectName.textContent = "Today";
     }
 
     weekFilter() {
-        
+
     }
 }
