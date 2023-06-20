@@ -10,6 +10,10 @@
     display: none;
 }
 
+body {
+    background-color: #314755;
+}
+
 #content {
     display: flex;
     min-height: 100vh;
