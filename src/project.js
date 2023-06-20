@@ -1,3 +1,5 @@
+import startOfWeek from 'date-fns/startOfWeek'
+import endOfWeek from 'date-fns/endOfWeek';
 import createMainSquare from "./userStaticInterface"; 
 export class Project {
     static id = 0;
@@ -168,6 +170,8 @@ export class Filter {
     }
 
     weekFilter() {
-
+        const date = new Date();
+        const start = startOfWeek(date, {weekStartsOn: 1});
+        const end = endOfWeek(date, {weekStartsOn: 1});
     }
 }
