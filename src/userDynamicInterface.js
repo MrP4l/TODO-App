@@ -39,12 +39,9 @@ function userDynamicInterface() {
                 newProject.showProject();
                 projectId = newProject.projectId;
 
-                console.log("last proj creat:", projectsList, projectId);
-
                 newProjectContainer.addEventListener("click", () => {
                     newProject.showProject();
                     projectId = newProject.projectId;
-                    console.log("click proj:", projectsList, projectId);
                 });
             }
             sideColumnSecondChild.removeChild(newNameContainer);
@@ -106,23 +103,16 @@ function userDynamicInterface() {
     dateFilters.forEach(child => {
         child.addEventListener("click", (event) => {
             event.stopPropagation();
-            console.log(event.target)
             const filter = new Filter(projectsList);
             if (child.id === "sideColumnAllContainer") {
-                alert("first");
                 filter.allFilter();
             } else if (child.id === "sideColumnTodayContainer") {
-                alert("second");
                 filter.todayFilter();
             } else if (child.id === "sideColumnWeekContainer") {
-                alert("third");
                 filter.weekFilter();
             }
         })
     })
-    //const allTasks = document.getElementById("sideColumnAllContainer");
-    //const todayTasks = document.getElementById("sideColumnTodayContainer");
-    //const weekTasks = document.getElementById("sideColumnWeekContainer");
 }
 
 

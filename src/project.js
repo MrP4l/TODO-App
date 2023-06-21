@@ -1,6 +1,7 @@
 import startOfWeek from 'date-fns/startOfWeek'
 import endOfWeek from 'date-fns/endOfWeek';
-import createMainSquare from "./userStaticInterface"; 
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 export class Project {
     static id = 0;
     constructor(projectName, projectsList) {
@@ -68,8 +69,6 @@ export class Project {
           this.projectsList.splice(index, 1);
         }
         newProjectContainer.remove();
-        // Add at the end the deletion (and the creation) of the project's content (mainSquareChildrenContainer)
-        //mainSquareChildrenContainer.remove();
       }
 }
 
@@ -124,12 +123,10 @@ export class Task {
         const project = this.projectsList.find(project => project.id === this.projectId);
         if (project) {
             const taskIndex = project.tasks.findIndex(task => task.taskId === this.taskId);
-            console.log("taskIndex:", taskIndex)
           if (taskIndex !== -1) {
             project.tasks.splice(taskIndex, 1);
           }
         }
-        console.log("project:", project, "project list after splice:", this.projectsList)
         newTaskContainer.remove();
     }
 
@@ -143,35 +140,64 @@ export class Filter {
     }
 
     allFilter() {
+        const removeTasks = document.querySelectorAll("#newTaskContainer");
+        removeTasks.forEach(taskContainer => {
+          taskContainer.remove();
+        });
+
+        this.projectsList.forEach(project => {
+            project.tasks.forEach(task => {
+              const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
+              taskInstance.createTask();
+            });
+          });
+
+        const newProjectName = document.getElementById("mainSquareTitleTextChild")
+        newProjectName.textContent = "All";
     }
 
     todayFilter() {
         const date = new Date();
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        let year = date.getFullYear();
-        let currentDate = `${day}/${month}/${year}`;
+        const currentDate = format(date, 'dd/MM/yyyy');
 
         const removeTasks = document.querySelectorAll("#newTaskContainer");
         removeTasks.forEach(taskContainer => {
           taskContainer.remove();
         });
 
-        for (const project of this.projectsList) {
-          for (const task of project.tasks) {
-            if (task.date === currentDate) {
-                const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
+        this.projectsList.forEach(project => {
+            project.tasks.filter(task => task.date === currentDate)
+              .forEach(filteredTask => {
+                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, this.projectsList, filteredTask.taskId);
                 taskInstance.createTask();
-            }
-          }
-        }
+              });
+          });
+
         const newProjectName = document.getElementById("mainSquareTitleTextChild")
         newProjectName.textContent = "Today";
     }
 
     weekFilter() {
         const date = new Date();
-        const start = startOfWeek(date, {weekStartsOn: 1});
-        const end = endOfWeek(date, {weekStartsOn: 1});
+        const startOfTheWeek = startOfWeek(date, {weekStartsOn: 1});
+        const endOfTheWeek = endOfWeek(date, {weekStartsOn: 1});
+        const startOfTheWeekFormatted = format(startOfTheWeek, 'dd/MM/yyyy');
+        const endOfTheWeekFormatted = format(endOfTheWeek, 'dd/MM/yyyy');
+        
+        const removeTasks = document.querySelectorAll("#newTaskContainer");
+        removeTasks.forEach(taskContainer => {
+          taskContainer.remove();
+        });
+
+        this.projectsList.forEach(project => {
+            project.tasks.filter(task => task.date >= startOfTheWeekFormatted && task.date <= endOfTheWeekFormatted)
+              .forEach(filteredTask => {
+                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, this.projectsList, filteredTask.taskId);
+                taskInstance.createTask();
+              });
+          });
+          const newProjectName = document.getElementById("mainSquareTitleTextChild")
+          newProjectName.textContent = "Week";
+
     }
 }
