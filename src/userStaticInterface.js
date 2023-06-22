@@ -119,8 +119,8 @@ function createBody() {
 
     sideAndMainContainer.id = "sideAndMainContainer";
 
-    sideAndMainContainer.appendChild(createSideColumn())
-    sideAndMainContainer.appendChild(createMainSquare())
+    sideAndMainContainer.appendChild(createSideColumn());
+    sideAndMainContainer.appendChild(createMainSquare());
 
     return sideAndMainContainer;
 }
