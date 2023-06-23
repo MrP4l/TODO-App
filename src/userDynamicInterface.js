@@ -13,14 +13,17 @@ function userDynamicInterface() {
         }
         const newNameContainer = document.createElement("div");
         const newNameTextfield = document.createElement("input");
-        const newNameAddButton = document.createElement("button");
-        const newNameCancelButton = document.createElement("button");
+        const newNameAddButton = document.createElement("i");
+        const newNameCancelButton = document.createElement("i");
 
         newNameContainer.id = "newNameContainer";
         newNameTextfield.setAttribute("type", "text");
         newNameTextfield.id = "newNameTextfieldInput";
+        newNameTextfield.placeholder = "Add a new project";
         newNameAddButton.id = "newNameAddButton";
+        newNameAddButton.classList.add("gg-math-plus");
         newNameCancelButton.id = "newNameCancelButton";
+        newNameCancelButton.classList.add("gg-math-plus");
 
         newNameContainer.appendChild(newNameTextfield);
         newNameContainer.appendChild(newNameAddButton);
