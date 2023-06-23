@@ -71,6 +71,7 @@ function userDynamicInterface() {
         taskNameContainer.setAttribute("class", "taskNameContainer");
         taskNameInput.setAttribute("type", "text");
         taskNameInput.id = "taskNameInput";
+        taskNameInput.placeholder = "Add a task";
         taskNameAdd.id = "taskNameAdd";
         taskNameCancel.id = "taskNameCancel";
 
