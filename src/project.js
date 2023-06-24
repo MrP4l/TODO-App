@@ -1,7 +1,6 @@
 import startOfWeek from 'date-fns/startOfWeek'
 import endOfWeek from 'date-fns/endOfWeek';
 import format from 'date-fns/format';
-import parse from 'date-fns/parse';
 export class Project {
     static id = 0;
     constructor(projectName, projectsList) {
@@ -15,8 +14,6 @@ export class Project {
         return this.id 
     }
 
-    // TODO
-    // Dynamic window usable for All, today, week and compatible with DOM
     createProject() {
         const mainSquare = document.getElementById("mainSquare");
         const newProjectContainer = document.createElement("div");
@@ -38,7 +35,7 @@ export class Project {
         newProjectDeleteButton.addEventListener("click", () => {
             this.deleteProject(newProjectContainer);
           });
-      
+
         return newProjectContainer;
     }
 
@@ -47,9 +44,8 @@ export class Project {
         removeTasks.forEach((newTaskContainer) => {
             newTaskContainer.remove();
         }) 
-
         const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
-        mainSquareTitleTextChild.innerText = this.projectName;
+        mainSquareTitleTextChild.innerText = this.projectName;  
         const index = this.projectsList.findIndex((project) => project.id === this.id);
         if (index !== -1) {
             for (const [key, value] of Object.entries(this.projectsList[index])) {
@@ -69,6 +65,7 @@ export class Project {
           this.projectsList.splice(index, 1);
         }
         newProjectContainer.remove();
+    
       }
 }
 
@@ -127,11 +124,9 @@ export class Task {
             project.tasks.splice(taskIndex, 1);
           }
         }
-        newTaskContainer.remove();
+        newTaskContainer.remove();        
     }
 
-    showTasks() {
-    }
 }
 
 export class Filter {

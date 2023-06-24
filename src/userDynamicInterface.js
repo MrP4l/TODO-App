@@ -9,6 +9,8 @@ function userDynamicInterface() {
 
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
+            const newNameContainer = document.getElementById("newNameContainer");
+            sideColumnSecondChild.removeChild(newNameContainer);
             return;
         }
         const newNameContainer = document.createElement("div");
