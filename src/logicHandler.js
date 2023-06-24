@@ -1,12 +1,11 @@
 import startOfWeek from 'date-fns/startOfWeek'
 import endOfWeek from 'date-fns/endOfWeek';
 import format from 'date-fns/format';
-import parse from 'date-fns/parse';
+import { projectsList } from './userDynamicInterface';
 export class Project {
     static id = 0;
-    constructor(projectName, projectsList) {
+    constructor(projectName) {
         this.projectName = projectName;
-        this.projectsList = projectsList;
         this.tasks = [];
         this.id = ++Project.id;
     }
@@ -15,8 +14,6 @@ export class Project {
         return this.id 
     }
 
-    // TODO
-    // Dynamic window usable for All, today, week and compatible with DOM
     createProject() {
         const mainSquare = document.getElementById("mainSquare");
         const newProjectContainer = document.createElement("div");
@@ -50,9 +47,9 @@ export class Project {
 
         const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
         mainSquareTitleTextChild.innerText = this.projectName;
-        const index = this.projectsList.findIndex((project) => project.id === this.id);
+        const index = projectsList.findIndex((project) => project.id === this.id);
         if (index !== -1) {
-            for (const [key, value] of Object.entries(this.projectsList[index])) {
+            for (const [key, value] of Object.entries(projectsList[index])) {
                 if (key === "tasks") {
                     for (const task of value) {
                       const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
@@ -64,19 +61,18 @@ export class Project {
     }
 
     deleteProject(newProjectContainer) {
-        const index = this.projectsList.findIndex((project) => project.id === this.id);
+        const index = projectsList.findIndex((project) => project.id === this.id);
         if (index !== -1) {
-          this.projectsList.splice(index, 1);
+            projectsList.splice(index, 1);
         }
         newProjectContainer.remove();
       }
 }
 
 export class Task {
-    constructor(taskName, projectId, projectsList, taskId) {
+    constructor(taskName, projectId, taskId) {
         this.taskName = taskName;
         this.projectId = projectId;
-        this.projectsList = projectsList;
         this.taskId = taskId;
     }
 
@@ -120,7 +116,7 @@ export class Task {
     }
 
     deleteTask(newTaskContainer) {
-        const project = this.projectsList.find(project => project.id === this.projectId);
+        const project = projectsList.find(project => project.id === this.projectId);
         if (project) {
             const taskIndex = project.tasks.findIndex(task => task.taskId === this.taskId);
           if (taskIndex !== -1) {
@@ -128,9 +124,6 @@ export class Task {
           }
         }
         newTaskContainer.remove();
-    }
-
-    showTasks() {
     }
 }
 
@@ -147,7 +140,7 @@ export class Filter {
 
         this.projectsList.forEach(project => {
             project.tasks.forEach(task => {
-              const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
+              const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
               taskInstance.createTask();
             });
           });
@@ -165,10 +158,10 @@ export class Filter {
           taskContainer.remove();
         });
 
-        this.projectsList.forEach(project => {
+        projectsList.forEach(project => {
             project.tasks.filter(task => task.date === currentDate)
               .forEach(filteredTask => {
-                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, this.projectsList, filteredTask.taskId);
+                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, filteredTask.taskId);
                 taskInstance.createTask();
               });
           });
@@ -189,10 +182,10 @@ export class Filter {
           taskContainer.remove();
         });
 
-        this.projectsList.forEach(project => {
+        projectsList.forEach(project => {
             project.tasks.filter(task => task.date >= startOfTheWeekFormatted && task.date <= endOfTheWeekFormatted)
               .forEach(filteredTask => {
-                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, this.projectsList, filteredTask.taskId);
+                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, filteredTask.taskId);
                 taskInstance.createTask();
               });
           });

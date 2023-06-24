@@ -1,14 +1,15 @@
-import { Project, Task, Filter} from "./project";
+export const projectsList = [];
+import { Project, Task, Filter} from "./logicHandler";
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
-    let projectsList = [];
-    let tasksList = [];
     let projectId = 0;
     let taskId = 0;
 
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
+            const newNameContainer = document.getElementById("newNameContainer");
+            sideColumnSecondChild.removeChild(newNameContainer);
             return;
         }
         const newNameContainer = document.createElement("div");
@@ -35,8 +36,9 @@ function userDynamicInterface() {
         newNameAddButton.addEventListener("click", () => {
             const projectName = newNameTextfield.value.trim();
             if (projectName !== "") {
-                const newProject = new Project(projectName, projectsList);
+                const newProject = new Project(projectName);
                 projectsList.push(newProject);
+                console.log("proj:", projectsList)
 
                 const newProjectContainer = newProject.createProject();
                 newProject.showProject();
@@ -82,14 +84,11 @@ function userDynamicInterface() {
 
         mainSquareTasksChild.insertBefore(taskNameContainer, mainSquareTasksChild.children[0]);
 
-        // TODO
-        // Add a centralized module with arrays and functs like date
         taskNameAdd.addEventListener("click", () => {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
                 ++taskId;
-                const newTask = new Task(taskName, projectId, projectsList, taskId);
-                tasksList.push(newTask);
+                const newTask = new Task(taskName, projectId, taskId);
 
                 newTask.createTask();
 
