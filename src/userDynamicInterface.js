@@ -1,5 +1,5 @@
 export const projectsList = [];
-import { Project, Task, Filter} from "./logicHandler";
+import { Project, Task, Filter} from "./classes";
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
@@ -67,15 +67,17 @@ function userDynamicInterface() {
         }
         const taskNameContainer = document.createElement("div");
         const taskNameInput = document.createElement("input");
-        const taskNameAdd = document.createElement("button");
-        const taskNameCancel = document.createElement("button");
+        const taskNameAdd = document.createElement("i");
+        const taskNameCancel = document.createElement("i");
 
-        taskNameContainer.setAttribute("class", "taskNameContainer");
+        taskNameContainer.classList.add("taskNameContainer");
         taskNameInput.setAttribute("type", "text");
         taskNameInput.id = "taskNameInput";
         taskNameInput.placeholder = "Add a task";
         taskNameAdd.id = "taskNameAdd";
         taskNameCancel.id = "taskNameCancel";
+        taskNameAdd.classList.add("gg-math-plus");
+        taskNameCancel.classList.add("gg-math-plus");
 
         taskNameContainer.appendChild(taskNameInput);
         taskNameContainer.appendChild(taskNameAdd);

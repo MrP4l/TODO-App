@@ -105,12 +105,7 @@ function createMainSquare() {
     mainSquareTasksChild.id = "mainSquareTasksChild";
     mainSquareTitleTextChild.id = "mainSquareTitleTextChild";
     mainSquareTitleIconChild.id = "mainSquareTitleIconChild";
-
-    mainSquareTitleTextChild.textContent = "Variable Text";
-
-    mainSquareTitleIconChild.classList.add("fa-solid");
-    mainSquareTitleIconChild.classList.add("fa-plus");
-
+    
     return mainSquare;
 }
 

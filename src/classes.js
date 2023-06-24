@@ -15,7 +15,7 @@ export class Project {
     }
 
     createProject() {
-        const mainSquare = document.getElementById("mainSquare");
+        const mainSquareTitleIconChild = document.getElementById("mainSquareTitleIconChild");
         const newProjectContainer = document.createElement("div");
         const newProjectName = document.createElement("div");
         const newProjectDeleteButton = document.createElement("div");
@@ -27,6 +27,9 @@ export class Project {
         newProjectContainer.id = "newProjectContainer";
         newProjectName.classList.add("newProjectName");
         newProjectDeleteButton.classList.add("newProjectDeleteButton");
+        mainSquareTitleIconChild.classList.add("fa-solid");
+        mainSquareTitleIconChild.classList.add("fa-plus");
+
 
         sideColumnSecondChild.appendChild(newProjectContainer);
         newProjectContainer.appendChild(newProjectName);
@@ -46,11 +49,14 @@ export class Project {
         }) 
 
         const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
-        mainSquareTitleTextChild.innerText = this.projectName;
         const index = projectsList.findIndex((project) => project.id === this.id);
         if (index !== -1) {
-            for (const [key, value] of Object.entries(projectsList[index])) {
-                if (key === "tasks") {
+          for (const [key, value] of Object.entries(projectsList[index])) {
+            mainSquareTitleTextChild.innerText = projectsList[index].projectName;
+            if (projectsList.length === 0) {
+              mainSquareTitleTextChild.innerText = " ";
+            }
+            if (key === "tasks") {
                     for (const task of value) {
                       const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
                       taskInstance.createTask();
@@ -66,6 +72,10 @@ export class Project {
             projectsList.splice(index, 1);
         }
         newProjectContainer.remove();
+        const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
+        if (projectsList.length === 0) {
+          mainSquareTitleTextChild.innerText = " ";
+        } 
       }
 }
 
@@ -92,14 +102,10 @@ export class Task {
         newTaskIcon.classList.add("fa-solid");
         newTaskIcon.classList.add("fa-check-double");
 
-        const [day, month, year] = [
-            new Date().getDate(),
-            new Date().getMonth() + 1,
-            new Date().getFullYear()
-        ];
-        const date = `${day}/${month}/${year}`;
+        const date = new Date();
+        const currentDate = format(date, 'dd/MM/yyyy');
         
-        this.date = date;
+        this.date = currentDate;
 
         newTaskDate.innerHTML = this.date;
         
