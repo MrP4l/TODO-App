@@ -23,24 +23,21 @@ function userDynamicInterface() {
 
                 console.log(projectsList);
                 userInterface.createProject();
-                userInterface.renderProject(newProjectContainer);
+                userInterface.showTheProjectCreatedRightNow();
+                projectId = newProject.projectId;
 
-                const projects = document.querySelectorAll(".newProjectContainer");
-                projects.forEach(project => {
-                    project.addEventListener("click", () => {
-                        userInterface.renderProject()
-                    })
-                })
-
-                //project.addEventListener("click", () => {
-                //    newProject.showProject();
-                //    projectId = newProject.projectId;
-                //});
+                //const projects = document.querySelectorAll(".newProjectContainer");
+                //projects.forEach(project => {
+                //    project.addEventListener("click", () => {
+                //        userInterface.renderProject()
+                //    })
+                //})
             }
             sideColumnSecondChild.removeChild(newNameContainer);
         });
         newNameCancelButton.addEventListener("click", () => {
             sideColumnSecondChild.removeChild(newNameContainer);
+        
         });
     })
 
