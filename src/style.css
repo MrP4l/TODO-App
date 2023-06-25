@@ -226,11 +226,11 @@ body {
     background: -webkit-linear-gradient(to right, #e76f51, #26292B);  
     background: linear-gradient(to right, #e76f51, #26292B);
     /*background: white;*/
-    transition: transform 300ms ease-out;
+    transition: transform 350ms ease-out;
 }
 
 #newProjectContainer:hover {
-    transform: translate(0px, 0px) scale(1.02, 1.02);
+    transform: translate(5px, 0px);
 }
 
 #mainSquare {

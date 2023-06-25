@@ -60,6 +60,8 @@ function userDynamicInterface() {
     const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
     addTask.addEventListener("click", () => {
         if (mainSquareTasksChild.querySelector(".taskNameContainer")) {
+            const taskNameContainer = document.querySelector(".taskNameContainer");
+            mainSquareTasksChild.removeChild(taskNameContainer);
             return;
         }
         if (projectsList.length === 0) {
