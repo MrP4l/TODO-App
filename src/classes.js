@@ -2,6 +2,7 @@ import startOfWeek from 'date-fns/startOfWeek'
 import endOfWeek from 'date-fns/endOfWeek';
 import format from 'date-fns/format';
 import { projectsList } from './userDynamicInterface';
+
 export class Project {
     static id = 0;
     constructor(projectName) {
@@ -12,58 +13,6 @@ export class Project {
 
     get projectId() {
         return this.id 
-    }
-
-    createProject() {
-        const mainSquareTitleIconChild = document.getElementById("mainSquareTitleIconChild");
-        const newProjectContainer = document.createElement("div");
-        const newProjectName = document.createElement("div");
-        const newProjectDeleteButton = document.createElement("div");
-
-        newProjectName.textContent = this.projectName;
-        newProjectDeleteButton.classList.add("fa-solid");
-        newProjectDeleteButton.classList.add("fa-trash");
-
-        newProjectContainer.id = "newProjectContainer";
-        newProjectName.classList.add("newProjectName");
-        newProjectDeleteButton.classList.add("newProjectDeleteButton");
-        mainSquareTitleIconChild.classList.add("fa-solid");
-        mainSquareTitleIconChild.classList.add("fa-plus");
-
-
-        sideColumnSecondChild.appendChild(newProjectContainer);
-        newProjectContainer.appendChild(newProjectName);
-        newProjectContainer.appendChild(newProjectDeleteButton);
-
-        newProjectDeleteButton.addEventListener("click", () => {
-            this.deleteProject(newProjectContainer);
-          });
-      
-        return newProjectContainer;
-    }
-
-    showProject() {
-        const removeTasks = document.querySelectorAll("#newTaskContainer");
-        removeTasks.forEach((newTaskContainer) => {
-            newTaskContainer.remove();
-        }) 
-
-        const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
-        const index = projectsList.findIndex((project) => project.id === this.id);
-        if (index !== -1) {
-          for (const [key, value] of Object.entries(projectsList[index])) {
-            mainSquareTitleTextChild.innerText = projectsList[index].projectName;
-            if (projectsList.length === 0) {
-              mainSquareTitleTextChild.innerText = " ";
-            }
-            if (key === "tasks") {
-                    for (const task of value) {
-                      const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
-                      taskInstance.createTask();
-                    }
-                }
-            }
-          }
     }
 
     deleteProject(newProjectContainer) {
@@ -134,10 +83,6 @@ export class Task {
 }
 
 export class Filter {
-    constructor(projectsList) {
-        this.projectsList = projectsList;
-    }
-
     allFilter() {
         const removeTasks = document.querySelectorAll("#newTaskContainer");
         removeTasks.forEach(taskContainer => {
@@ -199,4 +144,81 @@ export class Filter {
           newProjectName.textContent = "Week";
 
     }
+}
+
+export class UI {
+
+  addANewProjectBox() {
+    const newNameContainer = document.createElement("div");
+    const newNameTextfield = document.createElement("input");
+    const newNameAddButton = document.createElement("i");
+    const newNameCancelButton = document.createElement("i");  
+
+    newNameContainer.id = "newNameContainer";
+    newNameTextfield.setAttribute("type", "text");
+    newNameTextfield.id = "newNameTextfieldInput";
+    newNameTextfield.placeholder = "Add a new project";
+    newNameAddButton.id = "newNameAddButton";
+    newNameAddButton.classList.add("gg-math-plus");
+    newNameCancelButton.id = "newNameCancelButton";
+    newNameCancelButton.classList.add("gg-math-plus");  
+
+    newNameContainer.appendChild(newNameTextfield);
+    newNameContainer.appendChild(newNameAddButton);
+    newNameContainer.appendChild(newNameCancelButton);
+    sideColumnSecondChild.appendChild(newNameContainer); 
+
+    sideColumnSecondChild.insertBefore(newNameContainer, sideColumnSecondChild.children[1]);
+  }
+
+  createProject() {
+    const removeProjects = document.querySelectorAll("#newProjectContainer");
+    removeProjects.forEach((project) => {
+        project.remove();
+    }) 
+    projectsList.forEach(project => {
+      console.log(project)
+      const newProjectContainer = document.createElement("div");
+      const newProjectName = document.createElement("div");
+      const newProjectDeleteButton = document.createElement("div");
+
+      newProjectName.textContent = project.projectName;
+      newProjectDeleteButton.classList.add("fa-solid");
+      newProjectDeleteButton.classList.add("fa-trash");
+
+      newProjectContainer.id = "newProjectContainer";
+      newProjectName.classList.add("newProjectName");
+      newProjectDeleteButton.classList.add("newProjectDeleteButton");
+
+      sideColumnSecondChild.appendChild(newProjectContainer);
+      newProjectContainer.appendChild(newProjectName);
+      newProjectContainer.appendChild(newProjectDeleteButton);
+    })
+
+    return newProjectContainer;
+  }
+
+  renderProject(x) {
+    const removeTasks = document.querySelectorAll("#newTaskContainer");
+    removeTasks.forEach((newTaskContainer) => {
+        newTaskContainer.remove();
+    }) 
+
+    const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
+    const index = projectsList.findIndex((project) => project.id === this.id);
+    if (index !== -1) {
+      for (const [key, value] of Object.entries(projectsList[index])) {
+        mainSquareTitleTextChild.innerText = projectsList[index].projectName;
+        if (projectsList.length === 0) {
+          mainSquareTitleTextChild.innerText = " ";
+        }
+        if (key === "tasks") {
+                for (const task of value) {
+                  const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
+                  taskInstance.createTask();
+                }
+            }
+        }
+      }
+  }
 }

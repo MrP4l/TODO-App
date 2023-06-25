@@ -1,53 +1,41 @@
 export const projectsList = [];
-import { Project, Task, Filter} from "./classes";
+import { Project, Task, Filter, UI} from "./classes";
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
     let projectId = 0;
     let taskId = 0;
 
+    const userInterface = new UI(projectsList);
+
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
-            const newNameContainer = document.getElementById("newNameContainer");
-            sideColumnSecondChild.removeChild(newNameContainer);
             return;
         }
-        const newNameContainer = document.createElement("div");
-        const newNameTextfield = document.createElement("input");
-        const newNameAddButton = document.createElement("i");
-        const newNameCancelButton = document.createElement("i");
-
-        newNameContainer.id = "newNameContainer";
-        newNameTextfield.setAttribute("type", "text");
-        newNameTextfield.id = "newNameTextfieldInput";
-        newNameTextfield.placeholder = "Add a new project";
-        newNameAddButton.id = "newNameAddButton";
-        newNameAddButton.classList.add("gg-math-plus");
-        newNameCancelButton.id = "newNameCancelButton";
-        newNameCancelButton.classList.add("gg-math-plus");
-
-        newNameContainer.appendChild(newNameTextfield);
-        newNameContainer.appendChild(newNameAddButton);
-        newNameContainer.appendChild(newNameCancelButton);
-        sideColumnSecondChild.appendChild(newNameContainer);
-
-        sideColumnSecondChild.insertBefore(newNameContainer, sideColumnSecondChild.children[1]);
+        userInterface.addANewProjectBox();
 
         newNameAddButton.addEventListener("click", () => {
+            const newNameTextfield = document.getElementById("newNameTextfieldInput");
             const projectName = newNameTextfield.value.trim();
             if (projectName !== "") {
                 const newProject = new Project(projectName);
                 projectsList.push(newProject);
-                console.log("proj:", projectsList)
 
-                const newProjectContainer = newProject.createProject();
-                newProject.showProject();
-                projectId = newProject.projectId;
+                console.log(projectsList);
+                userInterface.createProject();
+                userInterface.renderProject(newProjectContainer);
 
-                newProjectContainer.addEventListener("click", () => {
-                    newProject.showProject();
-                    projectId = newProject.projectId;
-                });
+                const projects = document.querySelectorAll(".newProjectContainer");
+                projects.forEach(project => {
+                    project.addEventListener("click", () => {
+                        userInterface.renderProject()
+                    })
+                })
+
+                //project.addEventListener("click", () => {
+                //    newProject.showProject();
+                //    projectId = newProject.projectId;
+                //});
             }
             sideColumnSecondChild.removeChild(newNameContainer);
         });
