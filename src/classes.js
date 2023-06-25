@@ -1,11 +1,11 @@
 import startOfWeek from 'date-fns/startOfWeek'
 import endOfWeek from 'date-fns/endOfWeek';
 import format from 'date-fns/format';
+import { projectsList } from './userDynamicInterface';
 export class Project {
     static id = 0;
-    constructor(projectName, projectsList) {
+    constructor(projectName) {
         this.projectName = projectName;
-        this.projectsList = projectsList;
         this.tasks = [];
         this.id = ++Project.id;
     }
@@ -15,7 +15,7 @@ export class Project {
     }
 
     createProject() {
-        const mainSquare = document.getElementById("mainSquare");
+        const mainSquareTitleIconChild = document.getElementById("mainSquareTitleIconChild");
         const newProjectContainer = document.createElement("div");
         const newProjectName = document.createElement("div");
         const newProjectDeleteButton = document.createElement("div");
@@ -27,6 +27,9 @@ export class Project {
         newProjectContainer.id = "newProjectContainer";
         newProjectName.classList.add("newProjectName");
         newProjectDeleteButton.classList.add("newProjectDeleteButton");
+        mainSquareTitleIconChild.classList.add("fa-solid");
+        mainSquareTitleIconChild.classList.add("fa-plus");
+
 
         sideColumnSecondChild.appendChild(newProjectContainer);
         newProjectContainer.appendChild(newProjectName);
@@ -35,7 +38,7 @@ export class Project {
         newProjectDeleteButton.addEventListener("click", () => {
             this.deleteProject(newProjectContainer);
           });
-
+      
         return newProjectContainer;
     }
 
@@ -44,12 +47,16 @@ export class Project {
         removeTasks.forEach((newTaskContainer) => {
             newTaskContainer.remove();
         }) 
+
         const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
-        mainSquareTitleTextChild.innerText = this.projectName;  
-        const index = this.projectsList.findIndex((project) => project.id === this.id);
+        const index = projectsList.findIndex((project) => project.id === this.id);
         if (index !== -1) {
-            for (const [key, value] of Object.entries(this.projectsList[index])) {
-                if (key === "tasks") {
+          for (const [key, value] of Object.entries(projectsList[index])) {
+            mainSquareTitleTextChild.innerText = projectsList[index].projectName;
+            if (projectsList.length === 0) {
+              mainSquareTitleTextChild.innerText = " ";
+            }
+            if (key === "tasks") {
                     for (const task of value) {
                       const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
                       taskInstance.createTask();
@@ -60,20 +67,22 @@ export class Project {
     }
 
     deleteProject(newProjectContainer) {
-        const index = this.projectsList.findIndex((project) => project.id === this.id);
+        const index = projectsList.findIndex((project) => project.id === this.id);
         if (index !== -1) {
-          this.projectsList.splice(index, 1);
+            projectsList.splice(index, 1);
         }
         newProjectContainer.remove();
-    
+        const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
+        if (projectsList.length === 0) {
+          mainSquareTitleTextChild.innerText = " ";
+        } 
       }
 }
 
 export class Task {
-    constructor(taskName, projectId, projectsList, taskId) {
+    constructor(taskName, projectId, taskId) {
         this.taskName = taskName;
         this.projectId = projectId;
-        this.projectsList = projectsList;
         this.taskId = taskId;
     }
 
@@ -93,14 +102,10 @@ export class Task {
         newTaskIcon.classList.add("fa-solid");
         newTaskIcon.classList.add("fa-check-double");
 
-        const [day, month, year] = [
-            new Date().getDate(),
-            new Date().getMonth() + 1,
-            new Date().getFullYear()
-        ];
-        const date = `${day}/${month}/${year}`;
+        const date = new Date();
+        const currentDate = format(date, 'dd/MM/yyyy');
         
-        this.date = date;
+        this.date = currentDate;
 
         newTaskDate.innerHTML = this.date;
         
@@ -117,16 +122,15 @@ export class Task {
     }
 
     deleteTask(newTaskContainer) {
-        const project = this.projectsList.find(project => project.id === this.projectId);
+        const project = projectsList.find(project => project.id === this.projectId);
         if (project) {
             const taskIndex = project.tasks.findIndex(task => task.taskId === this.taskId);
           if (taskIndex !== -1) {
             project.tasks.splice(taskIndex, 1);
           }
         }
-        newTaskContainer.remove();        
+        newTaskContainer.remove();
     }
-
 }
 
 export class Filter {
@@ -142,7 +146,7 @@ export class Filter {
 
         this.projectsList.forEach(project => {
             project.tasks.forEach(task => {
-              const taskInstance = new Task(task.taskName, task.projectId, this.projectsList, task.taskId);
+              const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
               taskInstance.createTask();
             });
           });
@@ -160,10 +164,10 @@ export class Filter {
           taskContainer.remove();
         });
 
-        this.projectsList.forEach(project => {
+        projectsList.forEach(project => {
             project.tasks.filter(task => task.date === currentDate)
               .forEach(filteredTask => {
-                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, this.projectsList, filteredTask.taskId);
+                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, filteredTask.taskId);
                 taskInstance.createTask();
               });
           });
@@ -184,10 +188,10 @@ export class Filter {
           taskContainer.remove();
         });
 
-        this.projectsList.forEach(project => {
+        projectsList.forEach(project => {
             project.tasks.filter(task => task.date >= startOfTheWeekFormatted && task.date <= endOfTheWeekFormatted)
               .forEach(filteredTask => {
-                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, this.projectsList, filteredTask.taskId);
+                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, filteredTask.taskId);
                 taskInstance.createTask();
               });
           });
