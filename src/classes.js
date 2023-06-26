@@ -193,9 +193,11 @@ export class UI {
       sideColumnSecondChild.appendChild(newProjectContainer);
       newProjectContainer.appendChild(newProjectName);
       newProjectContainer.appendChild(newProjectDeleteButton);
-    })
 
-    return newProjectContainer;
+      newProjectContainer.dataset.id = project.id; 
+
+      return newProjectContainer;
+    })
   }
 
   //TODO
@@ -205,7 +207,7 @@ export class UI {
         newTaskContainer.remove();
     }) 
 
-    // this.id doesn't work anymore
+    // this.id doesn't work anymore, change this.id with the attribute id of the divs
     const index = projectsList.findIndex((project) => project.id === this.id);
     if (index !== -1) {
       for (const [key, value] of Object.entries(projectsList[index])) {
