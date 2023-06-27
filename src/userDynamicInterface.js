@@ -3,8 +3,8 @@ import { Project, Task, Filter, UI} from "./classes";
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
-    let projectId = 0;
-    let taskId = 0;
+//    let projectId = 0;
+//    let taskId = 0;
 
     const userInterface = new UI(projectsList);
 
@@ -24,20 +24,20 @@ function userDynamicInterface() {
                 console.log(projectsList);
                 userInterface.createProject();
                 userInterface.showTheProjectCreatedRightNow();
-                projectId = newProject.projectId;
 
-                //const projects = document.querySelectorAll(".newProjectContainer");
-                //projects.forEach(project => {
-                //    project.addEventListener("click", () => {
-                //        userInterface.renderProject()
-                //    })
-                //})
+                const projects = document.querySelectorAll("#newProjectContainer");
+                projects.forEach(project => {
+                    const projectId = project.dataset.id;
+                    const projectData = projectsList.find(project => project.id === parseInt(projectId));
+                    project.addEventListener("click", () => {
+                        userInterface.renderProject(projectData);
+                    });
+                });
             }
             sideColumnSecondChild.removeChild(newNameContainer);
         });
         newNameCancelButton.addEventListener("click", () => {
             sideColumnSecondChild.removeChild(newNameContainer);
-        
         });
     })
 
@@ -80,7 +80,7 @@ function userDynamicInterface() {
                 const newTask = new Task(taskName, projectId, taskId);
 
                 newTask.createTask();
-
+//TODO fix this, it pushes in the wrong object
                 projectsList[projectId - 1].tasks.push(newTask);
             }
             mainSquareTasksChild.removeChild(taskNameContainer);

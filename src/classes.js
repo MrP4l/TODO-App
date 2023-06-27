@@ -201,30 +201,20 @@ export class UI {
   }
 
   //TODO
-  renderProject() {
+  renderProject(project) {
     const removeTasks = document.querySelectorAll("#newTaskContainer");
     removeTasks.forEach((newTaskContainer) => {
         newTaskContainer.remove();
     }) 
 
-    // this.id doesn't work anymore, change this.id with the attribute id of the divs
-    const index = projectsList.findIndex((project) => project.id === this.id);
-    if (index !== -1) {
-      for (const [key, value] of Object.entries(projectsList[index])) {
-        const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
-        mainSquareTitleTextChild.innerText = projectsList[index].projectName;
-        if (projectsList.length === 0) {
-          mainSquareTitleTextChild.innerText = " ";
-        }
-        if (key === "tasks") {
-                for (const task of value) {
-                  const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
-                  taskInstance.createTask();
-                }
-            }
-        }
-      }
-  }
+    const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
+    mainSquareTitleTextChild.innerText = project.projectName;
+
+    project.tasks.forEach(task => {
+        const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
+        taskInstance.createTask();
+    });
+    }
 
   showTheProjectCreatedRightNow() {
     const newProjectName = document.getElementById("mainSquareTitleTextChild");
