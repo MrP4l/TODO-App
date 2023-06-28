@@ -4,146 +4,143 @@ import format from 'date-fns/format';
 import { projectsList } from './userDynamicInterface';
 
 export class Project {
-    static id = 0;
-    constructor(projectName) {
-        this.projectName = projectName;
-        this.tasks = [];
-        this.id = ++Project.id;
-    }
+  static id = 0;
+  constructor(projectName) {
+    this.projectName = projectName;
+    this.tasks = [];
+    this.id = ++Project.id;
+  }
 
-    get projectId() {
-        return this.id 
-    }
+  get projectId() {
+    return this.id
+  }
 
-    deleteProject(newProjectContainer) {
-        const index = projectsList.findIndex((project) => project.id === this.id);
-        if (index !== -1) {
-            projectsList.splice(index, 1);
-        }
-        newProjectContainer.remove();
-        const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
-        if (projectsList.length === 0) {
-          mainSquareTitleTextChild.innerText = " ";
-        } 
-      }
+  deleteProject() {
+    const projectId = newProjectContainer.dataset.id;
+    const index = projectsList.findIndex(project => project.id === parseInt(projectId));
+    if (index !== -1) {
+      projectsList.splice(index, 1);
+    }
+  }
 }
 
+//TODO
 export class Task {
-    constructor(taskName, projectId, taskId) {
-        this.taskName = taskName;
-        this.projectId = projectId;
-        this.taskId = taskId;
+  constructor(taskName, projectId, taskId) {
+    this.taskName = taskName;
+    this.projectId = projectId;
+    this.taskId = taskId;
+  }
+
+  createTask() {
+    const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
+    const newTaskContainer = document.createElement("div");
+    const newTaskIcon = document.createElement("div");
+    const newTaskName = document.createElement("div");
+    const newTaskDate = document.createElement("div");
+
+    newTaskContainer.id = "newTaskContainer";
+    newTaskIcon.id = "newTaskIcon";
+    newTaskName.id = "newTaskName";
+    newTaskDate.id = "newTaskDate";
+
+    newTaskName.textContent = this.taskName;
+    newTaskIcon.classList.add("fa-solid");
+    newTaskIcon.classList.add("fa-check-double");
+
+    const date = new Date();
+    const currentDate = format(date, 'dd/MM/yyyy');
+
+    this.date = currentDate;
+
+    newTaskDate.innerHTML = this.date;
+
+    mainSquareTasksChild.appendChild(newTaskContainer);
+    newTaskContainer.appendChild(newTaskIcon);
+    newTaskContainer.appendChild(newTaskName);
+    newTaskContainer.appendChild(newTaskDate);
+
+    newTaskContainer.addEventListener("click", () => {
+      this.deleteTask(newTaskContainer);
+    });
+
+    return newTaskContainer;
+  }
+
+  deleteTask(newTaskContainer) {
+    const project = projectsList.find(project => project.id === this.projectId);
+    if (project) {
+      const taskIndex = project.tasks.findIndex(task => task.taskId === this.taskId);
+      if (taskIndex !== -1) {
+        project.tasks.splice(taskIndex, 1);
+      }
     }
-
-    createTask() {
-        const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
-        const newTaskContainer = document.createElement("div");
-        const newTaskIcon = document.createElement("div");
-        const newTaskName = document.createElement("div");
-        const newTaskDate = document.createElement("div");
-
-        newTaskContainer.id = "newTaskContainer";
-        newTaskIcon.id = "newTaskIcon";
-        newTaskName.id = "newTaskName";
-        newTaskDate.id = "newTaskDate";
-
-        newTaskName.textContent = this.taskName;
-        newTaskIcon.classList.add("fa-solid");
-        newTaskIcon.classList.add("fa-check-double");
-
-        const date = new Date();
-        const currentDate = format(date, 'dd/MM/yyyy');
-        
-        this.date = currentDate;
-
-        newTaskDate.innerHTML = this.date;
-        
-        mainSquareTasksChild.appendChild(newTaskContainer);
-        newTaskContainer.appendChild(newTaskIcon);
-        newTaskContainer.appendChild(newTaskName);
-        newTaskContainer.appendChild(newTaskDate);
-
-        newTaskContainer.addEventListener("click", () => {
-            this.deleteTask(newTaskContainer);
-        });
-      
-        return newTaskContainer;
-    }
-
-    deleteTask(newTaskContainer) {
-        const project = projectsList.find(project => project.id === this.projectId);
-        if (project) {
-            const taskIndex = project.tasks.findIndex(task => task.taskId === this.taskId);
-          if (taskIndex !== -1) {
-            project.tasks.splice(taskIndex, 1);
-          }
-        }
-        newTaskContainer.remove();
-    }
+    newTaskContainer.remove();
+  }
 }
 
 export class Filter {
-    allFilter() {
-        const removeTasks = document.querySelectorAll("#newTaskContainer");
-        removeTasks.forEach(taskContainer => {
-          taskContainer.remove();
+  allFilter() {
+    const removeTasks = document.querySelectorAll("#newTaskContainer");
+    removeTasks.forEach(taskContainer => {
+      taskContainer.remove();
+    });
+
+    this.projectsList.forEach(project => {
+      project.tasks.forEach(task => {
+        const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
+        taskInstance.createTask();
+      });
+    });
+
+    const newProjectName = document.getElementById("mainSquareTitleTextChild")
+    newProjectName.textContent = "All";
+  }
+
+  todayFilter() {
+    const date = new Date();
+    const currentDate = format(date, 'dd/MM/yyyy');
+
+    const removeTasks = document.querySelectorAll("#newTaskContainer");
+    removeTasks.forEach(taskContainer => {
+      taskContainer.remove();
+    });
+
+    projectsList.forEach(project => {
+      project.tasks.filter(task => task.date === currentDate)
+        .forEach(filteredTask => {
+          const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, filteredTask.taskId);
+          taskInstance.createTask();
         });
+    });
 
-        this.projectsList.forEach(project => {
-            project.tasks.forEach(task => {
-              const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
-              taskInstance.createTask();
-            });
-          });
+    const newProjectName = document.getElementById("mainSquareTitleTextChild")
+    newProjectName.textContent = "Today";
+  }
 
-        const newProjectName = document.getElementById("mainSquareTitleTextChild")
-        newProjectName.textContent = "All";
-    }
+  weekFilter() {
+    const date = new Date();
+    const startOfTheWeek = startOfWeek(date, { weekStartsOn: 1 });
+    const endOfTheWeek = endOfWeek(date, { weekStartsOn: 1 });
+    const startOfTheWeekFormatted = format(startOfTheWeek, 'dd/MM/yyyy');
+    const endOfTheWeekFormatted = format(endOfTheWeek, 'dd/MM/yyyy');
 
-    todayFilter() {
-        const date = new Date();
-        const currentDate = format(date, 'dd/MM/yyyy');
+    const removeTasks = document.querySelectorAll("#newTaskContainer");
+    removeTasks.forEach(taskContainer => {
+      taskContainer.remove();
+    });
 
-        const removeTasks = document.querySelectorAll("#newTaskContainer");
-        removeTasks.forEach(taskContainer => {
-          taskContainer.remove();
+    projectsList.forEach(project => {
+      project.tasks.filter(task => task.date >= startOfTheWeekFormatted && task.date <= endOfTheWeekFormatted)
+        .forEach(filteredTask => {
+          const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, filteredTask.taskId);
+          taskInstance.createTask();
         });
+    });
+    const newProjectName = document.getElementById("mainSquareTitleTextChild")
+    newProjectName.textContent = "Week";
 
-        projectsList.forEach(project => {
-            project.tasks.filter(task => task.date === currentDate)
-              .forEach(filteredTask => {
-                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, filteredTask.taskId);
-                taskInstance.createTask();
-              });
-          });
-
-        const newProjectName = document.getElementById("mainSquareTitleTextChild")
-        newProjectName.textContent = "Today";
-    }
-
-    weekFilter() {
-        const date = new Date();
-        const startOfTheWeek = startOfWeek(date, {weekStartsOn: 1});
-        const endOfTheWeek = endOfWeek(date, {weekStartsOn: 1});
-        const startOfTheWeekFormatted = format(startOfTheWeek, 'dd/MM/yyyy');
-        const endOfTheWeekFormatted = format(endOfTheWeek, 'dd/MM/yyyy');
-        
-        const removeTasks = document.querySelectorAll("#newTaskContainer");
-        removeTasks.forEach(taskContainer => {
-          taskContainer.remove();
-        });
-
-        projectsList.forEach(project => {
-            project.tasks.filter(task => task.date >= startOfTheWeekFormatted && task.date <= endOfTheWeekFormatted)
-              .forEach(filteredTask => {
-                const taskInstance = new Task(filteredTask.taskName, filteredTask.projectId, filteredTask.taskId);
-                taskInstance.createTask();
-              });
-          });
-          const newProjectName = document.getElementById("mainSquareTitleTextChild")
-          newProjectName.textContent = "Week";
-
-    }
+  }
 }
 
 export class UI {
@@ -152,7 +149,7 @@ export class UI {
     const newNameContainer = document.createElement("div");
     const newNameTextfield = document.createElement("input");
     const newNameAddButton = document.createElement("i");
-    const newNameCancelButton = document.createElement("i");  
+    const newNameCancelButton = document.createElement("i");
 
     newNameContainer.id = "newNameContainer";
     newNameTextfield.setAttribute("type", "text");
@@ -161,12 +158,12 @@ export class UI {
     newNameAddButton.id = "newNameAddButton";
     newNameAddButton.classList.add("gg-math-plus");
     newNameCancelButton.id = "newNameCancelButton";
-    newNameCancelButton.classList.add("gg-math-plus");  
+    newNameCancelButton.classList.add("gg-math-plus");
 
     newNameContainer.appendChild(newNameTextfield);
     newNameContainer.appendChild(newNameAddButton);
     newNameContainer.appendChild(newNameCancelButton);
-    sideColumnSecondChild.appendChild(newNameContainer); 
+    sideColumnSecondChild.appendChild(newNameContainer);
 
     sideColumnSecondChild.insertBefore(newNameContainer, sideColumnSecondChild.children[1]);
   }
@@ -174,8 +171,8 @@ export class UI {
   createProject() {
     const removeProjects = document.querySelectorAll("#newProjectContainer");
     removeProjects.forEach((project) => {
-        project.remove();
-    }) 
+      project.remove();
+    })
     projectsList.forEach(project => {
       console.log(project)
       const newProjectContainer = document.createElement("div");
@@ -194,7 +191,7 @@ export class UI {
       newProjectContainer.appendChild(newProjectName);
       newProjectContainer.appendChild(newProjectDeleteButton);
 
-      newProjectContainer.dataset.id = project.id; 
+      newProjectContainer.dataset.id = project.id;
 
       return newProjectContainer;
     })
@@ -204,17 +201,17 @@ export class UI {
   renderProject(project) {
     const removeTasks = document.querySelectorAll("#newTaskContainer");
     removeTasks.forEach((newTaskContainer) => {
-        newTaskContainer.remove();
-    }) 
+      newTaskContainer.remove();
+    })
 
     const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
     mainSquareTitleTextChild.innerText = project.projectName;
 
     project.tasks.forEach(task => {
-        const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
-        taskInstance.createTask();
+      const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
+      taskInstance.createTask();
     });
-    }
+  }
 
   showTheProjectCreatedRightNow() {
     const newProjectName = document.getElementById("mainSquareTitleTextChild");

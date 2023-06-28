@@ -33,6 +33,14 @@ function userDynamicInterface() {
                         userInterface.renderProject(projectData);
                     });
                 });
+                const deleteProject = document.querySelectorAll(".newProjectDeleteButton");
+                deleteProject.forEach(project => {
+                    project.addEventListener("click", () => {
+                        console.log("pre:", projectsList)
+                        newProject.deleteProject();
+                        console.log("post:",projectsList);
+                    })
+                })
             }
             sideColumnSecondChild.removeChild(newNameContainer);
         });
@@ -40,6 +48,7 @@ function userDynamicInterface() {
             sideColumnSecondChild.removeChild(newNameContainer);
         });
     })
+
 
     const addTask = document.getElementById("mainSquareTitleIconChild");
     const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
