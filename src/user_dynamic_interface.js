@@ -22,7 +22,7 @@ function userDynamicInterface() {
                 projectsList.push(newProject);
 
                 console.log(projectsList);
-                userInterface.createProject();
+                userInterface.renderProjectList();
                 userInterface.showTheProjectCreatedRightNow();
 
                 const projects = document.querySelectorAll("#newProjectContainer");
@@ -39,6 +39,7 @@ function userDynamicInterface() {
                         console.log("pre:", projectsList)
                         newProject.deleteProject();
                         console.log("post:",projectsList);
+                        userInterface.renderProjectList();
                     })
                 })
             }
@@ -61,33 +62,13 @@ function userDynamicInterface() {
         if (projectsList.length === 0) {
             return;
         }
-        const taskNameContainer = document.createElement("div");
-        const taskNameInput = document.createElement("input");
-        const taskNameAdd = document.createElement("i");
-        const taskNameCancel = document.createElement("i");
 
-        taskNameContainer.classList.add("taskNameContainer");
-        taskNameInput.setAttribute("type", "text");
-        taskNameInput.id = "taskNameInput";
-        taskNameInput.placeholder = "Add a task";
-        taskNameAdd.id = "taskNameAdd";
-        taskNameCancel.id = "taskNameCancel";
-        taskNameAdd.classList.add("gg-math-plus");
-        taskNameCancel.classList.add("gg-math-plus");
-
-        taskNameContainer.appendChild(taskNameInput);
-        taskNameContainer.appendChild(taskNameAdd);
-        taskNameContainer.appendChild(taskNameCancel);
-        mainSquareTasksChild.appendChild(taskNameContainer);
-
-        mainSquareTasksChild.insertBefore(taskNameContainer, mainSquareTasksChild.children[0]);
+        userInterface.addANewTaskBox();
 
         taskNameAdd.addEventListener("click", () => {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
-                ++taskId;
-                const newTask = new Task(taskName, projectId, taskId);
-
+                const newTask = new Task(taskName);
                 newTask.createTask();
 //TODO fix this, it pushes in the wrong object
                 projectsList[projectId - 1].tasks.push(newTask);

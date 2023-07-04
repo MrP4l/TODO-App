@@ -1,7 +1,7 @@
 import startOfWeek from 'date-fns/startOfWeek'
 import endOfWeek from 'date-fns/endOfWeek';
 import format from 'date-fns/format';
-import { projectsList } from './userDynamicInterface';
+import { projectsList } from './user_dynamic_interface';
 
 export class Project {
   static id = 0;
@@ -16,8 +16,9 @@ export class Project {
   }
 
   deleteProject() {
-    const projectId = newProjectContainer.dataset.id;
-    const index = projectsList.findIndex(project => project.id === parseInt(projectId));
+    //TODO i guess i ll neeed a foreach
+    const projectId = this.id;
+    const index = projectsList.findIndex(project => project.id === projectId);
     if (index !== -1) {
       projectsList.splice(index, 1);
     }
@@ -26,10 +27,15 @@ export class Project {
 
 //TODO
 export class Task {
-  constructor(taskName, projectId, taskId) {
+  static id = 0;
+  constructor(taskName, projectId) {
     this.taskName = taskName;
     this.projectId = projectId;
-    this.taskId = taskId;
+    this.id = ++Task.id;
+  }
+
+  get taskId() {
+    return this.id
   }
 
   createTask() {
@@ -168,7 +174,7 @@ export class UI {
     sideColumnSecondChild.insertBefore(newNameContainer, sideColumnSecondChild.children[1]);
   }
 
-  createProject() {
+  renderProjectList() {
     const removeProjects = document.querySelectorAll("#newProjectContainer");
     removeProjects.forEach((project) => {
       project.remove();
@@ -195,6 +201,12 @@ export class UI {
 
       return newProjectContainer;
     })
+    const title = document.getElementById("mainSquareTitleTextChild");
+    if (projectsList.length === 0) {
+      title.innerText = "";
+    } else {
+      title.innerText = projectsList[projectsList.length - 1].projectName;
+    }
   }
 
   //TODO
@@ -220,5 +232,28 @@ export class UI {
     mainSquareTitleIconChild.classList.add("fa-solid");
     mainSquareTitleIconChild.classList.add("fa-plus");
     //TODO show the last project's tasks
+  }
+
+  addANewTaskBox() {
+    const taskNameContainer = document.createElement("div");
+    const taskNameInput = document.createElement("input");
+    const taskNameAdd = document.createElement("i");
+    const taskNameCancel = document.createElement("i");
+
+    taskNameContainer.classList.add("taskNameContainer");
+    taskNameInput.setAttribute("type", "text");
+    taskNameInput.id = "taskNameInput";
+    taskNameInput.placeholder = "Add a task";
+    taskNameAdd.id = "taskNameAdd";
+    taskNameCancel.id = "taskNameCancel";
+    taskNameAdd.classList.add("gg-math-plus");
+    taskNameCancel.classList.add("gg-math-plus");
+
+    taskNameContainer.appendChild(taskNameInput);
+    taskNameContainer.appendChild(taskNameAdd);
+    taskNameContainer.appendChild(taskNameCancel);
+    mainSquareTasksChild.appendChild(taskNameContainer);
+
+    mainSquareTasksChild.insertBefore(taskNameContainer, mainSquareTasksChild.children[0]);
   }
 }
