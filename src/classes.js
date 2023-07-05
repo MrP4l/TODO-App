@@ -15,12 +15,14 @@ export class Project {
     return this.id
   }
 
-  deleteProject() {
-    //TODO i guess i ll neeed a foreach
-    const projectId = this.id;
-    const index = projectsList.findIndex(project => project.id === projectId);
-    if (index !== -1) {
+  deleteProject(project) {
+    const projectId = project.id;
+    const projectToRemove = projectsList.find(project => project.id === projectId);
+    console.log("pre:",projectsList)
+    if (projectToRemove) {
+      const index = projectsList.indexOf(projectToRemove)
       projectsList.splice(index, 1);
+      console.log("post:",projectsList)
     }
   }
 }
@@ -209,7 +211,7 @@ export class UI {
     }
   }
 
-  //TODO
+  //TODO Shown the tasks inside the proj
   renderProject(project) {
     const removeTasks = document.querySelectorAll("#newTaskContainer");
     removeTasks.forEach((newTaskContainer) => {
@@ -219,20 +221,23 @@ export class UI {
     const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
     mainSquareTitleTextChild.innerText = project.projectName;
 
+    mainSquareTitleIconChild.classList.add("fa-solid");
+    mainSquareTitleIconChild.classList.add("fa-plus");
+
     project.tasks.forEach(task => {
       const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
       taskInstance.createTask();
     });
   }
 
-  showTheProjectCreatedRightNow() {
-    const newProjectName = document.getElementById("mainSquareTitleTextChild");
-    const lastProject = projectsList[projectsList.length - 1];
-    newProjectName.innerText = lastProject.projectName;
-    mainSquareTitleIconChild.classList.add("fa-solid");
-    mainSquareTitleIconChild.classList.add("fa-plus");
-    //TODO show the last project's tasks
-  }
+  //showTheProjectCreatedRightNow() {
+  //  const newProjectName = document.getElementById("mainSquareTitleTextChild");
+  //  const lastProject = projectsList[projectsList.length - 1];
+  //  newProjectName.innerText = lastProject.projectName;
+  //  mainSquareTitleIconChild.classList.add("fa-solid");
+  //  mainSquareTitleIconChild.classList.add("fa-plus");
+  //  //TODO show the last project's tasks
+  //}
 
   addANewTaskBox() {
     const taskNameContainer = document.createElement("div");
