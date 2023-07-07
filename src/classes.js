@@ -177,7 +177,7 @@ export class UI {
   }
 
   renderProjectList() {
-    const removeProjects = document.querySelectorAll("#newProjectContainer");
+    const removeProjects = document.querySelectorAll(".newProjectContainer");
     removeProjects.forEach((project) => {
       project.remove();
     })
@@ -191,7 +191,7 @@ export class UI {
       newProjectDeleteButton.classList.add("fa-solid");
       newProjectDeleteButton.classList.add("fa-trash");
 
-      newProjectContainer.id = "newProjectContainer";
+      newProjectContainer.classList.add("newProjectContainer");
       newProjectName.classList.add("newProjectName");
       newProjectDeleteButton.classList.add("newProjectDeleteButton");
 

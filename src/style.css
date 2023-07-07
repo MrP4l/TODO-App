@@ -216,7 +216,7 @@ body {
     background-color: transparent;
 }
 
-#sideColumnSecondChild > #newProjectContainer {
+#sideColumnSecondChild > .newProjectContainer {
     width: 85%;
     border: solid rgb(0, 0, 0, 0.6) 1px;
     border-radius: 5px;
@@ -229,7 +229,7 @@ body {
     transition: transform 350ms ease-out;
 }
 
-#newProjectContainer:hover {
+.newProjectContainer:hover {
     transform: translate(5px, 0px);
 }
 
