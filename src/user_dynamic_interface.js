@@ -3,8 +3,6 @@ import { Project, Task, Filter, UI } from "./classes";
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
-    //    let projectId = 0;
-    //    let taskId = 0;
 
     const userInterface = new UI(projectsList);
     //  Click to open the box for add a project
@@ -18,11 +16,10 @@ function userDynamicInterface() {
             const newNameTextfield = document.getElementById("newNameTextfieldInput");
             const projectName = newNameTextfield.value.trim();
             if (projectName !== "") {
-                const newProject = new Project(projectName);
-                projectsList.push(newProject);
-                userInterface.renderProjectList();
-                //  renderProject() not finished, it doesn't show the tasks inside the proj
-                userInterface.renderProject(newProject);
+                const project = new Project(projectName);
+                projectsList.push(project);
+                //  createProject() not finished, it doesn't show the tasks inside the proj
+                userInterface.createInterface(project);
 
                 console.log(projectsList);
                 //  Rendering the project clicked
@@ -37,15 +34,15 @@ function userDynamicInterface() {
                 //  Click the delete project button to delete the project, fix the deleteProject() method, it doesnt remove the last proj
                 const deleteButtons = document.querySelectorAll(".newProjectDeleteButton");
                 deleteButtons.forEach(button => {
-                    //    const project = button.closest("#newProjectContainer");
-                    //    const projectId = project.dataset.id;
-                    //    const projectData = projectsList.find(project => project.id === parseInt(projectId));
+                    const deleteButtonParent = button.closest(".newProjectContainer");
+                    const projectId = deleteButtonParent.dataset.id;
+                    const projectData = projectsList.find(project => project.id === parseInt(projectId));
                     button.addEventListener("click", () => {
-                        const project = button.closest(".newProjectContainer");
-                        const projectId = parseInt(project.dataset.id);
-                        const projectData = projectsList.find(project => project.id === projectId);
-                        newProject.deleteProject(projectData);
-                        userInterface.renderProjectList();
+                        project.deleteProject(projectData);
+                //  At the moment it deletes the project from the list, need to remove also the graphic part
+                        userInterface.deleteInterface(projectData);
+                //  Here the bug, it removes all the events listener
+                //        userInterface.renderProjectList();
                     })
                 })
             }
@@ -103,7 +100,5 @@ function userDynamicInterface() {
         })
     })
 }
-
-
 
 export default userDynamicInterface;

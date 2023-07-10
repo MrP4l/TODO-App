@@ -181,6 +181,12 @@ export class UI {
     removeProjects.forEach((project) => {
       project.remove();
     })
+    const title = document.getElementById("mainSquareTitleTextChild");
+    if (projectsList.length === 0) {
+      title.innerText = "";
+    } else {
+      title.innerText = projectsList[projectsList.length - 1].projectName;
+    }
     projectsList.forEach(project => {
       console.log(project)
       const newProjectContainer = document.createElement("div");
@@ -203,41 +209,53 @@ export class UI {
 
       return newProjectContainer;
     })
-    const title = document.getElementById("mainSquareTitleTextChild");
-    if (projectsList.length === 0) {
-      title.innerText = "";
-    } else {
-      title.innerText = projectsList[projectsList.length - 1].projectName;
-    }
   }
 
   //TODO Shown the tasks inside the proj
-  renderProject(project) {
-    const removeTasks = document.querySelectorAll("#newTaskContainer");
-    removeTasks.forEach((newTaskContainer) => {
-      newTaskContainer.remove();
-    })
+  createInterface(project) {
+    // const title = document.getElementById("mainSquareTitleTextChild");
+    // if (projectsList.length === 0) {
+    //   title.innerText = "";
+    // } else {
+    //   title.innerText = projectsList[projectsList.length - 1].projectName;
+    // }
+    const title = document.getElementById("mainSquareTitleTextChild");
+    title.innerText = project.projectName
 
-    const mainSquareTitleTextChild = document.getElementById("mainSquareTitleTextChild");
-    mainSquareTitleTextChild.innerText = project.projectName;
+    console.log(project)
+    const newProjectContainer = document.createElement("div");
+    const newProjectName = document.createElement("div");
+    const newProjectDeleteButton = document.createElement("div");
 
-    mainSquareTitleIconChild.classList.add("fa-solid");
-    mainSquareTitleIconChild.classList.add("fa-plus");
+    newProjectName.textContent = project.projectName;
+    newProjectDeleteButton.classList.add("fa-solid");
+    newProjectDeleteButton.classList.add("fa-trash");
 
-    project.tasks.forEach(task => {
-      const taskInstance = new Task(task.taskName, task.projectId, task.taskId);
-      taskInstance.createTask();
-    });
+    newProjectContainer.classList.add("newProjectContainer");
+    newProjectName.classList.add("newProjectName");
+    newProjectDeleteButton.classList.add("newProjectDeleteButton");
+
+    sideColumnSecondChild.appendChild(newProjectContainer);
+    newProjectContainer.appendChild(newProjectName);
+    newProjectContainer.appendChild(newProjectDeleteButton);
+
+    newProjectContainer.dataset.id = project.id;
+
+    return newProjectContainer;
   }
 
-  //showTheProjectCreatedRightNow() {
-  //  const newProjectName = document.getElementById("mainSquareTitleTextChild");
-  //  const lastProject = projectsList[projectsList.length - 1];
+  renderProject(projectData) {
+    const title = document.getElementById("mainSquareTitleTextChild");
+    title.innerText = projectData.projectName
   //  newProjectName.innerText = lastProject.projectName;
   //  mainSquareTitleIconChild.classList.add("fa-solid");
   //  mainSquareTitleIconChild.classList.add("fa-plus");
-  //  //TODO show the last project's tasks
-  //}
+  //  //TODO show the project's tasks
+  }
+
+  deleteInterface(projectData) {
+    const id = projectData.id;
+  }
 
   addANewTaskBox() {
     const taskNameContainer = document.createElement("div");
