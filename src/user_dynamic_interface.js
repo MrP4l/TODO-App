@@ -18,7 +18,7 @@ function userDynamicInterface() {
             if (projectName !== "") {
                 const project = new Project(projectName);
                 projectsList.push(project);
-                //  createProject() not finished, it doesn't show the tasks inside the proj
+                //  createInterface() not finished, it doesn't show the tasks inside the proj
                 userInterface.createInterface(project);
 
                 console.log(projectsList);
@@ -31,7 +31,7 @@ function userDynamicInterface() {
                         userInterface.renderProject(projectData);
                     });
                 });
-                //  Click the delete project button to delete the project, fix the deleteProject() method, it doesnt remove the last proj
+                //  Click the delete project button to delete the project
                 const deleteButtons = document.querySelectorAll(".newProjectDeleteButton");
                 deleteButtons.forEach(button => {
                     const deleteButtonParent = button.closest(".newProjectContainer");
@@ -39,10 +39,7 @@ function userDynamicInterface() {
                     const projectData = projectsList.find(project => project.id === parseInt(projectId));
                     button.addEventListener("click", () => {
                         project.deleteProject(projectData);
-                //  At the moment it deletes the project from the list, need to remove also the graphic part
                         userInterface.deleteInterface(projectData);
-                //  Here the bug, it removes all the events listener
-                //        userInterface.renderProjectList();
                     })
                 })
             }
@@ -52,37 +49,40 @@ function userDynamicInterface() {
             sideColumnSecondChild.removeChild(newNameContainer);
         });
     })
+    //TODO Clicking on the plus a task get created and pushed inside the right project
+    // every task has an id and a textfield where the user can insert the name of the
+    // task. When the user add the name the program need to find the right project and
+    // the right task and add a new property to the obj (taskName = ****)
 
-
-    const addTask = document.getElementById("mainSquareTitleIconChild");
-    const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
-    addTask.addEventListener("click", () => {
-        if (mainSquareTasksChild.querySelector(".taskNameContainer")) {
-            const taskNameContainer = document.querySelector(".taskNameContainer");
-            mainSquareTasksChild.removeChild(taskNameContainer);
-            return;
-        }
-        if (projectsList.length === 0) {
-            return;
-        }
-
-        userInterface.addANewTaskBox();
-
-        const newTaskBox = document.querySelector(".taskNameContainer");
-        taskNameAdd.addEventListener("click", () => {
-            const taskName = taskNameInput.value.trim();
-            if (taskName !== "") {
-                const newTask = new Task(taskName);
-                newTask.createTask();
-                //TODO fix this, it pushes in the wrong object
-                //                projectsList[projectId - 1].tasks.push(newTask);
-            }
-            mainSquareTasksChild.removeChild(newTaskBox);
-        })
-        taskNameCancel.addEventListener("click", () => {
-            mainSquareTasksChild.removeChild(newTaskBox);
-        })
-    });
+    //const addTask = document.getElementById("mainSquareTitleIconChild");
+    //const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
+    //addTask.addEventListener("click", () => {
+    //    if (mainSquareTasksChild.querySelector(".taskNameContainer")) {
+    //        const taskNameContainer = document.querySelector(".taskNameContainer");
+    //        mainSquareTasksChild.removeChild(taskNameContainer);
+    //        return;
+    //    }
+    //    if (projectsList.length === 0) {
+    //        return;
+    //    }
+//
+    //    userInterface.addANewTaskBox();
+//
+    //    const newTaskBox = document.querySelector(".taskNameContainer");
+    //    taskNameAdd.addEventListener("click", () => {
+    //        const taskName = taskNameInput.value.trim();
+    //        if (taskName !== "") {
+    //            const newTask = new Task(taskName);
+    //            newTask.createTask();
+    //            //TODO fix this, it pushes in the wrong object
+    //            //                projectsList[projectId - 1].tasks.push(newTask);
+    //        }
+    //        mainSquareTasksChild.removeChild(newTaskBox);
+    //    })
+    //    taskNameCancel.addEventListener("click", () => {
+    //        mainSquareTasksChild.removeChild(newTaskBox);
+    //    })
+    //});
 
     const parent = document.getElementById("sideColumnFirstChild");
     const dateFilters = parent.querySelectorAll("*");

@@ -176,10 +176,13 @@ export class UI {
     sideColumnSecondChild.insertBefore(newNameContainer, sideColumnSecondChild.children[1]);
   }
 
-  renderProjectList() {
+  renderProjectList(projectData) {
     const removeProjects = document.querySelectorAll(".newProjectContainer");
     removeProjects.forEach((project) => {
-      project.remove();
+      console.log("prj.id:", project)
+      if (parseInt(project.dataset.id) === projectData.id) {
+        project.remove();
+      }
     })
     const title = document.getElementById("mainSquareTitleTextChild");
     if (projectsList.length === 0) {
@@ -189,6 +192,7 @@ export class UI {
     }
     projectsList.forEach(project => {
       console.log(project)
+      
       const newProjectContainer = document.createElement("div");
       const newProjectName = document.createElement("div");
       const newProjectDeleteButton = document.createElement("div");
@@ -213,12 +217,6 @@ export class UI {
 
   //TODO Shown the tasks inside the proj
   createInterface(project) {
-    // const title = document.getElementById("mainSquareTitleTextChild");
-    // if (projectsList.length === 0) {
-    //   title.innerText = "";
-    // } else {
-    //   title.innerText = projectsList[projectsList.length - 1].projectName;
-    // }
     const title = document.getElementById("mainSquareTitleTextChild");
     title.innerText = project.projectName
 
@@ -241,7 +239,9 @@ export class UI {
 
     newProjectContainer.dataset.id = project.id;
 
-    return newProjectContainer;
+    const addTaskIcon = document.getElementById("mainSquareTitleIconChild");
+    addTaskIcon.classList.add("fa-solid");
+    addTaskIcon.classList.add("fa-plus");
   }
 
   renderProject(projectData) {
@@ -252,9 +252,14 @@ export class UI {
   //  mainSquareTitleIconChild.classList.add("fa-plus");
   //  //TODO show the project's tasks
   }
-
+  // TODO Delete also the tasks and the title
   deleteInterface(projectData) {
-    const id = projectData.id;
+    const removeProjects = document.querySelectorAll(".newProjectContainer");
+    removeProjects.forEach((project) => {
+      if (parseInt(project.dataset.id) === projectData.id) {
+        project.remove();
+      }
+    })
   }
 
   addANewTaskBox() {
