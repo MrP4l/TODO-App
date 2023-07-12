@@ -331,7 +331,7 @@ body {
 }
 
 /*Cambiare height in fit content per farla variare alla dimensione del caratteriere (usando anche clamp)*/
-#newTaskContainer {
+.newTaskContainer {
     display: flex;
     height: 4vh;
     width: 100%;
@@ -341,7 +341,7 @@ body {
     margin: 5px;
 }
 
-#newTaskContainer > div {
+.newTaskContainer > div {
     display: flex;
     flex-wrap: wrap;
     align-items: center;

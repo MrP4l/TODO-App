@@ -3,11 +3,14 @@ import { Project, Task, Filter, UI } from "./classes";
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
+    let projectDataId = 0;
 
     const userInterface = new UI(projectsList);
-    //  Click to open the box for add a project
+    //  Click to open or close the box Add Project
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
+            const projectNameContainer = document.querySelector("#newNameContainer");
+            sideColumnSecondChild.removeChild(projectNameContainer);
             return;
         }
         userInterface.addANewProjectBox();
@@ -18,8 +21,9 @@ function userDynamicInterface() {
             if (projectName !== "") {
                 const project = new Project(projectName);
                 projectsList.push(project);
+                projectDataId = project.id;
                 //  createInterface() not finished, it doesn't show the tasks inside the proj
-                userInterface.createInterface(project);
+                userInterface.createProjectInterface(project);
 
                 console.log(projectsList);
                 //  Rendering the project clicked
@@ -29,6 +33,7 @@ function userDynamicInterface() {
                     const projectData = projectsList.find(project => project.id === parseInt(projectId));
                     project.addEventListener("click", () => {
                         userInterface.renderProject(projectData);
+                        projectDataId = projectData.id;
                     });
                 });
                 //  Click the delete project button to delete the project
@@ -49,40 +54,37 @@ function userDynamicInterface() {
             sideColumnSecondChild.removeChild(newNameContainer);
         });
     })
-    //TODO Clicking on the plus a task get created and pushed inside the right project
-    // every task has an id and a textfield where the user can insert the name of the
-    // task. When the user add the name the program need to find the right project and
-    // the right task and add a new property to the obj (taskName = ****)
 
-    //const addTask = document.getElementById("mainSquareTitleIconChild");
-    //const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
-    //addTask.addEventListener("click", () => {
-    //    if (mainSquareTasksChild.querySelector(".taskNameContainer")) {
-    //        const taskNameContainer = document.querySelector(".taskNameContainer");
-    //        mainSquareTasksChild.removeChild(taskNameContainer);
-    //        return;
-    //    }
-    //    if (projectsList.length === 0) {
-    //        return;
-    //    }
-//
-    //    userInterface.addANewTaskBox();
-//
-    //    const newTaskBox = document.querySelector(".taskNameContainer");
-    //    taskNameAdd.addEventListener("click", () => {
-    //        const taskName = taskNameInput.value.trim();
-    //        if (taskName !== "") {
-    //            const newTask = new Task(taskName);
-    //            newTask.createTask();
-    //            //TODO fix this, it pushes in the wrong object
-    //            //                projectsList[projectId - 1].tasks.push(newTask);
-    //        }
-    //        mainSquareTasksChild.removeChild(newTaskBox);
-    //    })
-    //    taskNameCancel.addEventListener("click", () => {
-    //        mainSquareTasksChild.removeChild(newTaskBox);
-    //    })
-    //});
+    const addTask = document.getElementById("mainSquareTitleIconChild");
+    const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
+    //  Click to open the box for add a task
+    addTask.addEventListener("click", () => {
+        if (mainSquareTasksChild.querySelector(".taskNameContainer")) {
+            const taskNameContainer = document.querySelector(".taskNameContainer");
+            mainSquareTasksChild.removeChild(taskNameContainer);
+            return;
+        }
+
+        userInterface.addANewTaskBox();
+
+        const taskBox = document.querySelector(".taskNameContainer");
+        taskNameAdd.addEventListener("click", () => {
+            const taskName = taskNameInput.value.trim();
+            if (taskName !== "") {
+                const task = new Task(taskName);
+                const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
+            // TODO Fix this, split the logic and graphic part
+                task.createTask();
+
+                projectsList[index].tasks.push(task);
+                console.log("prjListAfterAddTask:",projectsList)
+            }
+            mainSquareTasksChild.removeChild(taskBox);
+        })
+        taskNameCancel.addEventListener("click", () => {
+            mainSquareTasksChild.removeChild(taskBox);
+        })
+    });
 
     const parent = document.getElementById("sideColumnFirstChild");
     const dateFilters = parent.querySelectorAll("*");
