@@ -22,8 +22,8 @@ function userDynamicInterface() {
                 const project = new Project(projectName);
                 projectsList.push(project);
                 projectDataId = project.id;
-                //  createInterface() not finished, it doesn't show the tasks inside the proj
-                userInterface.createProjectInterface(project);
+
+                userInterface.createANewProjectInterface(project);
 
                 console.log(projectsList);
                 //  Rendering the project clicked
@@ -73,11 +73,15 @@ function userDynamicInterface() {
             if (taskName !== "") {
                 const task = new Task(taskName);
                 const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
-            // TODO Fix this, split the logic and graphic part
-                task.createTask();
-
                 projectsList[index].tasks.push(task);
+                userInterface.createTask(task);
+                console.log("task:", task)
                 console.log("prjListAfterAddTask:",projectsList)
+                //  Click the task to delete it
+                const tasks = document.querySelectorAll(".newTaskContainer");
+                tasks.forEach(task => {
+                    // TODO To finish
+                })
             }
             mainSquareTasksChild.removeChild(taskBox);
         })

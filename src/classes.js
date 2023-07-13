@@ -74,15 +74,15 @@ export class Task {
     return newTaskContainer;
   }
 
-  deleteTask(newTaskContainer) {
-    const project = projectsList.find(project => project.id === this.projectId);
-    if (project) {
-      const taskIndex = project.tasks.findIndex(task => task.taskId === this.taskId);
-      if (taskIndex !== -1) {
-        project.tasks.splice(taskIndex, 1);
-      }
+  deleteTask(task) {
+    const taskId = task.id;
+    const taskToRemove = projectsList.tasks.find(task => task.id === taskId);
+    console.log("pre:",projectsList)
+    if (taskToRemove) {
+      const index = projectsList.tasks.indexOf(taskToRemove)
+      projectsList.tasks.splice(index, 1);
+      console.log("post:",projectsList)
     }
-    newTaskContainer.remove();
   }
 }
 
@@ -214,8 +214,12 @@ export class UI {
     })
   }
 
-  //TODO Shown the tasks inside the proj
-  createProjectInterface(project) {
+  createANewProjectInterface(project) {
+    const tasksToDelete = document.querySelectorAll(".newTaskContainer");
+    tasksToDelete.forEach((task) => {
+      task.remove();
+    })
+
     const title = document.getElementById("mainSquareTitleTextChild");
     title.innerText = project.projectName
 
@@ -241,14 +245,17 @@ export class UI {
     const addTaskIcon = document.getElementById("mainSquareTitleIconChild");
     addTaskIcon.classList.add("fa-solid");
     addTaskIcon.classList.add("fa-plus");
+
   }
 
   renderProject(projectData) {
+  // TODO With this the addEvenentListener is removed in every div
     const tasksToDelete = document.querySelectorAll(".newTaskContainer");
     tasksToDelete.forEach((task) => {
       task.remove();
     })
     const index = projectData.id - 1
+    // TODO Add if the *** > 0
     projectsList[index].tasks.forEach((task) => {
       const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
       const newTaskContainer = document.createElement("div");
@@ -276,21 +283,23 @@ export class UI {
       newTaskContainer.appendChild(newTaskIcon);
       newTaskContainer.appendChild(newTaskName);
       newTaskContainer.appendChild(newTaskDate);
+      
     })
     const title = document.getElementById("mainSquareTitleTextChild");
     title.innerText = projectData.projectName
-  
-  //  newProjectName.innerText = lastProject.projectName;
-  //  mainSquareTitleIconChild.classList.add("fa-solid");
-  //  mainSquareTitleIconChild.classList.add("fa-plus");
-  //  //TODO show the project's tasks
   }
-  // TODO Delete also the tasks and the title
+  // TODO Delete also the tasks
   deleteInterface(projectData) {
     const removeProjects = document.querySelectorAll(".newProjectContainer");
     removeProjects.forEach((project) => {
       if (parseInt(project.dataset.id) === projectData.id) {
         project.remove();
+        const title = document.getElementById("mainSquareTitleTextChild");
+        if (projectsList.length === 0) {
+          title.innerText = "";
+        } else {
+          title.innerText = projectsList[projectsList.length - 1].projectName;
+        }
       }
     })
   }
@@ -316,5 +325,36 @@ export class UI {
     mainSquareTasksChild.appendChild(taskNameContainer);
 
     mainSquareTasksChild.insertBefore(taskNameContainer, mainSquareTasksChild.children[0]);
+  }
+
+  createTask(task) {
+    const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
+    const newTaskContainer = document.createElement("div");
+    const newTaskIcon = document.createElement("div");
+    const newTaskName = document.createElement("div");
+    const newTaskDate = document.createElement("div");
+
+    newTaskContainer.classList.add("newTaskContainer");
+    newTaskIcon.id = "newTaskIcon";
+    newTaskName.id = "newTaskName";
+    newTaskDate.id = "newTaskDate";
+
+    newTaskName.textContent = task.taskName;
+    newTaskIcon.classList.add("fa-solid");
+    newTaskIcon.classList.add("fa-check-double");
+
+    const date = new Date();
+    const currentDate = format(date, 'dd/MM/yyyy');
+
+    this.date = currentDate;
+
+    newTaskDate.innerHTML = this.date;
+
+    newTaskContainer.dataset.id = task.id;
+
+    mainSquareTasksChild.appendChild(newTaskContainer);
+    newTaskContainer.appendChild(newTaskIcon);
+    newTaskContainer.appendChild(newTaskName);
+    newTaskContainer.appendChild(newTaskDate);
   }
 }
