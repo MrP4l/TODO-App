@@ -245,7 +245,6 @@ export class UI {
     const addTaskIcon = document.getElementById("mainSquareTitleIconChild");
     addTaskIcon.classList.add("fa-solid");
     addTaskIcon.classList.add("fa-plus");
-
   }
 
   renderProject(projectData) {
@@ -283,10 +282,19 @@ export class UI {
       newTaskContainer.appendChild(newTaskIcon);
       newTaskContainer.appendChild(newTaskName);
       newTaskContainer.appendChild(newTaskDate);
-      
+
+      newTaskContainer.dataset.id = task.id;      
     })
     const title = document.getElementById("mainSquareTitleTextChild");
     title.innerText = projectData.projectName
+
+    const tasks = document.querySelectorAll(".newTaskContainer");
+    tasks.forEach(task => {
+      task.addEventListener("click", () => {
+        // TODO Add the delete here, resolved the click event removed
+        console.log("tasksks",task)
+      })
+    })
   }
   // TODO Delete also the tasks
   deleteInterface(projectData) {

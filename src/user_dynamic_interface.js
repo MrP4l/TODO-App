@@ -64,7 +64,6 @@ function userDynamicInterface() {
             mainSquareTasksChild.removeChild(taskNameContainer);
             return;
         }
-
         userInterface.addANewTaskBox();
 
         const taskBox = document.querySelector(".taskNameContainer");
@@ -76,11 +75,16 @@ function userDynamicInterface() {
                 projectsList[index].tasks.push(task);
                 userInterface.createTask(task);
                 console.log("task:", task)
-                console.log("prjListAfterAddTask:",projectsList)
+                console.log("prjListAfterAddTask:", projectsList)
                 //  Click the task to delete it
                 const tasks = document.querySelectorAll(".newTaskContainer");
                 tasks.forEach(task => {
                     // TODO To finish
+                    task.addEventListener("click", () => {
+                        console.log("ttt:", Task.id)
+                        const taskId = task.dataset.id;
+                        console.log(taskId);
+                    })
                 })
             }
             mainSquareTasksChild.removeChild(taskBox);
