@@ -1,5 +1,9 @@
 export const projectsList = [];
-import { Project, Task, Filter, UI } from "./classes";
+import { Project } from "./project_class";
+import { Task } from "./task_class";
+import { Filter } from "./filters_class";
+import { UI } from "./ui_class";
+
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
@@ -34,6 +38,7 @@ function userDynamicInterface() {
                     project.addEventListener("click", () => {
                         userInterface.renderProject(projectData);
                         projectDataId = projectData.id;
+                        // TODO Maybe add here the tasks part
                     });
                 });
                 //  Click the delete project button to delete the project
@@ -77,21 +82,21 @@ function userDynamicInterface() {
                 console.log("task:", task)
                 console.log("prjListAfterAddTask:", projectsList)
                 //  Click the task to delete it
-                const tasks = document.querySelectorAll(".newTaskContainer");
-                tasks.forEach(task => {
-                    // TODO To finish
-                    task.addEventListener("click", () => {
-                        console.log("ttt:", Task.id)
-                        const taskId = task.dataset.id;
-                        console.log(taskId);
-                    })
-                })
+            //    const tasks = document.querySelectorAll(".newTaskContainer");
+            //    tasks.forEach(task => {
+            //        // TODO To finish
+            //        task.addEventListener("click", () => {
+            //            console.log("ttt:", Task.id)
+            //            const taskId = task.dataset.id;
+            //            console.log(taskId);
+            //        })
+            //    })
             }
             mainSquareTasksChild.removeChild(taskBox);
         })
         taskNameCancel.addEventListener("click", () => {
             mainSquareTasksChild.removeChild(taskBox);
-        })
+        })    
     });
 
     const parent = document.getElementById("sideColumnFirstChild");
