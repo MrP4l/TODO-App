@@ -5,8 +5,9 @@ import { projectsList } from './user_dynamic_interface';
 
 export class Task {
     static id = 0;
-    constructor(taskName) {
+    constructor(taskName, projectId) {
       this.taskName = taskName;
+      this.projectId = projectId;
       this.id = ++Task.id;
     }
   
@@ -14,15 +15,11 @@ export class Task {
       return this.id
     }
   
-    deleteTask(task) {
-      const taskId = task.id;
-      const taskToRemove = projectsList.tasks.find(task => task.id === taskId);
-      console.log("pre:",projectsList)
-      if (taskToRemove) {
-        const index = projectsList.tasks.indexOf(taskToRemove)
-        projectsList.tasks.splice(index, 1);
-        console.log("post:",projectsList)
-      }
+    deleteTask(taskData) {
+        const projectIndex = taskData.projectId;
+        const taskIndex = projectsList[projectIndex].tasks.findIndex(task => parseInt(task.id) === parseInt(taskData.id));
+        projectsList[projectIndex].tasks.splice(taskIndex, 1);
+        console.log("post:",projectsList);
     }
   }
   

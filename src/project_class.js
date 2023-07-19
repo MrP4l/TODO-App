@@ -15,15 +15,18 @@ export class Project {
       return this.id
     }
   
-    deleteProject(project) {
-      const projectId = project.id;
-      const projectToRemove = projectsList.find(project => project.id === projectId);
-      console.log("pre:",projectsList)
-      if (projectToRemove) {
-        const index = projectsList.indexOf(projectToRemove)
-        projectsList.splice(index, 1);
-        console.log("post:",projectsList)
-      }
+    deleteProject(projectData) {
+    //  const projectId = project.id;
+    //  const projectToRemove = projectsList.find(project => project.id === projectId);
+    //  console.log("pre:",projectsList)
+    //  if (projectToRemove) {
+    //    const index = projectsList.indexOf(projectToRemove)
+    //    projectsList.splice(index, 1);
+    //    console.log("post:",projectsList)
+    //  }
+      const index = projectsList.indexOf(projectData);
+      projectsList.splice(index, 1);
+      console.log("post:",projectsList)
     }
   }
   

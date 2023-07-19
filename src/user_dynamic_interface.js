@@ -39,6 +39,19 @@ function userDynamicInterface() {
                         userInterface.renderProject(projectData);
                         projectDataId = projectData.id;
                         // TODO Maybe add here the tasks part
+                        const tasks = document.querySelectorAll(".newTaskContainer");
+                        tasks.forEach(task => {
+                            // TODO To finish
+                            const taskId = task.dataset.id;
+                            const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
+                            const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId))
+                            task.addEventListener("click", () => {
+                                console.log("tskid:",taskId);
+                                const taskObj = new Task;
+                                taskObj.deleteTask(taskData);
+                                console.log("prjList-task after del:", projectsList)
+                            })
+                        })
                     });
                 });
                 //  Click the delete project button to delete the project
@@ -47,7 +60,7 @@ function userDynamicInterface() {
                     const deleteButtonParent = button.closest(".newProjectContainer");
                     const projectId = deleteButtonParent.dataset.id;
                     const projectData = projectsList.find(project => project.id === parseInt(projectId));
-                    button.addEventListener("click", () => {
+                    button.addEventListener("click", (event) => {
                         project.deleteProject(projectData);
                         userInterface.deleteInterface(projectData);
                     })
@@ -75,8 +88,9 @@ function userDynamicInterface() {
         taskNameAdd.addEventListener("click", () => {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
-                const task = new Task(taskName);
                 const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
+                const parentId = index;
+                const task = new Task(taskName, parentId);
                 projectsList[index].tasks.push(task);
                 userInterface.createTask(task);
                 console.log("task:", task)
