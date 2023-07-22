@@ -1,5 +1,3 @@
-import startOfWeek from 'date-fns/startOfWeek'
-import endOfWeek from 'date-fns/endOfWeek';
 import format from 'date-fns/format';
 import { projectsList } from './user_dynamic_interface';
 
@@ -76,7 +74,7 @@ export class UI {
         title.innerText = project.projectName
 
         console.log(project)
-        
+
         const newProjectContainer = document.createElement("div");
         const newProjectName = document.createElement("div");
         const newProjectDeleteButton = document.createElement("div");
@@ -160,7 +158,7 @@ export class UI {
     deleteTask(taskData) {
         const tasks = document.querySelectorAll(".newTaskContainer");
         tasks.forEach((task) => {
-            console.log("task:",task)
+            console.log("task:", task)
             if (parseInt(task.dataset.id) === taskData.id) {
                 task.remove();
             }

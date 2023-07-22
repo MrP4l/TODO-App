@@ -9,7 +9,7 @@ function userDynamicInterface() {
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
     let projectDataId = 0;
 
-    const userInterface = new UI(projectsList);
+    const userInterface = new UI();
     //  Click to open or close the box Add Project
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
@@ -38,7 +38,7 @@ function userDynamicInterface() {
                     project.addEventListener("click", () => {
                         console.log("projectData:", projectData)
                         userInterface.renderProject(projectData);
-                    //    userInterface.createANewProjectInterface(projectData);
+                        //    userInterface.createANewProjectInterface(projectData);
                         projectDataId = projectData.id;
                         const tasks = document.querySelectorAll(".newTaskContainer");
                         tasks.forEach(task => {
@@ -46,7 +46,7 @@ function userDynamicInterface() {
                             const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
                             const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId))
                             task.addEventListener("click", () => {
-                                console.log("tskid:",taskId);
+                                console.log("tskid:", taskId);
                                 const taskObj = new Task;
                                 taskObj.deleteTask(taskData);
                                 userInterface.deleteTask(taskData);
@@ -103,7 +103,7 @@ function userDynamicInterface() {
                     const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
                     const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId))
                     task.addEventListener("click", () => {
-                        console.log("tskid:",taskId);
+                        console.log("tskid:", taskId);
                         const taskObj = new Task;
                         taskObj.deleteTask(taskData);
                         console.log("prjList-task after del2:", projectsList);
@@ -115,20 +115,20 @@ function userDynamicInterface() {
         })
         taskNameCancel.addEventListener("click", () => {
             mainSquareTasksChild.removeChild(taskBox);
-        })    
+        })
     });
 
     const parent = document.getElementById("sideColumnFirstChild");
     const dateFilters = parent.querySelectorAll("*");
-    dateFilters.forEach(child => {
-        child.addEventListener("click", (event) => {
+    dateFilters.forEach(date => {
+        date.addEventListener("click", (event) => {
             event.stopPropagation();
-            const filter = new Filter(projectsList);
-            if (child.id === "sideColumnAllContainer") {
+            const filter = new Filter();
+            if (date.id === "sideColumnAllContainer") {
                 filter.allFilter();
-            } else if (child.id === "sideColumnTodayContainer") {
+            } else if (date.id === "sideColumnTodayContainer") {
                 filter.todayFilter();
-            } else if (child.id === "sideColumnWeekContainer") {
+            } else if (date.id === "sideColumnWeekContainer") {
                 filter.weekFilter();
             }
         })
