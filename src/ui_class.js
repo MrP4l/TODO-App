@@ -76,6 +76,7 @@ export class UI {
         title.innerText = project.projectName
 
         console.log(project)
+        
         const newProjectContainer = document.createElement("div");
         const newProjectName = document.createElement("div");
         const newProjectDeleteButton = document.createElement("div");
@@ -100,14 +101,12 @@ export class UI {
     }
 
     renderProject(projectData) {
-        // TODO With this the addEvenentListener is removed in every div
         const tasksToDelete = document.querySelectorAll(".newTaskContainer");
         tasksToDelete.forEach((task) => {
             task.remove();
         })
-        const index = projectData.id - 1
-        // TODO Modify here, when i delete the project it gives error because the 2nd condition doesn't exist (undefined)
-        if (projectsList.length > 0 && projectsList[index].tasks.length > 0) {
+        const index = projectsList.indexOf(projectData);
+        if (projectsList.length > 0 && index !== -1) {
             projectsList[index].tasks.forEach((task) => {
                 const mainSquareTasksChild = document.getElementById("mainSquareTasksChild");
                 const newTaskContainer = document.createElement("div");
@@ -142,11 +141,10 @@ export class UI {
             title.innerText = projectData.projectName
         }
     }
-
     // TODO Delete also the tasks
-    deleteInterface(projectData) {
-        const removeProjects = document.querySelectorAll(".newProjectContainer");
-        removeProjects.forEach((project) => {
+    deleteProject(projectData) {
+        const projects = document.querySelectorAll(".newProjectContainer");
+        projects.forEach((project) => {
             if (parseInt(project.dataset.id) === projectData.id) {
                 project.remove();
                 const title = document.getElementById("mainSquareTitleTextChild");
@@ -155,6 +153,16 @@ export class UI {
                 } else {
                     title.innerText = projectsList[projectsList.length - 1].projectName;
                 }
+            }
+        })
+    }
+
+    deleteTask(taskData) {
+        const tasks = document.querySelectorAll(".newTaskContainer");
+        tasks.forEach((task) => {
+            console.log("task:",task)
+            if (parseInt(task.dataset.id) === taskData.id) {
+                task.remove();
             }
         })
     }
