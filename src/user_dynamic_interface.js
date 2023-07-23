@@ -1,8 +1,9 @@
-export const projectsList = [];
+export const projectsList = getLocalStorage() || [];
 import { Project } from "./project_class";
 import { Task } from "./task_class";
 import { Filter } from "./filters_class";
 import { UI } from "./ui_class";
+import { setLocalStorage, getLocalStorage } from './local_storage';
 
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
@@ -37,8 +38,10 @@ function userDynamicInterface() {
                     const projectData = projectsList.find(project => project.id === parseInt(projectId));
                     project.addEventListener("click", () => {
                         console.log("projectData:", projectData)
+                        console.log("prjlist:", projectsList);
                         userInterface.renderProject(projectData);
                         projectDataId = projectData.id;
+
                         const tasks = document.querySelectorAll(".newTaskContainer");
                         tasks.forEach(task => {
                             const taskId = task.dataset.id;
@@ -46,10 +49,10 @@ function userDynamicInterface() {
                             const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId))
                             task.addEventListener("click", () => {
                                 console.log("tskid:", taskId);
-                                const taskObj = new Task;
+                                const taskObj = new Task();
                                 taskObj.deleteTask(taskData);
                                 userInterface.deleteTask(taskData);
-                                console.log("prjList-task after del1:", projectsList)
+                                console.log("prjList-task after del1:", projectsList);
                             })
                         })
                     });
@@ -106,7 +109,7 @@ function userDynamicInterface() {
                         const taskObj = new Task();
                         taskObj.deleteTask(taskData);
                         console.log("prjList-task after del2:", projectsList);
-                        userInterface.deleteTask(taskData)
+                        userInterface.deleteTask(taskData);
                     })
                 })
             }
@@ -132,6 +135,7 @@ function userDynamicInterface() {
             }
         })
     })
+
 }
 
 export default userDynamicInterface;

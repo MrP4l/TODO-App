@@ -145,20 +145,22 @@ export class UI {
             plusIcon.style.visibility = "visible";
         }
     }
-    // TODO Delete also the tasks
+    
     deleteProject(projectData) {
         const projects = document.querySelectorAll(".newProjectContainer");
-        projects.forEach((project) => {
-            if (parseInt(project.dataset.id) === projectData.id) {
-                project.remove();
-                const title = document.getElementById("mainSquareTitleTextChild");
-                if (projectsList.length === 0) {
-                    title.innerText = "";
-                } else {
-                    title.innerText = projectsList[projectsList.length - 1].projectName;
+        if (projectData !== undefined) {
+            projects.forEach((project) => {
+                if (parseInt(project.dataset.id) === projectData.id) {
+                    project.remove();
+                    const title = document.getElementById("mainSquareTitleTextChild");
+                    if (projectsList.length === 0) {
+                        title.innerText = "";
+                    } else {
+                        title.innerText = projectsList[projectsList.length - 1].projectName;
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
     deleteTask(taskData) {

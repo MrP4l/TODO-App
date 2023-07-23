@@ -14,7 +14,9 @@ export class Project {
 
 	deleteProject(projectData) {
 		const index = projectsList.indexOf(projectData);
-		projectsList.splice(index, 1);
+		if (index !== -1) {
+			projectsList.splice(index, 1);
+		}
 		console.log("post:", projectsList)
 	}
 }
