@@ -1,4 +1,5 @@
 import { projectsList } from './user_dynamic_interface';
+import format from 'date-fns/format';
 
 export class Task {
     static id = 0;
@@ -6,6 +7,8 @@ export class Task {
         this.taskName = taskName;
         this.projectId = projectId;
         this.id = ++Task.id;
+        const date = new Date();
+        this.date = format(date, 'dd/MM/yyyy');;
     }
 
     get taskId() {

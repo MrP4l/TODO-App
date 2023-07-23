@@ -38,7 +38,6 @@ function userDynamicInterface() {
                     project.addEventListener("click", () => {
                         console.log("projectData:", projectData)
                         userInterface.renderProject(projectData);
-                        //    userInterface.createANewProjectInterface(projectData);
                         projectDataId = projectData.id;
                         const tasks = document.querySelectorAll(".newTaskContainer");
                         tasks.forEach(task => {
@@ -90,8 +89,8 @@ function userDynamicInterface() {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
                 const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
-                const parentId = index;
-                const task = new Task(taskName, parentId);
+                const projectId = index;
+                const task = new Task(taskName, projectId);
                 projectsList[index].tasks.push(task);
                 userInterface.createTask(task);
                 console.log("task:", task)

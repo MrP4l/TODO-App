@@ -1,5 +1,6 @@
 import format from 'date-fns/format';
 import { projectsList } from './user_dynamic_interface';
+import { add } from 'date-fns';
 
 export class UI {
     addANewProjectBox() {
@@ -93,6 +94,9 @@ export class UI {
 
         newProjectContainer.dataset.id = project.id;
 
+        const plusIcon = document.getElementById("mainSquareTitleIconChild");
+        plusIcon.style.visibility = "visible";
+
         const addTaskIcon = document.getElementById("mainSquareTitleIconChild");
         addTaskIcon.classList.add("fa-solid");
         addTaskIcon.classList.add("fa-plus");
@@ -136,7 +140,9 @@ export class UI {
                 newTaskContainer.dataset.id = task.id;
             })
             const title = document.getElementById("mainSquareTitleTextChild");
-            title.innerText = projectData.projectName
+            title.innerText = projectData.projectName;
+            const plusIcon = document.getElementById("mainSquareTitleIconChild");
+            plusIcon.style.visibility = "visible";
         }
     }
     // TODO Delete also the tasks
