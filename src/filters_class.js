@@ -3,8 +3,10 @@ import endOfWeek from 'date-fns/endOfWeek';
 import format from 'date-fns/format';
 import { projectsList } from './user_dynamic_interface';
 import { UI } from "./ui_class";
+import { Task } from "./task_class";
 
 const userInterface = new UI();
+const task = new Task();
 
 export class Filter {
 
@@ -28,16 +30,21 @@ export class Filter {
 			});
 		});
 
-		// TODO Add the possibility to delete the tasks from here? REMEMBER dataset is the same of id inside task
-		// TODO Fix/Finish this
 		const tasks = document.querySelectorAll(".newTaskContainer");
 		tasks.forEach(el => {
 			el.addEventListener("click", () => {
-				console.log("tssss", el);
-				const taskData = projectsList.tasks.find(task => task.id === el.dataset.id);
-				console.log(taskData) 
-			})
-		})
+				const taskId = parseInt(el.dataset.id);
+				for (const project of projectsList) {
+					const taskIndex = project.tasks.findIndex(task => task.id === taskId);
+					if (taskIndex !== -1) {
+						const taskData = project.tasks[taskIndex];
+						task.deleteTask(taskData);
+						userInterface.deleteTask(taskData);
+						break;
+					}
+				}
+			});
+		});
 
 		newProjectName.textContent = "All";
 	}
@@ -62,10 +69,24 @@ export class Filter {
 			});
 		});
 
-		// TODO Add the possibility to delete the tasks from here?
+		const todayTasks = document.querySelectorAll(".newTaskContainer");
+		todayTasks.forEach(el => {
+			el.addEventListener("click", () => {
+				const taskId = parseInt(el.dataset.id);
+				for (const project of projectsList) {
+					const taskIndex = project.tasks.findIndex(task => task.id === taskId);
+					if (taskIndex !== -1) {
+						const taskData = project.tasks[taskIndex];
+						task.deleteTask(taskData);
+						userInterface.deleteTask(taskData);
+						break;
+					}
+				}
+			});
+		});
 
 		const tasks = document.querySelectorAll(".newTaskContainer");
-		tasks.forEach(task  => {
+		tasks.forEach(task => {
 			console.log(task)
 		})
 
@@ -97,7 +118,21 @@ export class Filter {
 		const plusIcon = document.getElementById("mainSquareTitleIconChild");
 		plusIcon.style.visibility = "hidden";
 
-		// TODO Add the possibility to delete the tasks from here?
+		const weekTasks = document.querySelectorAll(".newTaskContainer");
+		weekTasks.forEach(el => {
+			el.addEventListener("click", () => {
+				const taskId = parseInt(el.dataset.id);
+				for (const project of projectsList) {
+					const taskIndex = project.tasks.findIndex(task => task.id === taskId);
+					if (taskIndex !== -1) {
+						const taskData = project.tasks[taskIndex];
+						task.deleteTask(taskData);
+						userInterface.deleteTask(taskData);
+						break;
+					}
+				}
+			});
+		});
 
 		const newProjectName = document.getElementById("mainSquareTitleTextChild")
 		newProjectName.textContent = "Week";

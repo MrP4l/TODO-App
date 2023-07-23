@@ -103,7 +103,7 @@ function userDynamicInterface() {
                     const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId))
                     task.addEventListener("click", () => {
                         console.log("tskid:", taskId);
-                        const taskObj = new Task;
+                        const taskObj = new Task();
                         taskObj.deleteTask(taskData);
                         console.log("prjList-task after del2:", projectsList);
                         userInterface.deleteTask(taskData)
