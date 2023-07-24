@@ -53,6 +53,7 @@ function userDynamicInterface() {
                                 taskObj.deleteTask(taskData);
                                 userInterface.deleteTask(taskData);
                                 console.log("prjList-task after del1:", projectsList);
+                                setLocalStorage(projectsList);
                             })
                         })
                     });
@@ -66,8 +67,10 @@ function userDynamicInterface() {
                     button.addEventListener("click", () => {
                         project.deleteProject(projectData);
                         userInterface.deleteProject(projectData);
+                        setLocalStorage(projectsList);
                     })
                 })
+                setLocalStorage(projectsList);
             }
             sideColumnSecondChild.removeChild(newNameContainer);
         });
@@ -110,8 +113,10 @@ function userDynamicInterface() {
                         taskObj.deleteTask(taskData);
                         console.log("prjList-task after del2:", projectsList);
                         userInterface.deleteTask(taskData);
+                        setLocalStorage(projectsList);
                     })
                 })
+                setLocalStorage(projectsList);
             }
             mainSquareTasksChild.removeChild(taskBox);
         })
@@ -123,15 +128,16 @@ function userDynamicInterface() {
     const parent = document.getElementById("sideColumnFirstChild");
     const dateFilters = parent.querySelectorAll("*");
     dateFilters.forEach(date => {
-        date.addEventListener("click", (event) => {
-            event.stopPropagation();
+        date.addEventListener("click", () => {
             const filter = new Filter();
             if (date.id === "sideColumnAllContainer") {
                 filter.allFilter();
             } else if (date.id === "sideColumnTodayContainer") {
                 filter.todayFilter();
+                setLocalStorage(projectsList);
             } else if (date.id === "sideColumnWeekContainer") {
                 filter.weekFilter();
+                setLocalStorage(projectsList);
             }
         })
     })

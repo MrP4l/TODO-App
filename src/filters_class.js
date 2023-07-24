@@ -4,6 +4,7 @@ import format from 'date-fns/format';
 import { projectsList } from './user_dynamic_interface';
 import { UI } from "./ui_class";
 import { Task } from "./task_class";
+import { setLocalStorage, getLocalStorage } from './local_storage';
 
 const userInterface = new UI();
 const task = new Task();
@@ -40,6 +41,7 @@ export class Filter {
 						const taskData = project.tasks[taskIndex];
 						task.deleteTask(taskData);
 						userInterface.deleteTask(taskData);
+						setLocalStorage(projectsList);
 						break;
 					}
 				}
@@ -79,6 +81,7 @@ export class Filter {
 						const taskData = project.tasks[taskIndex];
 						task.deleteTask(taskData);
 						userInterface.deleteTask(taskData);
+						setLocalStorage(projectsList);
 						break;
 					}
 				}
@@ -128,6 +131,7 @@ export class Filter {
 						const taskData = project.tasks[taskIndex];
 						task.deleteTask(taskData);
 						userInterface.deleteTask(taskData);
+						setLocalStorage(projectsList);
 						break;
 					}
 				}

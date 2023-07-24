@@ -145,7 +145,7 @@ export class UI {
             plusIcon.style.visibility = "visible";
         }
     }
-    
+
     deleteProject(projectData) {
         const projects = document.querySelectorAll(".newProjectContainer");
         if (projectData !== undefined) {
@@ -157,6 +157,7 @@ export class UI {
                         title.innerText = "";
                     } else {
                         title.innerText = projectsList[projectsList.length - 1].projectName;
+                        this.renderProject(projectsList[projectsList.length - 1]);
                     }
                 }
             })
