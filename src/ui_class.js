@@ -103,10 +103,12 @@ export class UI {
     }
 
     renderProject(projectData) {
-        const tasksToDelete = document.querySelectorAll(".newTaskContainer");
-        tasksToDelete.forEach((task) => {
-            task.remove();
-        })
+        if (projectsList.indexOf(projectData) !== -1) {
+            const tasksToDelete = document.querySelectorAll(".newTaskContainer");
+            tasksToDelete.forEach((task) => {
+                task.remove();
+            })
+        } 
         const index = projectsList.indexOf(projectData);
         if (projectsList.length > 0 && index !== -1) {
             projectsList[index].tasks.forEach((task) => {

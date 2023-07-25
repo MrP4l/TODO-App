@@ -41,11 +41,12 @@ function userDynamicInterface() {
                         console.log("prjlist:", projectsList);
                         userInterface.renderProject(projectData);
                         projectDataId = projectData.id;
-
                         const tasks = document.querySelectorAll(".newTaskContainer");
                         tasks.forEach(task => {
                             const taskId = task.dataset.id;
                             const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
+                        // TODO thw deleted projectData comes here, so index doesn't exists and this breaks down here,
+                        // maybe try and catch or move the tasks handler outside this cycle (does it work outside?)
                             const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId))
                             task.addEventListener("click", () => {
                                 console.log("tskid:", taskId);
@@ -56,6 +57,9 @@ function userDynamicInterface() {
                                 setLocalStorage(projectsList);
                             })
                         })
+
+                        // TODO Bug when the proj where u are is deleted, there aren't showed the tasks of the previous project (showed then deleted from renderProject)
+
                     });
                 });
                 //  Click the delete project button to delete the project
