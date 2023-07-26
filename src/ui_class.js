@@ -1,6 +1,6 @@
 import format from 'date-fns/format';
 import { projectsList } from './user_dynamic_interface';
-import { add } from 'date-fns';
+import { Filter } from './filters_class';
 
 export class UI {
     addANewProjectBox() {
@@ -155,11 +155,12 @@ export class UI {
                 if (parseInt(project.dataset.id) === projectData.id) {
                     project.remove();
                     const title = document.getElementById("mainSquareTitleTextChild");
+                    // TODO When the user is in All filter and projects are deleted the tasks's project are not
                     if (projectsList.length === 0) {
                         title.innerText = "";
                     } else {
-                        title.innerText = projectsList[projectsList.length - 1].projectName;
-                        this.renderProject(projectsList[projectsList.length - 1]);
+                        const filter = new Filter();
+                        filter.allFilter();
                     }
                 }
             })
