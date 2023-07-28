@@ -1,5 +1,6 @@
 import format from 'date-fns/format';
 import { projectsList } from './user_dynamic_interface';
+import { projectDataIdShowed } from './user_dynamic_interface';
 import { Filter } from './filters_class';
 
 export class UI {
@@ -108,7 +109,7 @@ export class UI {
             tasksToDelete.forEach((task) => {
                 task.remove();
             })
-        } 
+        }
         const index = projectsList.indexOf(projectData);
         if (projectsList.length > 0 && index !== -1) {
             projectsList[index].tasks.forEach((task) => {
@@ -155,12 +156,19 @@ export class UI {
                 if (parseInt(project.dataset.id) === projectData.id) {
                     project.remove();
                     const title = document.getElementById("mainSquareTitleTextChild");
-                    // TODO When the user is in All filter and projects are deleted the tasks's project are not
                     if (projectsList.length === 0) {
                         title.innerText = "";
-                    } else {
-                        const filter = new Filter();
-                        filter.allFilter();
+                        const plusIcon = document.getElementById("mainSquareTitleIconChild");
+                        plusIcon.style.visibility = "hidden";
+                        const tasksToDelete = document.querySelectorAll(".newTaskContainer");
+                        tasksToDelete.forEach((task) => {
+                            task.remove();
+                        })
+                    } else if (projectDataIdShowed === projectData.id) {
+                        // TODO n1 No more the possibility to click the tasks to delete them after went from proj 3-2-1 deleting the previous one
+                        // TODO n2 3 projects, deleting from3 to 1 the last one has the data from the previous one (n2)
+                        title.innerText = projectsList[projectsList.length - 1].projectName;
+                        this.renderProject(projectsList[projectsList.length - 1]);
                     }
                 }
             })

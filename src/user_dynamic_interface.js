@@ -1,4 +1,5 @@
 export const projectsList = getLocalStorage() || [];
+export let projectDataIdShowed = 0;
 import { Project } from "./project_class";
 import { Task } from "./task_class";
 import { Filter } from "./filters_class";
@@ -8,7 +9,6 @@ import { setLocalStorage, getLocalStorage } from './local_storage';
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
-    let projectDataId = 0;
 
     const userInterface = new UI();
     //  Click to open or close the box Add Project
@@ -26,7 +26,7 @@ function userDynamicInterface() {
             if (projectName !== "") {
                 const project = new Project(projectName);
                 projectsList.push(project);
-                projectDataId = project.id;
+                projectDataIdShowed = project.id;
 
                 userInterface.createANewProjectInterface(project);
 
@@ -40,12 +40,14 @@ function userDynamicInterface() {
                         console.log("projectData:", projectData)
                         console.log("prjlist:", projectsList);
                         userInterface.renderProject(projectData);
-                        projectDataId = projectData.id;
+                        if (projectsList.indexOf(projectData) !== -1) {
+                            projectDataIdShowed = projectData.id;
+                        }
                         const tasks = document.querySelectorAll(".newTaskContainer");
                         tasks.forEach(task => {
                             if (projectsList.indexOf(projectData) !== -1) {
                                 const taskId = task.dataset.id;
-                                const index = projectsList.findIndex(project => projectDataId === parseInt(project.id));
+                                const index = projectsList.findIndex(project => projectDataIdShowed === parseInt(project.id));
                                 const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId));
                                 task.addEventListener("click", () => {
                                     console.log("tskid:", taskId);
@@ -95,7 +97,7 @@ function userDynamicInterface() {
         taskNameAdd.addEventListener("click", () => {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
-                const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
+                const index = projectsList.findIndex(project => projectDataIdShowed === parseInt(project.id))
                 const projectId = index;
                 const task = new Task(taskName, projectId);
                 projectsList[index].tasks.push(task);
@@ -106,7 +108,7 @@ function userDynamicInterface() {
                 const tasks = document.querySelectorAll(".newTaskContainer");
                 tasks.forEach(task => {
                     const taskId = task.dataset.id;
-                    const index = projectsList.findIndex(project => projectDataId === parseInt(project.id))
+                    const index = projectsList.findIndex(project => projectDataIdShowed === parseInt(project.id))
                     const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId))
                     task.addEventListener("click", () => {
                         console.log("tskid:", taskId);
