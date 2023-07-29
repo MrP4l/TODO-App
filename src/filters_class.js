@@ -10,7 +10,6 @@ const userInterface = new UI();
 const task = new Task();
 
 export class Filter {
-
 	allFilter() {
 		const newProjectName = document.getElementById("mainSquareTitleTextChild");
 		if (newProjectName.textContent === "All") {

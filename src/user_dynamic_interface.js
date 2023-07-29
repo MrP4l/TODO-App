@@ -1,5 +1,5 @@
 export const projectsList = getLocalStorage() || [];
-export let projectDataIdShowed = 0;
+export let projectDataIdShowed = null;
 import { Project } from "./project_class";
 import { Task } from "./task_class";
 import { Filter } from "./filters_class";
@@ -70,6 +70,11 @@ function userDynamicInterface() {
                     button.addEventListener("click", () => {
                         project.deleteProject(projectData);
                         userInterface.deleteProject(projectData);
+                        if (projectsList.length > 0) {
+                            projectDataIdShowed = projectsList[projectsList.length - 1].id;
+                        } else {
+                            projectDataIdShowed = null;
+                        }
                         setLocalStorage(projectsList);
                     })
                 })

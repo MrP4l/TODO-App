@@ -1,9 +1,17 @@
 import format from 'date-fns/format';
 import { projectsList } from './user_dynamic_interface';
 import { projectDataIdShowed } from './user_dynamic_interface';
-import { Filter } from './filters_class';
+import { Task } from "./task_class";
+import { setLocalStorage, getLocalStorage } from './local_storage';
+
+const task = new Task();
 
 export class UI {
+    constructor() {
+        // Inizializza la proprietà this.userInterface come un'istanza della classe UI
+        this.userInterface = this;
+    }
+
     addANewProjectBox() {
         const newNameContainer = document.createElement("div");
         const newNameTextfield = document.createElement("input");
@@ -146,6 +154,23 @@ export class UI {
             title.innerText = projectData.projectName;
             const plusIcon = document.getElementById("mainSquareTitleIconChild");
             plusIcon.style.visibility = "visible";
+
+            const tasks = document.querySelectorAll(".newTaskContainer");
+            tasks.forEach(el => {
+                el.addEventListener("click", () => {
+                    const taskId = parseInt(el.dataset.id);
+                    for (const project of projectsList) {
+                        const taskIndex = project.tasks.findIndex(task => task.id === taskId);
+                        if (taskIndex !== -1) {
+                            const taskData = project.tasks[taskIndex];
+                            task.deleteTask(taskData);
+                            this.userInterface.deleteTask(taskData);
+                            setLocalStorage(projectsList);
+                            break;
+                        }
+                    }
+                });
+            });
         }
     }
 
@@ -166,7 +191,6 @@ export class UI {
                         })
                     } else if (projectDataIdShowed === projectData.id) {
                         // TODO n1 No more the possibility to click the tasks to delete them after went from proj 3-2-1 deleting the previous one
-                        // TODO n2 3 projects, deleting from3 to 1 the last one has the data from the previous one (n2)
                         title.innerText = projectsList[projectsList.length - 1].projectName;
                         this.renderProject(projectsList[projectsList.length - 1]);
                     }
