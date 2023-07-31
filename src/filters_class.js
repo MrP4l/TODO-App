@@ -30,6 +30,7 @@ export class Filter {
 			});
 		});
 
+		// TODO when u try to delete a task just right after deleted a project it doesn't delete the task and bug everything
 		const tasks = document.querySelectorAll(".newTaskContainer");
 		tasks.forEach(el => {
 			el.addEventListener("click", () => {
@@ -111,6 +112,7 @@ export class Filter {
 
 		projectsList.forEach(project => {
 			project.tasks.forEach(task => {
+				//TODO task.date <= endOfTheWeekFormatted doesn't work
 				if (task.date >= startOfTheWeekFormatted && task.date <= endOfTheWeekFormatted) {
 					userInterface.createTask(task);
 				}

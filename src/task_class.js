@@ -19,7 +19,9 @@ export class Task {
         const projectIndex = taskData.projectId;
         // TODO Cannot read properties of undefined (reading 'tasks')
         const taskIndex = projectsList[projectIndex].tasks.findIndex(task => parseInt(task.id) === parseInt(taskData.id));
-        projectsList[projectIndex].tasks.splice(taskIndex, 1);
+        if (projectIndex !== -1 && taskIndex !== -1) {
+            projectsList[projectIndex].tasks.splice(taskIndex, 1);
+		}
         console.log("post:", projectsList);
     }
 }
