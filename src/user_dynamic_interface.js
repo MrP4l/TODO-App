@@ -103,7 +103,7 @@ function userDynamicInterface() {
             const taskName = taskNameInput.value.trim();
             if (taskName !== "") {
                 const index = projectsList.findIndex(project => projectDataIdShowed === parseInt(project.id))
-                const projectId = index;
+                const projectId = projectsList[index].id;
                 const task = new Task(taskName, projectId);
                 projectsList[index].tasks.push(task);
                 userInterface.createTask(task);
