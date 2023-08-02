@@ -190,7 +190,6 @@ export class UI {
                             task.remove();
                         })
                     } else if (projectDataIdShowed === projectData.id) {
-                        // TODO n1 No more the possibility to click the tasks to delete them after went from proj 3-2-1 deleting the previous one
                         title.innerText = projectsList[projectsList.length - 1].projectName;
                         this.renderProject(projectsList[projectsList.length - 1]);
                     }

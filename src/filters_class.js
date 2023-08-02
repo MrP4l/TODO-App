@@ -1,6 +1,9 @@
 import startOfWeek from 'date-fns/startOfWeek'
 import endOfWeek from 'date-fns/endOfWeek';
 import format from 'date-fns/format';
+import parse from 'date-fns/format';
+import isBefore from 'date-fns/format';
+import isAfter from 'date-fns/format';
 import { projectsList } from './user_dynamic_interface';
 import { UI } from "./ui_class";
 import { Task } from "./task_class";
@@ -30,7 +33,6 @@ export class Filter {
 			});
 		});
 
-		// TODO when u try to delete a task just right after deleted a project it doesn't delete the task and bug everything
 		const tasks = document.querySelectorAll(".newTaskContainer");
 		tasks.forEach(el => {
 			el.addEventListener("click", () => {
@@ -102,8 +104,8 @@ export class Filter {
 		const date = new Date();
 		const startOfTheWeek = startOfWeek(date, { weekStartsOn: 1 });
 		const endOfTheWeek = endOfWeek(date, { weekStartsOn: 1 });
-		const startOfTheWeekFormatted = format(startOfTheWeek, 'dd/MM/yyyy');
-		const endOfTheWeekFormatted = format(endOfTheWeek, 'dd/MM/yyyy');
+		const startOfTheWeekFormatted = new Date(format(startOfTheWeek, 'MM/dd/yyyy'));
+		const endOfTheWeekFormatted = new Date(format(endOfTheWeek, 'MM/dd/yyyy'));
 
 		const removeTasks = document.querySelectorAll(".newTaskContainer");
 		removeTasks.forEach(taskContainer => {
@@ -113,7 +115,14 @@ export class Filter {
 		projectsList.forEach(project => {
 			project.tasks.forEach(task => {
 				//TODO task.date <= endOfTheWeekFormatted doesn't work
-				if (task.date >= startOfTheWeekFormatted && task.date <= endOfTheWeekFormatted) {
+			//	const taskDate = parse(toString(task.date), 'dd/MM/yyyy', new Date());
+				const taskDateString = (task.date).toString();
+				console.log("1:", task.date, typeof(taskDateString));
+				console.log("2:", startOfTheWeekFormatted, endOfTheWeekFormatted);
+				const taskDateFormatted = format()
+				console.log("ts:", taskDate);
+			//	const taskDate = parseDate(task.date, 'dd/MM/yyyy');
+				if (task.Date >= startOfTheWeekFormatted && task.Date <= endOfTheWeekFormatted) {
 					userInterface.createTask(task);
 				}
 			});

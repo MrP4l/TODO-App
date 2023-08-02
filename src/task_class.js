@@ -16,10 +16,8 @@ export class Task {
     }
 
     deleteTask(taskData) {
-    //    const projectIndex = taskData.projectId;
-        // TODO previously i was picking the .projectId of taskData but it is't the same of the projectIndex
-        //      need to find the right index of the project startng from taskData
-        // TODO Cannot read properties of undefined (reading 'tasks')
+        const projectId = taskData.projectId;
+        const projectIndex = projectsList.findIndex(project => project.id === projectId);
         const taskIndex = projectsList[projectIndex].tasks.findIndex(task => parseInt(task.id) === parseInt(taskData.id));
         if (projectIndex !== -1 && taskIndex !== -1) {
             projectsList[projectIndex].tasks.splice(taskIndex, 1);
