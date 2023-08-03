@@ -35,20 +35,7 @@ export class UI {
         sideColumnSecondChild.insertBefore(newNameContainer, sideColumnSecondChild.children[1]);
     }
 
-    renderProjectList(projectData) {
-        const removeProjects = document.querySelectorAll(".newProjectContainer");
-        removeProjects.forEach((project) => {
-            console.log("prj.id:", project)
-            if (parseInt(project.dataset.id) === projectData.id) {
-                project.remove();
-            }
-        })
-        const title = document.getElementById("mainSquareTitleTextChild");
-        if (projectsList.length === 0) {
-            title.innerText = "";
-        } else {
-            title.innerText = projectsList[projectsList.length - 1].projectName;
-        }
+    renderProjectList(projectsList) {
         projectsList.forEach(project => {
             console.log(project)
 

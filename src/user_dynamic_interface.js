@@ -11,6 +11,40 @@ function userDynamicInterface() {
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
 
     const userInterface = new UI();
+    // TODO Think the best way to do this
+    if (projectsList.length > 0) {
+        userInterface.renderProjectList(projectsList);
+        const projects = document.querySelectorAll(".newProjectContainer");
+        projects.forEach(project => {
+            const projectId = project.dataset.id;
+            const projectData = projectsList.find(project => project.id === parseInt(projectId));
+            project.addEventListener("click", () => {
+                console.log("projectData:", projectData)
+                console.log("prjlist:", projectsList);
+                userInterface.renderProject(projectData);
+                if (projectsList.indexOf(projectData) !== -1) {
+                    projectDataIdShowed = projectData.id;
+                }
+                const tasks = document.querySelectorAll(".newTaskContainer");
+                tasks.forEach(task => {
+                    if (projectsList.indexOf(projectData) !== -1) {
+                        const taskId = task.dataset.id;
+                        const index = projectsList.findIndex(project => projectDataIdShowed === parseInt(project.id));
+                        const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId));
+                        task.addEventListener("click", () => {
+                            console.log("tskid:", taskId);
+                            const taskObj = new Task();
+                            taskObj.deleteTask(taskData);
+                            userInterface.deleteTask(taskData);
+                            console.log("prjList-task after del1:", projectsList);
+                            setLocalStorage(projectsList);
+                        })
+                    }
+                })
+            });
+        })
+    }
+
     //  Click to open or close the box Add Project
     addProject.addEventListener("click", () => {
         if (sideColumnSecondChild.querySelector("#newNameContainer")) {
