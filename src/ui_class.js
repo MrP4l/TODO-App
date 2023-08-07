@@ -141,6 +141,10 @@ export class UI {
             title.innerText = projectData.projectName;
             const plusIcon = document.getElementById("mainSquareTitleIconChild");
             plusIcon.style.visibility = "visible";
+            
+            const addTaskIcon = document.getElementById("mainSquareTitleIconChild");
+            addTaskIcon.classList.add("fa-solid");
+            addTaskIcon.classList.add("fa-plus");
 
             const tasks = document.querySelectorAll(".newTaskContainer");
             tasks.forEach(el => {

@@ -13,6 +13,7 @@ function userDynamicInterface() {
     const userInterface = new UI();
     // TODO Think the best way to do this
     if (projectsList.length > 0) {
+        const project = new Project();
         userInterface.renderProjectList(projectsList);
         const projects = document.querySelectorAll(".newProjectContainer");
         projects.forEach(project => {
@@ -42,6 +43,23 @@ function userDynamicInterface() {
                     }
                 })
             });
+        })
+        //  Click the delete project button to delete the project
+        const deleteButtons = document.querySelectorAll(".newProjectDeleteButton");
+        deleteButtons.forEach(button => {
+            const deleteButtonParent = button.closest(".newProjectContainer");
+            const projectId = deleteButtonParent.dataset.id;
+            const projectData = projectsList.find(project => project.id === parseInt(projectId));
+            button.addEventListener("click", () => {
+                project.deleteProject(projectData);
+                userInterface.deleteProject(projectData);
+                if (projectsList.length > 0) {
+                    projectDataIdShowed = projectsList[projectsList.length - 1].id;
+                } else {
+                    projectDataIdShowed = null;
+                }
+                setLocalStorage(projectsList);
+            })
         })
     }
 
