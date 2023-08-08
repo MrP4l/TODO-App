@@ -56,7 +56,7 @@ export class UI {
             newProjectContainer.appendChild(newProjectDeleteButton);
 
             newProjectContainer.dataset.id = project.id;
-
+            
             return newProjectContainer;
         })
     }
@@ -123,9 +123,9 @@ export class UI {
                 newTaskIcon.classList.add("fa-solid");
                 newTaskIcon.classList.add("fa-check-double");
 
-                const date = new Date();
-                const currentDate = format(date, 'dd/MM/yyyy');
-
+                //const date = new Date();
+                //const currentDate = format(date, 'dd/MM/yyyy');
+                const currentDate = task.date;
                 this.date = currentDate;
 
                 newTaskDate.innerHTML = this.date;
@@ -141,7 +141,10 @@ export class UI {
             title.innerText = projectData.projectName;
             const plusIcon = document.getElementById("mainSquareTitleIconChild");
             plusIcon.style.visibility = "visible";
-            
+
+            const titleBottomBorder = document.getElementById("mainSquareTitleChild");
+            titleBottomBorder.style.borderBottom = "1px solid rgba(255, 255, 255, 0.8)";
+
             const addTaskIcon = document.getElementById("mainSquareTitleIconChild");
             addTaskIcon.classList.add("fa-solid");
             addTaskIcon.classList.add("fa-plus");
@@ -238,9 +241,10 @@ export class UI {
         newTaskIcon.classList.add("fa-solid");
         newTaskIcon.classList.add("fa-check-double");
 
-        const date = new Date();
-        const currentDate = format(date, 'dd/MM/yyyy');
+        //const date = new Date();
+        //const currentDate = format(date, 'dd/MM/yyyy');
 
+        const currentDate = task.date;
         this.date = currentDate;
 
         newTaskDate.innerHTML = this.date;
