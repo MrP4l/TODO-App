@@ -90,7 +90,7 @@ body {
     border: solid rgb(254, 252, 252, 0.9) 1px;
     -webkit-box-shadow: 0px 0px 28px 8px #000000; 
     box-shadow: 0px 0px 28px 8px #000000;
-    width: clamp(250px, 15%, 15%);
+    width: clamp(250px, 15%, 280px);
     background: -webkit-linear-gradient(to bottom, #e9c46a, #e76f51);  
     background: linear-gradient(to bottom, #e9c46a, #e76f51);
     border-radius: 23px;
@@ -139,7 +139,8 @@ body {
     width: 100%;
     font-size: 1.2rem;
     font-weight: 200;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #sideColumnAddProjectContainer {
@@ -247,6 +248,8 @@ body {
     height: 80vh;
     width: clamp(50vw,70%, 100vw);
     padding: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #mainSquareTitleChild {
@@ -365,6 +368,8 @@ body {
 #newTaskName {
     width: 50%;
     font-size: 1.1rem;
+    overflow-x: scroll;
+    margin-right: 20px;
 }
 
 #newTaskDate {
@@ -375,12 +380,91 @@ body {
 }
 
 @media screen and (max-width: 425px) { 
+    #contentContainer {
+        overflow-y: scroll;
+    }
+
     #sideAndMainContainer {
         border: solid purple;
         flex-direction: column;
+        align-items: center;
+    }
+
+    #sideColumn {
+        width: 80%;
+        -webkit-box-shadow: 0px 0px 28px 2px #000000; 
+        box-shadow: 0px 0px 28px 2px #000000;
     }
 
     #mainSquare {
         border: solid tomato;
+        width: 95%;
+        margin: 0;
     }
+
+    #mainSquareChildrenContainer {
+        width: 100%;
+        overflow-y: unset;
+        overflow-x: unset;
+    }
+
+    #taskNameInput {
+        width: 80%;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    .newTaskContainer {
+        margin-left: 0;
+    }
+
+    #newTaskIcon {
+        margin-right: 10px;
+    }
+
+    #newTaskName {
+        overflow-x: scroll;
+    }
+
+    #button {
+        position: relative;
+        border: solid rgba(255, 255, 255, 0.9) 1px;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        background: -webkit-linear-gradient(to bottom, #e9c46a, #e76f51);  
+        background: linear-gradient(to bottom, #e9c46a, #e76f51);
+        -webkit-box-shadow: 0px 0px 28px 2px #000000; 
+        box-shadow: 0px 0px 28px 2px #000000;
+    }
+
+    #arrow {
+        font-size: 2rem;
+    }
+
+    #sideAndMainContainer {
+        display: flex;
+        height:max-content;
+    }
+
+    .sideColumn {
+        position: absolute;
+        top: 120px;
+        transform: translateY(0.5rem);
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .arrow {
+        transform: rotate(180deg);
+        transition: 0.2s ease;
+    }
+
+    .show {
+        transform: translateY(0rem);
+        visibility: visible;
+        opacity: 1;
+      }
 }
