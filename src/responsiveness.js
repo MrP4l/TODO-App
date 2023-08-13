@@ -1,6 +1,5 @@
-const mediaQuery = window.matchMedia('(max-width: 425px)');
-
 function dropDownMenuButton() {
+    const mediaQuery = window.matchMedia('(max-width: 425px)');
     const button = document.getElementById("button");
 
     if (mediaQuery.matches) {
@@ -46,12 +45,13 @@ function createDropDownMenu() {
         toggleArrow.classList.toggle("arrow");
       };
 
-    button.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleDropdown();
-    })
-
-    window.addEventListener('resize', dropDownMenuButton);
+    if (button) {
+        button.addEventListener("click", (e) => {
+            e.stopImmediatePropagation();
+            toggleDropdown();
+        })
+    }
+    window.addEventListener('resize', createDropDownMenu);
 }
 
 
