@@ -379,43 +379,76 @@ body {
     font-size: 1rem;
 }
 
-@media screen and (max-width: 425px) { 
+@media screen and (max-width: 430px) { 
+
+    #content {
+        height: fit-content;
+    }
+
     #contentContainer {
-        overflow-y: scroll;
+        height: 100%;
+        margin: 10px;
     }
 
     #sideAndMainContainer {
         border: solid purple;
         flex-direction: column;
         align-items: center;
+        height: 100%;
+        max-width: 100%;
     }
 
     #sideColumn {
-        width: 80%;
+        width: 85%;
         -webkit-box-shadow: 0px 0px 28px 2px #000000; 
         box-shadow: 0px 0px 28px 2px #000000;
     }
 
+    #sideColumnFirstChild {
+        flex-direction: column;
+        width: 90%;
+    }
+
     #mainSquare {
-        border: solid tomato;
-        width: 95%;
+        border: solid orange;
+        width: 100%;
         margin: 0;
+        overflow: hidden;
     }
 
     #mainSquareChildrenContainer {
         width: 100%;
-        overflow-y: unset;
-        overflow-x: unset;
+        height: 100%;
+        border: solid hotpink;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        margin: 5px;
+        padding: 0px;
+    }
+
+    #mainSquareTitleChild > h4 {
+        width: 75%;
+        margin-left: 8%;
     }
 
     #taskNameInput {
-        width: 80%;
+        width: 85%;
         margin: 0;
         margin-bottom: 10px;
     }
 
+    #mainSquareTasksChild {
+        border: solid green;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
     .newTaskContainer {
+        border: solid red;
+        width: 95%;
+        margin: 0;
         margin-left: 0;
+        overflow-x: hidden;
     }
 
     #newTaskIcon {
@@ -424,6 +457,7 @@ body {
 
     #newTaskName {
         overflow-x: scroll;
+        max-width: 50%;
     }
 
     #button {
@@ -444,14 +478,9 @@ body {
         font-size: 2rem;
     }
 
-    #sideAndMainContainer {
-        display: flex;
-        height:max-content;
-    }
-
     .sideColumn {
         position: absolute;
-        top: 120px;
+        top: 108px;
         transform: translateY(0.5rem);
         visibility: hidden;
         opacity: 0;
@@ -467,4 +496,68 @@ body {
         visibility: visible;
         opacity: 1;
       }
+}
+
+@media screen and (max-width: 320px) { 
+    body {
+        overflow: hidden;
+    }
+
+    #contentContainer {
+        height: 100vh;
+        margin: 0px;
+    }
+
+    #headerTitle {
+        font-size: 1.3rem;
+    }
+
+    #headerIcon{
+        font-size: 1.3rem;
+    }
+
+    #button {
+        width: 25px;
+        height: 25px;
+        margin-top: 0vh;
+        margin-bottom: 0vh;
+    }
+
+    #arrow {
+        font-size: 1.2rem;
+    }
+
+    #sideColumn {
+        position: absolute;
+        top: 45px;
+    }
+
+    #sideAndMainContainer > div {
+        display: flex;
+        height: 85vh;
+    }
+
+    #sideColumnFirstChild {
+        flex-wrap: nowrap;
+    }
+
+    #sideColumnFirstChild > div {
+        flex-wrap: nowrap;
+        height: fit-content;
+        width: 100%;
+        margin: 1px;
+        padding: 0px;
+        font-size: 0.8rem;
+    }
+
+    #sideColumnSecondChild > div {
+        font-size: 0.9rem;
+    }
+
+    #sideColumnSecondChild > div > div {
+        font-size: 0.8rem;
+    }
+
+    #newProjectName {
+    }
 }

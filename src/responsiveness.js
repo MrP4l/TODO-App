@@ -1,5 +1,5 @@
 function dropDownMenuButton() {
-    const mediaQuery = window.matchMedia('(max-width: 425px)');
+    const mediaQuery = window.matchMedia('(max-width: 430px)');
     const button = document.getElementById("button");
 
     if (mediaQuery.matches) {
@@ -53,6 +53,5 @@ function createDropDownMenu() {
     }
     window.addEventListener('resize', createDropDownMenu);
 }
-
 
 export default createDropDownMenu;
