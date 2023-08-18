@@ -7,7 +7,6 @@ import { Task } from "./task_class";
 import { setLocalStorage, getLocalStorage } from './local_storage';
 
 const userInterface = new UI();
-const task = new Task();
 
 export class Filter {
 	allFilter() {
@@ -37,6 +36,7 @@ export class Filter {
 				for (const project of projectsList) {
 					const taskIndex = project.tasks.findIndex(task => task.id === taskId);
 					if (taskIndex !== -1) {
+						const task = new Task();
 						const taskData = project.tasks[taskIndex];
 						task.deleteTask(taskData);
 						userInterface.deleteTask(taskData);
@@ -48,6 +48,10 @@ export class Filter {
 		});
 
 		newProjectName.textContent = "All";
+
+		const titleBottomBorder = document.getElementById("mainSquareTitleChild");
+		titleBottomBorder.style.borderBottom = "1px solid rgba(255, 255, 255, 0.8)";
+
 	}
 
 	todayFilter() {
@@ -77,6 +81,7 @@ export class Filter {
 				for (const project of projectsList) {
 					const taskIndex = project.tasks.findIndex(task => task.id === taskId);
 					if (taskIndex !== -1) {
+						const task = new Task();
 						const taskData = project.tasks[taskIndex];
 						task.deleteTask(taskData);
 						userInterface.deleteTask(taskData);
@@ -87,14 +92,11 @@ export class Filter {
 			});
 		});
 
-		const tasks = document.querySelectorAll(".newTaskContainer");
-		tasks.forEach(task => {
-			console.log(task)
-		})
-
-
 		const newProjectName = document.getElementById("mainSquareTitleTextChild")
 		newProjectName.textContent = "Today";
+
+		const titleBottomBorder = document.getElementById("mainSquareTitleChild");
+		titleBottomBorder.style.borderBottom = "1px solid rgba(255, 255, 255, 0.8)";
 	}
 
 	weekFilter() {
@@ -131,6 +133,7 @@ export class Filter {
 				for (const project of projectsList) {
 					const taskIndex = project.tasks.findIndex(task => task.id === taskId);
 					if (taskIndex !== -1) {
+						const task = new Task();
 						const taskData = project.tasks[taskIndex];
 						task.deleteTask(taskData);
 						userInterface.deleteTask(taskData);
@@ -144,5 +147,7 @@ export class Filter {
 		const newProjectName = document.getElementById("mainSquareTitleTextChild")
 		newProjectName.textContent = "Week";
 
+		const titleBottomBorder = document.getElementById("mainSquareTitleChild");
+		titleBottomBorder.style.borderBottom = "1px solid rgba(255, 255, 255, 0.8)";
 	}
 }

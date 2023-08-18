@@ -73,10 +73,13 @@ function createSideColumn() {
     sideColumnWeekText.textContent = "Week";
     sideColumnAddProjectText.textContent = "Add Project";
 
+    sideColumnAllContainer.classList.add("filter");
     sideColumnAllIcon.classList.add("fa-solid");
     sideColumnAllIcon.classList.add("fa-globe");
+    sideColumnTodayContainer.classList.add("filter");
     sideColumnTodayIcon.classList.add("fa-solid");
     sideColumnTodayIcon.classList.add("fa-calendar-day");
+    sideColumnWeekContainer.classList.add("filter");
     sideColumnWeekIcon.classList.add("fa-solid");
     sideColumnWeekIcon.classList.add("fa-calendar-week");
     sideColumnAddProjectIcon.classList.add("fa-solid");

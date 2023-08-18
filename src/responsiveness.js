@@ -1,7 +1,7 @@
 function dropDownMenuButton() {
     const mediaQuery = window.matchMedia('(max-width: 430px)');
     const button = document.getElementById("button");
-
+// TODO let the menu open when the page is loaded
     if (mediaQuery.matches) {
         if (!button) {
             createButton();
@@ -31,7 +31,7 @@ function createButton() {
     return button;
 }
 
-function createDropDownMenu() {
+export function createDropDownMenu() {
     dropDownMenuButton();
 
     const button = document.getElementById("button");
@@ -39,7 +39,6 @@ function createDropDownMenu() {
     const toggleArrow = document.getElementById("arrow");
 
     sideColumn.classList.add("sideColumn");
-    // TODO add the hidden to overflow-y on content container when the dropdown is toggled
     const toggleDropdown = () => {
         sideColumn.classList.toggle("show");
         toggleArrow.classList.toggle("arrow");
@@ -51,6 +50,17 @@ function createDropDownMenu() {
             toggleDropdown();
         })
     }
+
+    const projects = document.querySelectorAll(".newProjectContainer");
+    const filters = document.querySelectorAll(".filter");
+    [...projects, ...filters].forEach(item => {
+        item.addEventListener("click", () => {
+            if (button) {
+                toggleDropdown();
+            }
+        });
+    });
+
     window.addEventListener('resize', createDropDownMenu);
 }
 

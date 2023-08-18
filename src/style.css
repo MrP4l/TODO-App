@@ -243,7 +243,7 @@ body {
     margin: 25px;
     margin-left: 0px;
 }
-/*TODO Add clamp*/
+
 #mainSquareChildrenContainer {
     height: 80vh;
     width: clamp(50vw,70%, 100vw);
@@ -257,8 +257,9 @@ body {
     justify-content: start;
     align-items: center;
     height: fit-content;
-    width: 100%;
-    margin-bottom: 10px;
+    width: 95%;
+    margin: 10px;
+    margin-top: 0px;
     text-align: center; 
     color: white;
     font-size: 2rem;
@@ -305,8 +306,8 @@ body {
     padding: 5px 10px;
     outline: none;
     margin: 5px;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 15%;
+    margin-right: 15%;
     font-size: 1rem;
     font-family: "Lucida Console", "Courier New", monospace;
     background-color: transparent;
@@ -334,7 +335,6 @@ body {
     cursor: pointer;
 }
 
-/*TODO Clamp on height*/
 .newTaskContainer {
     display: flex;
     height: fit-content;
@@ -348,7 +348,6 @@ body {
     border-left: solid rgb(254, 252, 252, 0.5) 1px;
 }
 
-/*TODO Finish this*/
 .newTaskContainer:hover {
     border-left: solid rgb(254, 252, 252, 1) 1px;
     color: rgb(254, 252, 252, 1);
@@ -391,7 +390,6 @@ body {
     }
 
     #sideAndMainContainer {
-        border: solid purple;
         flex-direction: column;
         align-items: center;
         height: 100%;
@@ -410,7 +408,6 @@ body {
     }
 
     #mainSquare {
-        border: solid orange;
         width: 100%;
         margin: 0;
         overflow: hidden;
@@ -419,7 +416,6 @@ body {
     #mainSquareChildrenContainer {
         width: 100%;
         height: 100%;
-        border: solid hotpink;
         overflow-y: scroll;
         overflow-x: hidden;
         margin: 5px;
@@ -438,15 +434,13 @@ body {
     }
 
     #mainSquareTasksChild {
-        border: solid green;
         width: 100%;
         overflow-x: hidden;
     }
 
     .newTaskContainer {
-        border: solid red;
         width: 95%;
-        margin: 0;
+        margin: 5px;
         margin-left: 0;
         overflow-x: hidden;
     }
@@ -466,7 +460,7 @@ body {
         width: 40px;
         height: 40px;
         border-radius: 100%;
-        margin-top: 1vh;
+        margin-top: 1.1vh;
         margin-bottom: 1vh;
         background: -webkit-linear-gradient(to bottom, #e9c46a, #e76f51);  
         background: linear-gradient(to bottom, #e9c46a, #e76f51);
@@ -480,7 +474,7 @@ body {
 
     .sideColumn {
         position: absolute;
-        top: 108px;
+        top: 110px;
         transform: translateY(0.5rem);
         visibility: hidden;
         opacity: 0;
@@ -517,19 +511,19 @@ body {
     }
 
     #button {
-        width: 25px;
-        height: 25px;
-        margin-top: 0vh;
+        width: 30px;
+        height: 30px;
+        margin-top: 1vh;
         margin-bottom: 0vh;
     }
 
     #arrow {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
     #sideColumn {
         position: absolute;
-        top: 45px;
+        top: 50px;
     }
 
     #sideAndMainContainer > div {
@@ -547,7 +541,7 @@ body {
         width: 100%;
         margin: 1px;
         padding: 0px;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
     #sideColumnSecondChild > div {
@@ -558,6 +552,11 @@ body {
         font-size: 0.8rem;
     }
 
-    #newProjectName {
+    #mainSquareTitleTextChild {
+        font-size: 1.6rem;
+    }
+
+    .newTaskContainer {
+        margin: 0px;
     }
 }

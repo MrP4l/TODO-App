@@ -5,13 +5,14 @@ import { Task } from "./task_class";
 import { Filter } from "./filters_class";
 import { UI } from "./ui_class";
 import { setLocalStorage, getLocalStorage } from './local_storage';
+import {createDropDownMenu} from './responsiveness';
 
 function userDynamicInterface() {
     const addProject = document.getElementById("sideColumnAddProjectContainer");
     const sideColumnSecondChild = document.getElementById("sideColumnSecondChild");
 
     const userInterface = new UI();
-    // TODO Think the best way to do this
+    
     if (projectsList.length > 0) {
         const project = new Project();
         userInterface.renderProjectList(projectsList);
@@ -20,8 +21,6 @@ function userDynamicInterface() {
             const projectId = project.dataset.id;
             const projectData = projectsList.find(project => project.id === parseInt(projectId));
             project.addEventListener("click", () => {
-                console.log("projectData:", projectData)
-                console.log("prjlist:", projectsList);
                 userInterface.renderProject(projectData);
                 if (projectsList.indexOf(projectData) !== -1) {
                     projectDataIdShowed = projectData.id;
@@ -33,11 +32,9 @@ function userDynamicInterface() {
                         const index = projectsList.findIndex(project => projectDataIdShowed === parseInt(project.id));
                         const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId));
                         task.addEventListener("click", () => {
-                            console.log("tskid:", taskId);
                             const taskObj = new Task();
                             taskObj.deleteTask(taskData);
                             userInterface.deleteTask(taskData);
-                            console.log("prjList-task after del1:", projectsList);
                             setLocalStorage(projectsList);
                         })
                     }
@@ -81,16 +78,12 @@ function userDynamicInterface() {
                 projectDataIdShowed = project.id;
 
                 userInterface.createANewProjectInterface(project);
-
-                console.log(projectsList);
                 //  Rendering the project clicked
                 const projects = document.querySelectorAll(".newProjectContainer");
                 projects.forEach(project => {
                     const projectId = project.dataset.id;
                     const projectData = projectsList.find(project => project.id === parseInt(projectId));
                     project.addEventListener("click", () => {
-                        console.log("projectData:", projectData)
-                        console.log("prjlist:", projectsList);
                         userInterface.renderProject(projectData);
                         if (projectsList.indexOf(projectData) !== -1) {
                             projectDataIdShowed = projectData.id;
@@ -102,11 +95,9 @@ function userDynamicInterface() {
                                 const index = projectsList.findIndex(project => projectDataIdShowed === parseInt(project.id));
                                 const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId));
                                 task.addEventListener("click", () => {
-                                    console.log("tskid:", taskId);
                                     const taskObj = new Task();
                                     taskObj.deleteTask(taskData);
                                     userInterface.deleteTask(taskData);
-                                    console.log("prjList-task after del1:", projectsList);
                                     setLocalStorage(projectsList);
                                 })
                             }
@@ -131,6 +122,11 @@ function userDynamicInterface() {
                     })
                 })
                 setLocalStorage(projectsList);
+
+                const mediaQuery = window.matchMedia('(max-width: 430px)');
+                if (mediaQuery.matches) {
+                    createDropDownMenu();
+                } 
             }
             sideColumnSecondChild.removeChild(newNameContainer);
         });
@@ -159,8 +155,6 @@ function userDynamicInterface() {
                 const task = new Task(taskName, projectId);
                 projectsList[index].tasks.push(task);
                 userInterface.createTask(task);
-                console.log("task:", task)
-                console.log("prjListAfterAddTask:", projectsList)
                 //  Click the task to delete it
                 const tasks = document.querySelectorAll(".newTaskContainer");
                 tasks.forEach(task => {
@@ -168,10 +162,8 @@ function userDynamicInterface() {
                     const index = projectsList.findIndex(project => projectDataIdShowed === parseInt(project.id))
                     const taskData = projectsList[index].tasks.find(task => task.id === parseInt(taskId))
                     task.addEventListener("click", () => {
-                        console.log("tskid:", taskId);
                         const taskObj = new Task();
                         taskObj.deleteTask(taskData);
-                        console.log("prjList-task after del2:", projectsList);
                         userInterface.deleteTask(taskData);
                         setLocalStorage(projectsList);
                     })

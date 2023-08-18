@@ -8,7 +8,6 @@ const task = new Task();
 
 export class UI {
     constructor() {
-        // Inizializza la proprietà this.userInterface come un'istanza della classe UI
         this.userInterface = this;
     }
 
@@ -37,7 +36,6 @@ export class UI {
 
     renderProjectList(projectsList) {
         projectsList.forEach(project => {
-            console.log(project)
 
             const newProjectContainer = document.createElement("div");
             const newProjectName = document.createElement("div");
@@ -69,8 +67,6 @@ export class UI {
 
         const title = document.getElementById("mainSquareTitleTextChild");
         title.innerText = project.projectName
-
-        console.log(project)
 
         const newProjectContainer = document.createElement("div");
         const newProjectName = document.createElement("div");
@@ -123,8 +119,6 @@ export class UI {
                 newTaskIcon.classList.add("fa-solid");
                 newTaskIcon.classList.add("fa-check-double");
 
-                //const date = new Date();
-                //const currentDate = format(date, 'dd/MM/yyyy');
                 const currentDate = task.date;
                 this.date = currentDate;
 
@@ -195,7 +189,6 @@ export class UI {
     deleteTask(taskData) {
         const tasks = document.querySelectorAll(".newTaskContainer");
         tasks.forEach((task) => {
-            console.log("task:", task)
             if (parseInt(task.dataset.id) === taskData.id) {
                 task.remove();
             }
@@ -240,9 +233,6 @@ export class UI {
         newTaskName.textContent = task.taskName;
         newTaskIcon.classList.add("fa-solid");
         newTaskIcon.classList.add("fa-check-double");
-
-        //const date = new Date();
-        //const currentDate = format(date, 'dd/MM/yyyy');
 
         const currentDate = task.date;
         this.date = currentDate;
