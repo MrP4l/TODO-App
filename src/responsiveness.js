@@ -1,7 +1,7 @@
 function dropDownMenuButton() {
     const mediaQuery = window.matchMedia('(max-width: 430px)');
     const button = document.getElementById("button");
-// TODO let the menu open when the page is loaded
+
     if (mediaQuery.matches) {
         if (!button) {
             createButton();
@@ -39,15 +39,21 @@ export function createDropDownMenu() {
     const toggleArrow = document.getElementById("arrow");
 
     sideColumn.classList.add("sideColumn");
-    const toggleDropdown = () => {
-        sideColumn.classList.toggle("show");
-        toggleArrow.classList.toggle("arrow");
-      };
 
+    const toggleDropdown = () => {
+        sideColumn.classList.toggle("hide");
+        toggleArrow.classList.toggle("arrow");
+    };
+    
     if (button) {
         button.addEventListener("click", (e) => {
             e.stopImmediatePropagation();
             toggleDropdown();
+            const taskBoxParent = document.getElementById("mainSquareTasksChild");
+            const taskBox = document.querySelector(".taskNameContainer");
+            if (taskBox) {
+                taskBoxParent.removeChild(taskBox);
+            }
         })
     }
 

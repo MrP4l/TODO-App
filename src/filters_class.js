@@ -4,7 +4,7 @@ import format from 'date-fns/format';
 import { projectsList } from './user_dynamic_interface';
 import { UI } from "./ui_class";
 import { Task } from "./task_class";
-import { setLocalStorage, getLocalStorage } from './local_storage';
+import { setLocalStorage } from './local_storage';
 
 const userInterface = new UI();
 

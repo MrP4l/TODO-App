@@ -342,7 +342,7 @@ body {
     cursor: pointer;
     color: rgb(254, 252, 252, 0.7);
     margin: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
     margin-top: 10px;
     padding: 10px;
     border-left: solid rgb(254, 252, 252, 0.5) 1px;
@@ -460,7 +460,7 @@ body {
         width: 40px;
         height: 40px;
         border-radius: 100%;
-        margin-top: 1.1vh;
+        margin-top: 1.8vh;
         margin-bottom: 1vh;
         background: -webkit-linear-gradient(to bottom, #e9c46a, #e76f51);  
         background: linear-gradient(to bottom, #e9c46a, #e76f51);
@@ -476,8 +476,8 @@ body {
         position: absolute;
         top: 110px;
         transform: translateY(0.5rem);
-        visibility: hidden;
-        opacity: 0;
+        visibility: visible;
+        opacity: 1;
     }
 
     .arrow {
@@ -485,10 +485,10 @@ body {
         transition: 0.2s ease;
     }
 
-    .show {
+    .hide {
         transform: translateY(0rem);
-        visibility: visible;
-        opacity: 1;
+        visibility: hidden;
+        opacity: 0;
       }
 }
 

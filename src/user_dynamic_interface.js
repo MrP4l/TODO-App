@@ -186,10 +186,10 @@ function userDynamicInterface() {
                 filter.allFilter();
             } else if (date.id === "sideColumnTodayContainer") {
                 filter.todayFilter();
-                setLocalStorage(projectsList);
+            //    setLocalStorage(projectsList);
             } else if (date.id === "sideColumnWeekContainer") {
                 filter.weekFilter();
-                setLocalStorage(projectsList);
+            //    setLocalStorage(projectsList);
             }
         })
     })

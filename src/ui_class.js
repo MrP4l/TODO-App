@@ -92,6 +92,9 @@ export class UI {
         const addTaskIcon = document.getElementById("mainSquareTitleIconChild");
         addTaskIcon.classList.add("fa-solid");
         addTaskIcon.classList.add("fa-plus");
+
+        const titleBottomBorder = document.getElementById("mainSquareTitleChild");
+		titleBottomBorder.style.borderBottom = "1px solid rgba(255, 255, 255, 0.8)";
     }
 
     renderProject(projectData) {
