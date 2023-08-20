@@ -177,6 +177,8 @@ function userDynamicInterface() {
         })
     });
 
+    // TODO the filters work only when it's added the second project
+    // TODO on mobile the arrow is blue
     const parent = document.getElementById("sideColumnFirstChild");
     const dateFilters = parent.querySelectorAll("*");
     dateFilters.forEach(date => {

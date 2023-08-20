@@ -176,6 +176,8 @@ export class UI {
                         title.innerText = "";
                         const plusIcon = document.getElementById("mainSquareTitleIconChild");
                         plusIcon.style.visibility = "hidden";
+                        const titleBottomBorder = document.getElementById("mainSquareTitleChild");
+                        titleBottomBorder.style.borderBottom = "transparent";
                         const tasksToDelete = document.querySelectorAll(".newTaskContainer");
                         tasksToDelete.forEach((task) => {
                             task.remove();
