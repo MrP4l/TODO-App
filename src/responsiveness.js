@@ -44,7 +44,7 @@ export function createDropDownMenu() {
         sideColumn.classList.toggle("hide");
         toggleArrow.classList.toggle("arrow");
     };
-    
+
     if (button) {
         button.addEventListener("click", (e) => {
             e.stopImmediatePropagation();
@@ -60,9 +60,12 @@ export function createDropDownMenu() {
     const projects = document.querySelectorAll(".newProjectContainer");
     const filters = document.querySelectorAll(".filter");
     [...projects, ...filters].forEach(item => {
-        item.addEventListener("click", () => {
-            if (button) {
-                toggleDropdown();
+        item.addEventListener("click", (e) => {
+            if (!e.target.classList.contains("newProjectDeleteButton")) {
+                if (button) {
+                    e.stopImmediatePropagation();
+                    toggleDropdown();
+                }
             }
         });
     });

@@ -177,8 +177,7 @@ function userDynamicInterface() {
         })
     });
 
-    // TODO the filters work only when it's added the second project
-    // TODO on mobile the arrow is blue
+    // TODO on mobile the borders of inputboxes are semi-visibles
     const parent = document.getElementById("sideColumnFirstChild");
     const dateFilters = parent.querySelectorAll("*");
     dateFilters.forEach(date => {
@@ -188,10 +187,8 @@ function userDynamicInterface() {
                 filter.allFilter();
             } else if (date.id === "sideColumnTodayContainer") {
                 filter.todayFilter();
-            //    setLocalStorage(projectsList);
             } else if (date.id === "sideColumnWeekContainer") {
                 filter.weekFilter();
-            //    setLocalStorage(projectsList);
             }
         })
     })
