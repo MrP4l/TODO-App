@@ -209,6 +209,7 @@ body {
 #newNameTextfieldInput {
     width: 100%;
     height: 2.5vh;
+    border: transparent;
     border-radius: 0;
     border-bottom: 1px solid;
     padding: 5px 10px;
