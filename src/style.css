@@ -381,6 +381,16 @@ body {
     font-size: 1rem;
 }
 
+@media screen and (max-width: 630px) { 
+    #newTaskIcon {
+        margin-right: 10px;
+    }
+
+    #newTaskName {
+        width: 30%;
+    }
+}
+
 @media screen and (max-width: 430px) { 
 
     #content {
